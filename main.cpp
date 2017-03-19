@@ -1,8 +1,11 @@
 #include <iostream>
-#include "Vector3.h"
+#include "include/Vector3.h"
+#include "include/Scene.h"
 
 int main(int argc, char* argv[]) {
-    std::cout << "Hello, World!\n";
-    std::cout << argc << "\n";
+    Scene sampleScene = Scene();
+    sampleScene.initialize();
+    sampleScene.run();
+
     return 0;
 }

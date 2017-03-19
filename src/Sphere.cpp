@@ -1,11 +1,12 @@
-#include "Sphere.h"
+#include "../include/Sphere.h"
 
 Sphere::Sphere() {
 
 }
 
 Sphere::Sphere(Vector3 &center, float rad) {
-
+    this->center = center;
+    radius = rad;
 }
 
 rayState Sphere::intersects(Ray& r, float& a_dist){

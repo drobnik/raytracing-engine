@@ -11,7 +11,7 @@ private:
 public:
     Sphere();
     Sphere(Vector3& center, float rad);
-    virtual inline rayState intersects(Ray& r, float& a_dist);
+    virtual rayState intersects(Ray& r, float& a_dist);
 };
 
 

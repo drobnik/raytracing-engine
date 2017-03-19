@@ -1,4 +1,4 @@
-#include "Vector3.h"
+#include "../include/Vector3.h"
 
 Vector3::Vector3(const Vector3 &v1) {
     this->x = v1.x;
