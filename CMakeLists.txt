@@ -3,5 +3,5 @@ project(raytracing_engine)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES main.cpp Vector3.cpp Vector3.h)
+set(SOURCE_FILES main.cpp Vector3.cpp Vector3.h Ray.cpp Ray.h Sphere.cpp Sphere.h Primitive.cpp Primitive.h)
 add_executable(raytracing_engine ${SOURCE_FILES})

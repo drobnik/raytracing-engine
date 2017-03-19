@@ -64,7 +64,11 @@ bool Vector3::operator==(const Vector3 &v2) {
 }
 
 float Vector3::dot(Vector3 v2) {
-    return ((this->x * v2.x) + (this->y * v2.y) + (this->z * v2.z));
+    return (this->x * v2.x) + (this->y * v2.y) + (this->z * v2.z);
+}
+
+float Vector3::absDot(Vector3 v2) {
+    return fabsf((this->x * v2.x) + (this->y * v2.y) + (this->z * v2.z));
 }
 
 Vector3 Vector3::crossProd(Vector3 v2) {
