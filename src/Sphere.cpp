@@ -38,3 +38,7 @@ rayState Sphere::intersects(Ray& r, float& a_dist){
     }
     return state;
 }
+
+Vector3 Sphere::getCenter() {
+    return center;
+}

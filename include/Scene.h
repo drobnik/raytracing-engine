@@ -1,7 +1,7 @@
 #ifndef RAYTRACING_ENGINE_SCENE_H
 #define RAYTRACING_ENGINE_SCENE_H
 #include <vector>
-#include <memory>
+#include <iostream>
 #include "Ray.h"
 #include "Primitive.h"
 #include "Sphere.h"
@@ -9,9 +9,11 @@
 #include "Vector3.h"
 
 class Scene {
+    //TODO: one lis for all
 private:
-    std::vector<std::unique_ptr<Primitive>> objects;
+    std::vector<Sphere> spheres;
     std::vector<Ray> rays;
+    Plane samplePlane;
 public:
     Scene();
     void initialize();

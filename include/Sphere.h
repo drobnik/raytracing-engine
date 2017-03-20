@@ -12,6 +12,7 @@ public:
     Sphere();
     Sphere(Vector3& center, float rad);
     virtual rayState intersects(Ray& r, float& a_dist);
+    Vector3 getCenter();
 };
 
 

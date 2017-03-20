@@ -20,7 +20,6 @@ public:
     Vector3 operator/(float k);
     Vector3 operator+(const Vector3& v2);
     Vector3 operator-(const Vector3& v2);
-
     bool operator==(const Vector3& v2);// 92
 
     float dot(Vector3 v2);
@@ -34,6 +33,9 @@ public:
     float getX() const {return x;};
     float getY() const {return y;};
     float getZ() const {return z;};
+
+    friend std::ostream& operator<<(std::ostream&, const Vector3&);
 };
+
 
 #endif //RAYTRACING_ENGINE_VECTOR_H

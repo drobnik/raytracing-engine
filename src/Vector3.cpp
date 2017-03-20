@@ -23,7 +23,8 @@ float Vector3::length(){
 }
 
 std::ostream& operator<<(std::ostream& out, const Vector3& v){
-    return out << "[Vector] x: "<< v.getX() <<", y: "<< v.getY() << ", z: "<< v.getZ() <<"\n";
+    out << "[Vector] x: "<< v.getX() <<", y: "<< v.getY() << ", z: "<< v.getZ() <<"\n";
+    return out;
 }
 
 Vector3 Vector3::normalize(){
