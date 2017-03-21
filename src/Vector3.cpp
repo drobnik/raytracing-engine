@@ -48,7 +48,7 @@ Vector3 Vector3::neg(Vector3 v) {
     return Vector3(-v.x, -v.y, -v.z);
 }
 
-Vector3 Vector3::operator*(float k) {
+Vector3 Vector3::operator*(const float& k) {
     return Vector3(this->x*k, this->y*k, this->z*k);
 }
 

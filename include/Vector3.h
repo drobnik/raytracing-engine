@@ -16,7 +16,7 @@ public:
     Vector3(float x, float y, float z);
     Vector3 neg(Vector3 v);
 
-    Vector3 operator*(float k);
+    Vector3 operator*(const float& k);
     Vector3 operator/(float k);
     Vector3 operator+(const Vector3& v2);
     Vector3 operator-(const Vector3& v2);

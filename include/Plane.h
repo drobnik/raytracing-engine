@@ -9,7 +9,7 @@ private:
 public:
     virtual rayState intersects(Ray& r, float& t);
     Plane();
-    Plane(Vector3& nor, float& offset);
+    Plane(const Vector3& nor, const float& offset);
 };
 
 
