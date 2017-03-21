@@ -2,6 +2,7 @@
 #define RAYTRACING_ENGINE_SCENE_H
 #include <vector>
 #include <iostream>
+#include <string>
 #include "Ray.h"
 #include "Primitive.h"
 #include "Sphere.h"
@@ -18,7 +19,9 @@ public:
     Scene();
     void initialize();
     void run();
-    void calcPoint(Ray &r, float& t, rayState& state);//, rayState& m);
+    Vector3 calcPoint(Ray &r, float &t, rayState &state);
+    void logResults(const rayState &state, const std::string &rayName);
+    void logPoint(Vector3 point, rayState& state);
 };
 
 

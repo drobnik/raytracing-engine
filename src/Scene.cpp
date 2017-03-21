@@ -25,35 +25,58 @@ void Scene::initialize() {
     rays.push_back(r2);
     rays.push_back(r3);
 }
+// ideas - utilities module with logging possibility, linear/geometry for basic calculations
+// add ID or name for every ray!!
 
-//TEMP
-void Scene::calcPoint(Ray &r, float& t, rayState& state){
+
+void Scene::logResults(const rayState &state, const std::string &rayName) {
     if(state > 0){
-        Vector3 point = r.getOrigin() + r.getDirection() * t;
-        std::cout << "The point of intersection: " << point <<"\n";
+        std::cout << "Ray " << rayName << " has ";
+        if(state == 1) std::cout << "2 points of intersection.\n";
+        else std::cout << "1 point of intersection.\n";
     }
+    if(state == 0) std::cout <<"Ray " << rayName <<" has missed the primitive.\n\n";
+}
+
+//only calculate the point -> other function for logging
+Vector3 Scene::calcPoint(Ray &r, float &t, rayState &state){
+    Vector3 point = r.getOrigin() + r.getDirection() * t;
     t = 0;
+    return point;
 }
 
 void Scene::run() {
+    Vector3 p1, p2, p3, p4;
     Ray r1 = rays.at(0);
     Ray r2 = rays.at(1);
     Ray r3 = rays.at(2);
     float t = 0.0f;
 
     rayState t1 = spheres.at(0).intersects(r1, t);
-    std::cout << "Sphere intersects r1: " << t1 <<"\n";
-    calcPoint(r1, t, t1);
+    logResults(t1, "R1");
+    p1 = calcPoint(r1, t, t1);
+    logPoint(p1, t1);
 
     rayState t2 = spheres.at(0).intersects(r2, t);
-    std::cout << "Sphere intersects r2: " << t2 <<"\n";
-    calcPoint(r2, t, t2);
+    logResults(t2, "R2");
+    p2 = calcPoint(r2, t, t2);
+    logPoint(p2, t2);
 
     rayState t3 = spheres.at(0).intersects(r3, t);
-    std::cout << "Sphere intersects r3: " << t3 <<"\n";
-    calcPoint(r3, t, t3);
+    logResults(t3, "R3");
+    p3 = calcPoint(r3, t, t3);
+    logPoint(p3, t3);
 
     rayState t4 = samplePlane.intersects(r2, t);
-    std::cout << "R2 intersects plane: " << t4 <<"\n";
-    calcPoint(r2, t, t4);
+    logResults(t4, "R2");
+    p4 = calcPoint(r2, t, t4);
+    logPoint(p4, t4);
 }
+
+void Scene::logPoint(Vector3 point, rayState &state) {
+    if(state > 0) {
+        std::cout << "The nearest point of intersection: " << point <<"\n";
+    }
+}
+
+
