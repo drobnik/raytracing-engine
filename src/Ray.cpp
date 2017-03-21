@@ -23,7 +23,7 @@ Ray::Ray(const Ray &parent) {
     this->depth = parent.depth + 1;
 }
 
-void Ray::setDestination(const Vector3 &dest) {
+void Ray::pointAt(const Vector3 &dest) {
     this->destination = dest;
 }
 Vector3 Ray::getOrigin() {

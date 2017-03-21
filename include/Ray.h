@@ -9,12 +9,12 @@ private:
     Vector3 destination;
     float distance;
     int depth;
-    // float time; <- for motion blur
+
 public:
     Ray();
     Ray(const Vector3& origin, const Vector3& direct);
     Ray(const Ray& parent);
-    void setDestination(const Vector3& dest);
+    void pointAt(const Vector3 &dest);
     Vector3 getOrigin();
     Vector3 getDirection();
     float getDistance();
