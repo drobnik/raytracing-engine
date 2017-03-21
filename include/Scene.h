@@ -18,7 +18,7 @@ public:
     Scene();
     void initialize();
     void run();
-    void calcPoint(Ray &r, float t);
+    void calcPoint(Ray &r, float& t);//, rayState& m);
 };
 
 

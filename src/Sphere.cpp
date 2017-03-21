@@ -43,7 +43,7 @@ rayState Sphere::intersects(Ray& r, float& t) {
     else if (det == 0){
         float t_temp = b;
         t = t_temp;
-        state = hit;
+        state = tangent;
     }
 
     return state;
