@@ -2,14 +2,16 @@
 
 Ray::Ray() {
     origin = Vector3();
-    direction = Vector3();
-    distance = 0.0f;
+    direction = Vector3(1,0,0);
+    destination = Vector3();
+    distance = INT_MAX;
     depth = 0;
 }
 
 Ray::Ray(Vector3& origin, Vector3& direct){
     this->origin = origin;
     direction = direct;
+    distance = INT_MAX;
     depth = 0;
 }
 
@@ -20,6 +22,9 @@ Ray::Ray(const Ray &parent) {
     this->depth = parent.depth + 1;
 }
 
+void Ray::setDestination(Vector3 &dest) {
+    this->destination = dest;
+}
 Vector3 Ray::getOrigin() {
     return origin;
 }

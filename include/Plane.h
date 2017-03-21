@@ -5,11 +5,11 @@
 class Plane : Primitive {
 private:
     Vector3 normal; // no crossproduct, or adding a point
-    float offset; //D?
+    Vector3 offset; //D?
 public:
     virtual rayState intersects(Ray& r, float& t);
     Plane();
-    Plane(Vector3& nor, float offset);
+    Plane(Vector3& nor, Vector3& offset);
 };
 
 

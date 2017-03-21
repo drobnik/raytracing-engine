@@ -8,11 +8,14 @@ void Scene::initialize() {
     Vector3 zero = Vector3();
     Vector3 rayOrigin = Vector3(0.0f, 0.0f, -20.0f);
     Vector3 direction = Vector3(0.0f, 1.0f, 0.0f); //hard coded?
+    Vector3 kamil = Vector3(0,0,1);
 
     Sphere s = Sphere(zero, 10);
     spheres.push_back(s);
-    Ray r1 = Ray(rayOrigin, zero);
+    Ray r1 = Ray(rayOrigin, kamil);
     Ray r2 = Ray(rayOrigin, direction);
+    r1.setDestination(zero);
+
     rays.push_back(r1);
     rays.push_back(r2);
 }
@@ -32,7 +35,8 @@ void Scene::run() {
 
     std::cout << "Sphere intersects r1: " << spheres.at(0).intersects(r1, t) << " t: "<< t <<"\n";
     calcPoint(r1, t);
+
     t = 0.0f;
     std::cout << "Sphere intersects r2: " << spheres.at(0).intersects(r2, t) << " t: "<< t <<"\n";
-    calcPoint(r1, t);
+    calcPoint(r2, t);
 }
