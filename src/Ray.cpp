@@ -4,13 +4,13 @@ Ray::Ray() {
     origin = Vector3();
     direction = Vector3();
     distance = 0.0f;
-    depth = 1;
+    depth = 0;
 }
 
 Ray::Ray(Vector3& origin, Vector3& direct){
     this->origin = origin;
     direction = direct;
-    depth = 1;
+    depth = 0;
 }
 
 Ray::Ray(const Ray &parent) {

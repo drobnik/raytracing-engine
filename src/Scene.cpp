@@ -17,12 +17,22 @@ void Scene::initialize() {
     rays.push_back(r2);
 }
 
+//TEMP
+void Scene::calcPoint(Ray &r, float t){
+    if(t > 0){
+        Vector3 point = r.getOrigin() + r.getDirection() * t;
+        std::cout << "The point of intersection: " << point <<"\n";
+    }
+}
+
 void Scene::run() {
-    // R1 test
     Ray r1 = rays.at(0);
     Ray r2 = rays.at(1);
-    float dis = r1.getDistance();
-    std::cout << "speher" << r1.getDirection() << "\n";
-    std::cout << "Sphere intersects r1: " << spheres.at(0).intersects(r1, dis) << "\n";
-    std::cout << "Sphere intersects r2: " << spheres.at(0).intersects(r2, dis) << "\n";
+    float t = 0.0f;
+
+    std::cout << "Sphere intersects r1: " << spheres.at(0).intersects(r1, t) << " t: "<< t <<"\n";
+    calcPoint(r1, t);
+    t = 0.0f;
+    std::cout << "Sphere intersects r2: " << spheres.at(0).intersects(r2, t) << " t: "<< t <<"\n";
+    calcPoint(r1, t);
 }
