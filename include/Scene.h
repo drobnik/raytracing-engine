@@ -20,7 +20,7 @@ public:
     void initialize();
     void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state);
-    void logResults(const rayState &state, const std::string &rayName);
+    void logResults(const rayState &state, const std::string &rayName, const std::string &primitive);
     void logPoint(Vector3 point, rayState& state);
 };
 
