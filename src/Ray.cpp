@@ -4,7 +4,7 @@ Ray::Ray() {
     origin = Vector3();
     direction = Vector3(1,0,0);
     destination = Vector3();
-    distance = INT_MAX;
+    distance = INFINITY;
     depth = 0;
 }
 
@@ -12,7 +12,7 @@ Ray::Ray(const Vector3& origin, const Vector3& direct){
     this->origin = origin;
     direction = direct;
     destination = Vector3();
-    distance = INT_MAX;
+    distance = INFINITY;
     depth = 0;
 }
 
