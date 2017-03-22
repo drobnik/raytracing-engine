@@ -3,9 +3,11 @@
 #include "Ray.h"
 
 enum rayState{
+    inner = -1,
     miss = 0,
     hit = 1,
-    tangent = 2 //1 point
+    tangent = 2,
+    backward = 3
 };
 
 class Primitive {

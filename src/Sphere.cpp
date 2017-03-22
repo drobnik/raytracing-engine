@@ -27,7 +27,7 @@ rayState Sphere::intersects(Ray& r, float& t) {
             { 
                 if (i2 < t){
                     t = i2;
-                    state = tangent;
+                    state = inner;
                 }
                 
             }

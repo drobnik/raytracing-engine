@@ -10,10 +10,10 @@ rayState Plane::intersects(Ray &r, float &t) {
     float denom = normal.dot(r.getDirection());
     float q = 0.0f;
 
-    if(denom < 1e-6) return state; //parallel to the plane
+    if(fabs(denom) < 1e-6) return state; //parallel to the plane
     q = r.getOrigin().dot(normal);
     t = (offset - q) / denom;
-    return t >= 0 ? (state=tangent) : state;
+    return t >= 0 ? (state=backward) : (state=tangent); //dodatni tyl
 
 }
 
