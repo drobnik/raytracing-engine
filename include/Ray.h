@@ -1,6 +1,7 @@
 #ifndef RAYTRACING_ENGINE_RAY_H
 #define RAYTRACING_ENGINE_RAY_H
 #include "Vector3.h"
+#include <climits>
 
 class Ray {
 private:
