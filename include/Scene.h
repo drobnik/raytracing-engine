@@ -10,6 +10,7 @@
 #include "Vector3.h"
 #include "Utility.h"
 
+// add a camera
 class Scene {
 private:
     std::vector<Sphere> spheres;
