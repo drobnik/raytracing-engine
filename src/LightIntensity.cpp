@@ -24,7 +24,7 @@ LightIntensity operator*(float scale, LightIntensity &l) {
 LightIntensity operator*(LightIntensity &l, float scale) {
     return LightIntensity(l.red() * scale, l.green() * scale, l.blue() * scale);
 }
-
+/*
 std::ostream operator<<(std::ostream &str, LightIntensity &l) {
     return str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue();
-}
+}*/
