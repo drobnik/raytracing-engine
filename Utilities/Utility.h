@@ -1,7 +1,7 @@
 #ifndef RAYTRACING_ENGINE_UTILITIES_H
 #define RAYTRACING_ENGINE_UTILITIES_H
-#include "Vector3.h"
-#include "Primitive.h"
+#include "../Geometry/Vector3.h"
+#include "../Geometry/Objects/Primitive.h"
 
 namespace Utility {
     void logResults(const rayState &state, const std::string &rayName, const std::string &primitive);

@@ -1,4 +1,4 @@
-#include "../include/Ray.h"
+#include "Ray.h"
 
 Ray::Ray() {
     origin = Vector3();

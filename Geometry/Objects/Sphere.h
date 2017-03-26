@@ -3,7 +3,7 @@
 #include <cmath>
 #include <algorithm>
 #include "Primitive.h"
-#include "Vector3.h"
+#include "../Vector3.h"
 
 class Sphere : Primitive{
 private:

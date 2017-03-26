@@ -1,6 +1,6 @@
 #ifndef RAYTRACING_ENGINE_PRIMITIVE_H
 #define RAYTRACING_ENGINE_PRIMITIVE_H
-#include "Ray.h"
+#include "../Ray.h"
 
 enum rayState{
     inner = -1,

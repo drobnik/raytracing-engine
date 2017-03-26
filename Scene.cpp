@@ -1,7 +1,7 @@
-#include "../include/Scene.h"
-#include "../include/Utility.h"
+#include "Scene.h"
 
-Scene::Scene() {}
+
+Scene::Scene() {} // add flag for a camera
 
 void Scene::initialize() {
     Vector3 zero = Vector3();
@@ -22,6 +22,10 @@ void Scene::initialize() {
     rays.push_back(r1);
     rays.push_back(r2);
     rays.push_back(r3);
+}
+
+void Scene::init(){
+
 }
 
 // TODO: Geometry module
@@ -57,6 +61,11 @@ void Scene::run() {
     Utility::logResults(t4, "R2", "plane");
     p4 = calcPoint(r2, t, t4);
     Utility::logPoint(p4, t4);
+}
+
+//FIXME
+EngineImage Scene::renderScene() {
+    return camera->renderScene();
 }
 
 

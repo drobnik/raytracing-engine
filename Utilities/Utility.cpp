@@ -1,4 +1,4 @@
-#include "../include/Utility.h"
+#include "Utility.h"
 
 namespace Utility {
     void logPoint(Vector3 point, rayState &state) {

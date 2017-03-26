@@ -1,10 +1,13 @@
 #ifndef RAYTRACING_ENGINE_CAMERA_H
 #define RAYTRACING_ENGINE_CAMERA_H
-#include "Ray.h"
+#include "../Geometry/Ray.h"
+#include "../Geometry/Objects/Primitive.h"
+#include "../EngineImage.h"
+#include <vector>
 
 class Camera {
 public:
-    //virtual Image renderScene()=0;
+    virtual EngineImage renderScene()=0;
     virtual Ray spawnRay(const Vector3& point)=0;
 
 protected:

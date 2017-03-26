@@ -1,4 +1,4 @@
-#include "../include/LightIntensity.h"
+#include "LightIntensity.h"
 
 LightIntensity LightIntensity::operator+(LightIntensity &l) {
     return LightIntensity(r + l.red(), g + l.green(), b + l.blue());
@@ -28,3 +28,6 @@ LightIntensity operator*(LightIntensity &l, float scale) {
 std::ostream operator<<(std::ostream &str, LightIntensity &l) {
     return str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue();
 }*/
+
+// przekazac liste rzeczy na scenie, puscic promien z kazdego piksela. jak jestesmy
+// przy jednym promieniu, to sprawdz przeciecia z kazda rzecza na scenie
