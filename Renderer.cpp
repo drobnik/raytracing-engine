@@ -1,6 +1,14 @@
 #include "Renderer.h"
 
-Renderer::Renderer(Scene &s) {
+Renderer::Renderer() {
+    this->img = EngineImage(0,0);
+    assert(false);
+}
+
+//FIXME
+Renderer::Renderer(Scene &s, FileManager& man) {
+    scene = &s;
+    manager = &man;
     img = EngineImage(0, 0);
 }
 
@@ -10,9 +18,5 @@ EngineImage Renderer::renderScene() {
 }
 
 void Renderer::saveImage() {
-
-}
-
-Renderer::Renderer() {
-    assert(false);
+    manager->saveImage(img,"test.bmp"); //FIXME config.sceneName
 }

@@ -4,14 +4,16 @@
 #include "../Geometry/Objects/Primitive.h"
 #include "../EngineImage.h"
 #include <vector>
+#include <memory>
 
 class Camera {
 public:
-    virtual EngineImage renderScene()=0;
+    virtual EngineImage renderScene(std::vector<std::unique_ptr<Primitive>>& objs)=0;
     virtual Ray spawnRay(const Vector3& point)=0;
+    void calcUVW();
 
 protected:
-    Vector3 position;
+    Vector3 eye;
     Vector3 lookAt;
     Vector3 up;
     Vector3 horizontal;
@@ -19,6 +21,8 @@ protected:
     float nearPlane;
     float farPlane;
     float fieldOfView;
+
+    Vector3 u, v, w; //local coordinates
 };
 
 

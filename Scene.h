@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <memory>
 #include "Geometry/Objects/Primitive.h"
 #include "Geometry/Ray.h"
 #include "Geometry/Objects/Sphere.h"
@@ -16,7 +17,7 @@ class Scene {
 private:
     std::vector<Sphere> spheres;
     std::vector<Ray> rays;
-    std::vector<Primitive*> objs;// headaches guaranteed
+    std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Plane samplePlane; //delete
     Camera* camera;
 

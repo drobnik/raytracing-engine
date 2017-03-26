@@ -4,14 +4,16 @@
 #include "Renderer.h"
 
 int main(int argc, char* argv[]) {
-    Scene sampleScene = Scene();
+    /*Scene sampleScene = Scene();
     sampleScene.initialize();
-    sampleScene.run();
+    sampleScene.run();*/
 
-    /*Scene renderScene = Scene();
+    Scene renderScene = Scene();
+    FileManager man = FileManager("/img");
     renderScene.init(); //FIXME
-    Renderer renderer = Renderer(renderScene);
-    renderer.renderScene();*/
+    Renderer renderer = Renderer(renderScene, man);
+
+    //renderer.renderScene();
 
     return 0;
 }

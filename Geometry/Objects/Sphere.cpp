@@ -52,3 +52,12 @@ rayState Sphere::intersects(Ray& r, float& t) {
 Vector3 Sphere::getCenter() {
     return center;
 }
+
+Sphere::Sphere(Sphere *s) {
+    center = s->getCenter();
+    radius = s ->getRadius();
+}
+
+float Sphere::getRadius() {
+    return radius;
+}

@@ -14,7 +14,7 @@ private:
     //EngineConfig config;
 public:
     Renderer();
-    Renderer(Scene& s);
+    Renderer(Scene& s, FileManager& man);
     EngineImage renderScene();
     void saveImage();
 };

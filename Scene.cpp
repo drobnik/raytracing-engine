@@ -25,7 +25,10 @@ void Scene::initialize() {
 }
 
 void Scene::init(){
-
+    Vector3 zero = Vector3();
+   // std::unique_ptr<Primitive> sphere(new Sphere(zero, 10));
+    objs.push_back(std::make_unique<Sphere>(new Sphere(zero, 10)));
+    //camera = new OrthoCamera();
 }
 
 // TODO: Geometry module
@@ -65,7 +68,7 @@ void Scene::run() {
 
 //FIXME
 EngineImage Scene::renderScene() {
-    return camera->renderScene();
+    return camera->renderScene(objs);
 }
 
 

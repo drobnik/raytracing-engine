@@ -5,15 +5,17 @@
 #include "Primitive.h"
 #include "../Vector3.h"
 
-class Sphere : Primitive{
+class Sphere : public Primitive{
 private:
     Vector3 center;
     float radius;
 public:
     Sphere();
+    Sphere(Sphere* s);
     Sphere(Vector3& center, float rad);
-    virtual rayState intersects(Ray& r, float& t);
+    rayState intersects(Ray& r, float& t) override;
     Vector3 getCenter();
+    float getRadius();
 };
 
 
