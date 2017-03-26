@@ -3,7 +3,7 @@
 Ray::Ray() {
     origin = Vector3();
     direction = Vector3(1,0,0);
-    destination = Vector3();
+    Vector3();
     distance = INFINITY;
     depth = 0;
 }
@@ -11,7 +11,7 @@ Ray::Ray() {
 Ray::Ray(const Vector3& origin, const Vector3& direct){
     this->origin = origin;
     direction = direct;
-    destination = Vector3();
+    Vector3();
     distance = INFINITY;
     depth = 0;
 }
@@ -24,7 +24,6 @@ Ray::Ray(const Ray &parent) {
 }
 
 void Ray::pointAt(const Vector3 &dest) {
-    this->destination = dest;
 }
 Vector3 Ray::getOrigin() {
     return origin;
@@ -36,4 +35,16 @@ Vector3 Ray::getDirection() {
 
 float Ray::getDistance() {
     return distance;
+}
+
+void Ray::setOrigin(const Vector3 &origin) {
+    Ray::origin = origin;
+}
+
+void Ray::setDirection(const Vector3 &direction) {
+    Ray::direction = direction;
+}
+
+void Ray::setDepth(int depth) {
+    Ray::depth = depth;
 }

@@ -19,7 +19,7 @@ public:
     EngineImage();
     int getWidth() const;
     int getHeight() const;
-    const bitmap_image &getImg() const;
+    bitmap_image & getImg();
     const LightIntensity &getBackground() const;
     //Vector3 getPixel(int x, int y);
     void setPixel(int x, int y, const LightIntensity& c);

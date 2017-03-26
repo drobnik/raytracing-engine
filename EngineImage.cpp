@@ -50,7 +50,7 @@ const LightIntensity &EngineImage::getBackground() const {
     return background;
 }
 
-const bitmap_image &EngineImage::getImg() const {
+bitmap_image & EngineImage::getImg() {
     return img;
 }
 

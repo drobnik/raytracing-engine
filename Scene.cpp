@@ -22,6 +22,11 @@ void Scene::initialize() {
     rays.push_back(r1);
     rays.push_back(r2);
     rays.push_back(r3);
+
+    viewPlane.WRes(500); //from the configuration file!!
+    viewPlane.HRes(500);
+    viewPlane.setPixSize(1.0f);
+    viewPlane.setGamma(1.0f);
 }
 
 void Scene::init(){
@@ -68,7 +73,7 @@ void Scene::run() {
 
 //FIXME
 EngineImage Scene::renderScene() {
-    return camera->renderScene(objs);
+//    return camera->renderScene(objs, <#initializer#>, <#initializer#>);
 }
 
 

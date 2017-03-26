@@ -3,12 +3,15 @@
 #include "../Geometry/Ray.h"
 #include "../Geometry/Objects/Primitive.h"
 #include "../EngineImage.h"
+#include "../Geometry/ViewPlane.h"
 #include <vector>
 #include <memory>
 
 class Camera {
 public:
-    virtual EngineImage renderScene(std::vector<std::unique_ptr<Primitive>>& objs)=0;
+    virtual EngineImage
+    renderScene(std::vector<std::unique_ptr<Primitive>> &objs,
+                ViewPlane &plane, LightIntensity &light)=0;
     virtual Ray spawnRay(const Vector3& point)=0;
     void calcUVW();
 

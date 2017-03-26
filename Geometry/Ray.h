@@ -7,7 +7,6 @@ class Ray {
 private:
     Vector3 origin;
     Vector3 direction;
-    Vector3 destination;
     float distance;
     int depth;
 
@@ -19,6 +18,9 @@ public:
     Vector3 getOrigin();
     Vector3 getDirection();
     float getDistance();
+    void setOrigin(const Vector3 &origin);
+    void setDirection(const Vector3 &direction);
+    void setDepth(int depth);
 };
 
 

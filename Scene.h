@@ -12,14 +12,16 @@
 #include "Utilities/Utility.h"
 #include "Cameras/Camera.h"
 #include "Utilities/Utility.h"
+#include "Geometry/ViewPlane.h"
 
 class Scene {
 private:
     std::vector<Sphere> spheres;
     std::vector<Ray> rays;
-    std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Plane samplePlane; //delete
+    std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Camera* camera;
+    ViewPlane viewPlane;
 
 public:
     Scene();

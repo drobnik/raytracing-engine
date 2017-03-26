@@ -9,5 +9,5 @@ set(SOURCE_FILES main.cpp Geometry/Vector3.cpp Geometry/Vector3.h Geometry/Ray.c
         Scene.h Utilities/Utility.cpp Utilities/Utility.h lib/bitmap/bitmap_image.hpp
         Cameras/Camera.h EngineImage.cpp EngineImage.h Utilities/FileManager.cpp
         Utilities/FileManager.h Lights/LightIntensity.cpp Lights/LightIntensity.h
-        Cameras/OrthoCamera.cpp Cameras/OrthoCamera.h Renderer.cpp Renderer.h Cameras/Camera.cpp)
+        Cameras/OrthoCamera.cpp Cameras/OrthoCamera.h Renderer.cpp Renderer.h Cameras/Camera.cpp Geometry/ViewPlane.cpp Geometry/ViewPlane.h)
 add_executable(raytracing_engine ${SOURCE_FILES})
