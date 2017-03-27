@@ -1,6 +1,11 @@
 #ifndef RAYTRACING_ENGINE_TRACER_H
 #define RAYTRACING_ENGINE_TRACER_H
-#include "Scene.h"
+#include "../Lights/LightIntensity.h"
+#include "../Geometry/Ray.h"
+#include "../Engine/ShadeInfo.h"
+
+
+class Scene;
 
 class Tracer {
 private:

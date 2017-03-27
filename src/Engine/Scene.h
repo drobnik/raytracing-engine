@@ -34,8 +34,9 @@ public:
     void init();
     void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
-    ShadeInfo raytraceObjects(const Ray& ray) const;
+    ShadeInfo raytraceObjects(const Ray& ray);
     EngineImage renderScene();
+    LightIntensity Background();
 };
 
 

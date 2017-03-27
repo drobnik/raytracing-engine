@@ -4,7 +4,7 @@
 #include <cassert>
 #include "../Geometry/Vector3.h"
 #include "../Lights/LightIntensity.h"
-#include "../lib/bitmap/bitmap_image.hpp"
+#include "../../lib/bitmap/bitmap_image.hpp"
 
 class EngineImage {
 private:

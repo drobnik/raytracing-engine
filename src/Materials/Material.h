@@ -9,7 +9,7 @@ private:
 public:
     Material(); //TEMP
     Material(LightIntensity diff);
-    LightIntensity getColor();
+    LightIntensity getColor()const;
 };
 
 

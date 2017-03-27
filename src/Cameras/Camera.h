@@ -4,14 +4,15 @@
 #include "../Geometry/Objects/Primitive.h"
 #include "../Engine/EngineImage.h"
 #include "../Geometry/ViewPlane.h"
+#include "../Engine/Tracer.h"
 #include <vector>
 #include <memory>
 
 class Camera {
 public:
+    //renderScene had objs
     virtual EngineImage
-    renderScene(std::vector<std::unique_ptr<Primitive>> &objs,
-                ViewPlane &plane, LightIntensity &light)=0;
+    renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer)=0;
     virtual Ray spawnRay(const Vector3& point)=0;
     void calcUVW();
 

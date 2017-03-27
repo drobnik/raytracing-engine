@@ -90,23 +90,24 @@ EngineImage Scene::renderScene() {
 //    return camera->renderScene(objs, <#initializer#>, <#initializer#>);
 }
 
-//FIXME
-ShadeInfo Scene::raytraceObjects(const Ray &ray) const {
-    ShadeInfo info = ShadeInfo();
-    //ShadeInfo info(*this);
-    /*float t = 0.0f, tmin = INFINITY;
+ShadeInfo Scene::raytraceObjects(const Ray &ray){
+    ShadeInfo info = ShadeInfo(*this);
+    float t = 0.0f, tmin = INFINITY;
 
     for(unsigned int i = 0; i < objs.size(); i++){
         rayState state = objs.at(i)->intersects((Ray &) ray, t);
         if( (state == hit || state == tangent) && (t < tmin)){
-            //info.intersection = state;
+            info.setState(state);
             tmin = t;
-            //FIXME add a material parameter to every primitive called `diffuse color` known from the very beginning
-            //info.color = objs.at(i)->getColor();
+            info.setMaterial(objs.at(i)->getMaterial());
         }
-    }*/
+    }
 
     return info;
+}
+
+LightIntensity Scene::Background() {
+    return sceneBackground;
 }
 
 

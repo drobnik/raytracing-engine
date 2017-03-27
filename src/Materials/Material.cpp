@@ -8,7 +8,7 @@ Material::Material(LightIntensity diff) {
     diffuseColor = diff;
 }
 
-LightIntensity Material::getColor() {
+LightIntensity Material::getColor()const {
     return diffuseColor;
 }
 

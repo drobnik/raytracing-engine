@@ -1,7 +1,7 @@
 #ifndef RAYTRACING_ENGINE_FILEMANAGER_H
 #define RAYTRACING_ENGINE_FILEMANAGER_H
 #include <string>
-#include "../lib/bitmap/bitmap_image.hpp"
+#include "../../lib/bitmap/bitmap_image.hpp"
 #include "../Engine/EngineImage.h"
 
 // this class is used for load/save operations; now it is only dedicated
