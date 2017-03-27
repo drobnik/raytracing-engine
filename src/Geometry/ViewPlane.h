@@ -10,13 +10,15 @@ private:
     float gamma;    //- monitor gamma factor
 
 public:
+    ViewPlane();
+    ViewPlane(int h, int w, float siz);
+    ~ViewPlane(){};
     int getHRes() const;
     int getWRes() const;
     float getPixSize() const;
     void HRes(int hResolution);
     void WRes(int wResolution);
     void setPixSize(float pixSize);
-    float getGamma() const;
     void setGamma(float gamma);
 };
 

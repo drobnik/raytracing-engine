@@ -24,11 +24,15 @@ private:
     std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Camera* camera;
     ViewPlane viewPlane;
+public:
+    const ViewPlane &getViewPlane() const;
+
+private:
     LightIntensity sceneBackground;
 
 public:
     Scene();
-    Scene(Camera* cam);
+    Scene(int w, int h, float p);
     Scene(const Scene& sc);
     ~Scene();
     void initialize();

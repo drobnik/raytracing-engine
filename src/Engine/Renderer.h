@@ -14,10 +14,13 @@ private:
     //ArgsParser parser;
     //EngineConfig config;
     void saveImage();
+
 public:
     Renderer();
+    ~Renderer();
+    Renderer(const Renderer& r);
     Renderer(Scene& s, FileManager& man);
-    EngineImage renderScene(Tracer *tracer);
+    void renderScene(Tracer *tracer);
 };
 
 

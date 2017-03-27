@@ -4,11 +4,13 @@
 
 Scene::Scene() {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
+    viewPlane = ViewPlane();
 }
 
-Scene::Scene(Camera *cam) {
+Scene::Scene(int w, int h, float p) {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
-    camera = cam;
+   // camera = cam;
+    viewPlane = ViewPlane(w, h, p);
 }
 
 //FIXME
@@ -29,6 +31,10 @@ Scene::Scene(const Scene &sc) {
 Scene::~Scene() {
     delete camera;
     camera = nullptr;
+}
+
+EngineImage Scene::renderScene(Tracer *tracer) {
+    return camera->renderScene(viewPlane, sceneBackground, tracer);
 }
 
 void Scene::initialize() {
@@ -98,10 +104,6 @@ void Scene::run() {
     Utility::logPoint(p4, t4);
 }
 
-EngineImage Scene::renderScene(Tracer *tracer) {
-    return camera->renderScene(viewPlane, sceneBackground, tracer);
-}
-
 ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
     float t = 0.0f, tmin = INFINITY;
@@ -120,6 +122,10 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
 
 LightIntensity Scene::Background() {
     return sceneBackground;
+}
+
+const ViewPlane &Scene::getViewPlane() const {
+    return viewPlane;
 }
 
 
