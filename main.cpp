@@ -9,10 +9,12 @@ int main(int argc, char* argv[]) {
     sampleScene.run();*/
 
     Scene renderScene = Scene();
+    //EngineImage img = EngineImage();
     FileManager man = FileManager("/img");
     renderScene.init(); //FIXME
     Renderer renderer = Renderer(renderScene, man);
 
+    //FIXME
     //renderer.renderScene();
 
     return 0;

@@ -8,7 +8,6 @@ LightIntensity LightIntensity::operator-(LightIntensity &l) {
     return LightIntensity(r - l.red(), g - l.green(), b - l.blue());
 }
 
-//do i need this?! vvvv
 LightIntensity LightIntensity::operator/(LightIntensity &l) {
     return LightIntensity(r/l.red(), g/l.green(), b/l.blue());
 }
@@ -24,10 +23,8 @@ LightIntensity operator*(float scale, LightIntensity &l) {
 LightIntensity operator*(LightIntensity &l, float scale) {
     return LightIntensity(l.red() * scale, l.green() * scale, l.blue() * scale);
 }
-/*
-std::ostream operator<<(std::ostream &str, LightIntensity &l) {
-    return str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue();
-}*/
 
-// przekazac liste rzeczy na scenie, puscic promien z kazdego piksela. jak jestesmy
-// przy jednym promieniu, to sprawdz przeciecia z kazda rzecza na scenie
+std::ostream& operator<<(std::ostream &str, LightIntensity &l) {
+    str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue()<<" ]\n";
+    return str;
+}

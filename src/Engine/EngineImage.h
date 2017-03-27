@@ -14,16 +14,15 @@ private:
     LightIntensity background;
 
 public:
+    EngineImage();
     EngineImage(int w, int h);
     EngineImage(int w, int h, LightIntensity light);
-    EngineImage();
-    int getWidth() const;
-    int getHeight() const;
+    ~EngineImage() {};
+    EngineImage(const EngineImage& e);
     bitmap_image & getImg();
     const LightIntensity &getBackground() const;
-    //Vector3 getPixel(int x, int y);
     void setPixel(int x, int y, const LightIntensity& c);
-    void resetPixels(const LightIntensity& c);
+    void resetPixels(LightIntensity &c);
 };
 
 

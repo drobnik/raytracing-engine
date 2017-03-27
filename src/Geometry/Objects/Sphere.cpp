@@ -1,9 +1,15 @@
 #include "Sphere.h"
 
-Sphere::Sphere() {
+Sphere::Sphere()
+        : radius(10),
+          center(Vector3(0.0f, 0.0f, 0.0f)){ }
 
+Sphere::~Sphere() { }
+
+Sphere::Sphere(const Sphere &s) {
+    radius = s.radius;
+    center = s.center;
 }
-
 Sphere::Sphere(Vector3 &center, float rad) {
     this->center = center;
     radius = rad;

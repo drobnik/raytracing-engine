@@ -13,6 +13,9 @@ enum rayState{
 
 class Primitive {
 public:
+    Primitive();
+    virtual ~Primitive();
+    Primitive(const Primitive& p);
     virtual rayState intersects(Ray& r, float& a_dist)=0;
     inline Material getMaterial(){return material;}
 protected:

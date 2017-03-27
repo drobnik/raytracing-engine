@@ -1,20 +1,15 @@
 #include "OrthoCamera.h"
-#include "../Geometry/ViewPlane.h"
-#include "../Engine/Tracer.h"
 
-//FIXME
-OrthoCamera::OrthoCamera() {
+OrthoCamera::OrthoCamera() : Camera() { }
 
-}
+OrthoCamera::OrthoCamera(Vector3 e, Vector3 look, float near, float far)
+        : Camera(e, look, near, far){ }
 
-//FIXME
-OrthoCamera::OrthoCamera(Vector3 eye, Vector3 lookAt, float nearPlane, float farPlane) {
-
-}
 EngineImage
 OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) {
     LightIntensity color;
     EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light);
+    image.resetPixels(light);
     float x, y;
     Ray ray;// zw == nearPlane
     ray.setDirection(Vector3(0.0f, 0.0f, -1.0f));
@@ -25,16 +20,13 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
             y = plane.getPixSize() * (r - 0.5f * (plane.getWRes() - 1.0f));
             ray.setOrigin(Vector3(x, y, nearPlane));
             color = tracer->rayTrace(ray);
-            image.getImg().set_pixel((const unsigned int) x,
-                                     (const unsigned int) y,
-                                     (const unsigned char) color.red(),
-                                     (const unsigned char) color.green(),
-                                     (const unsigned char) color.blue());
+            image.setPixel((int)x, (int)y, color);
         }
     }
     return image;
 }
 
+//FIXME
 Ray OrthoCamera::spawnRay(const Vector3 &point) {
     return Ray();
 }

@@ -11,6 +11,9 @@
 class Camera {
 public:
     //renderScene had objs
+    Camera(); //+ copy constructor
+    Camera(Vector3 e, Vector3 look, float near, float far);
+    virtual ~Camera();
     virtual EngineImage
     renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer)=0;
     virtual Ray spawnRay(const Vector3& point)=0;

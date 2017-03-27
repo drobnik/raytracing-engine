@@ -17,7 +17,7 @@ private:
 public:
     Renderer();
     Renderer(Scene& s, FileManager& man);
-    EngineImage renderScene();
+    EngineImage renderScene(Tracer *tracer);
 };
 
 

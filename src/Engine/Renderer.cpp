@@ -12,11 +12,11 @@ Renderer::Renderer(Scene &s, FileManager& man) {
     img = EngineImage(0, 0);
 }
 
-EngineImage Renderer::renderScene() {
-    EngineImage img = scene->renderScene();
+EngineImage Renderer::renderScene(Tracer *tracer) {
+    EngineImage img = scene->renderScene(tracer);
     return img;
 }
 
 void Renderer::saveImage() {
-    manager->saveImage(img,"test.bmp"); //FIXME config.sceneName
+    manager->saveImage(img,"test.bmp"); //TODO config.sceneName
 }

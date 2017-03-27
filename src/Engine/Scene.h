@@ -20,7 +20,7 @@ class Scene {
 private:
     std::vector<Sphere> spheres;
     std::vector<Ray> rays;
-    Plane samplePlane; //delete
+    Plane samplePlane;
     std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Camera* camera;
     ViewPlane viewPlane;
@@ -29,13 +29,14 @@ private:
 public:
     Scene();
     Scene(Camera* cam);
-    //~Scene();
+    Scene(const Scene& sc);
+    ~Scene();
     void initialize();
     void init();
     void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray& ray);
-    EngineImage renderScene();
+    EngineImage renderScene(Tracer *tracer);
     LightIntensity Background();
 };
 

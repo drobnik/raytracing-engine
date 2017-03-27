@@ -12,6 +12,7 @@ private:
 
 public:
     Ray();
+    ~Ray() {};
     Ray(const Vector3& origin, const Vector3& direct);
     Ray(const Ray& parent);
     void pointAt(const Vector3 &dest);

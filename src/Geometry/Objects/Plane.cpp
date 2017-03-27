@@ -22,3 +22,8 @@ Plane::Plane(const Vector3 &nor, const float &off) : normal(nor) {
     normal.normalize();
     offset = off;
 }
+
+Plane::Plane(const Plane &p)
+        : normal(p.normal),
+          offset(p.offset){ }
+Plane::~Plane() { }

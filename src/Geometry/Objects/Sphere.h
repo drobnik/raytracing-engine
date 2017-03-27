@@ -11,6 +11,8 @@ private:
     float radius;
 public:
     Sphere();
+    ~Sphere();
+    Sphere(const Sphere& s);
     Sphere(Sphere* s);
     Sphere(Vector3& center, float rad);
     rayState intersects(Ray& r, float& t) override;

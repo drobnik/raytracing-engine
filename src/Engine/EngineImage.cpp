@@ -1,14 +1,22 @@
 #include "EngineImage.h"
 
-EngineImage::EngineImage() {
-    std::cout<<"engineimage() used!";
-}
+EngineImage::EngineImage()
+    : width(600),
+      height(400),
+      img(bitmap_image()),
+      background(LightIntensity(0.0f, 0.0f, 0.0f))
+    {  std::cout<<"engineimage() used!"; }
 
 EngineImage::EngineImage(int w, int h) {
     width = w;
     height = h;
     img = bitmap_image((const unsigned int) w, (const unsigned int) h);
     background = LightIntensity(0.0f, 0.0f, 0.0f);
+}
+
+EngineImage::EngineImage(const EngineImage &e) {
+    width = e.width;
+    height = e.height;
 }
 
 EngineImage::EngineImage(int w, int h, LightIntensity light) {
@@ -32,18 +40,10 @@ void EngineImage::setPixel(int x, int y, const LightIntensity &c) {
     //imgData.at((unsigned long long int) (x + y * width)) = c;
 }
 
-void EngineImage::resetPixels(const LightIntensity &c) {
+void EngineImage::resetPixels(LightIntensity &c) {
     img.set_all_channels((const unsigned char &) (c.red() * 255),
                          (const unsigned char &) (c.green() * 255),
                          (const unsigned char &) (c.blue() * 255));
-}
-
-int EngineImage::getWidth() const {
-    return width;
-}
-
-int EngineImage::getHeight() const {
-    return height;
 }
 
 const LightIntensity &EngineImage::getBackground() const {
@@ -53,5 +53,4 @@ const LightIntensity &EngineImage::getBackground() const {
 bitmap_image & EngineImage::getImg() {
     return img;
 }
-
 

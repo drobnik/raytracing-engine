@@ -4,18 +4,32 @@
 
 Scene::Scene() {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
-} // add flag for a camera
+}
 
 Scene::Scene(Camera *cam) {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
+    camera = cam;
 }
 
-//FIXME whats goin on -- better follow `the rule of three`
-/*Scene::~Scene() {
- * //take care of our dear objs
+//FIXME
+Scene::Scene(const Scene &sc) {
+    spheres = sc.spheres;
+    samplePlane = sc.samplePlane;
+    rays = sc.rays;
+
+    objs.clear(); //just to make sure
+    /*for(const auto& ptr : sc.objs)
+        objs.push_back(std::make_unique<Sphere>(*ptr));*/
+
+    camera = sc.camera;
+    viewPlane = sc.viewPlane;
+    sceneBackground = sc.sceneBackground;
+}
+
+Scene::~Scene() {
     delete camera;
     camera = nullptr;
-}*/
+}
 
 void Scene::initialize() {
     Vector3 zero = Vector3();
@@ -45,7 +59,6 @@ void Scene::initialize() {
 
 void Scene::init(){
     Vector3 zero = Vector3();
-   // std::unique_ptr<Primitive> sphere(new Sphere(zero, 10));
     objs.push_back(std::make_unique<Sphere>(new Sphere(zero, 10)));
     camera = new OrthoCamera();
 }
@@ -85,9 +98,8 @@ void Scene::run() {
     Utility::logPoint(p4, t4);
 }
 
-//FIXME
-EngineImage Scene::renderScene() {
-//    return camera->renderScene(objs, <#initializer#>, <#initializer#>);
+EngineImage Scene::renderScene(Tracer *tracer) {
+    return camera->renderScene(viewPlane, sceneBackground, tracer);
 }
 
 ShadeInfo Scene::raytraceObjects(const Ray &ray){
@@ -109,5 +121,6 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
 LightIntensity Scene::Background() {
     return sceneBackground;
 }
+
 
 
