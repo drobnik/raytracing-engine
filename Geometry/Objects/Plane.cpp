@@ -3,6 +3,7 @@
 Plane::Plane() {
     normal = Vector3(0.0f, 1.0f, 0.0f);
     offset = 0.0f;
+    material = Material();
 }
 
 rayState Plane::intersects(Ray &r, float &t) {

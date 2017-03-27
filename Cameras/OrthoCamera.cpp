@@ -1,6 +1,14 @@
 #include "OrthoCamera.h"
 #include "../Geometry/ViewPlane.h"
 
+//FIXME
+OrthoCamera::OrthoCamera() {
+
+}
+
+OrthoCamera::OrthoCamera(Vector3 eye, Vector3 lookAt, float nearPlane, float farPlane) {
+
+}
 EngineImage
 OrthoCamera::renderScene(std::vector<std::unique_ptr<Primitive>> &objs,
                          ViewPlane &plane, LightIntensity &light/*Tracer* tracer*/) {
@@ -31,3 +39,4 @@ OrthoCamera::renderScene(std::vector<std::unique_ptr<Primitive>> &objs,
 Ray OrthoCamera::spawnRay(const Vector3 &point) {
     return Ray();
 }
+

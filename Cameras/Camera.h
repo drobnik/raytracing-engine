@@ -2,7 +2,7 @@
 #define RAYTRACING_ENGINE_CAMERA_H
 #include "../Geometry/Ray.h"
 #include "../Geometry/Objects/Primitive.h"
-#include "../EngineImage.h"
+#include "../Engine/EngineImage.h"
 #include "../Geometry/ViewPlane.h"
 #include <vector>
 #include <memory>
@@ -19,7 +19,6 @@ protected:
     Vector3 eye;
     Vector3 lookAt;
     Vector3 up;
-    Vector3 horizontal;
 
     float nearPlane;
     float farPlane;

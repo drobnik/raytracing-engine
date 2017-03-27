@@ -1,7 +1,21 @@
 #include "Scene.h"
 
 
-Scene::Scene() {} // add flag for a camera
+
+Scene::Scene() {
+    sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
+} // add flag for a camera
+
+Scene::Scene(Camera *cam) {
+    sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
+}
+
+//FIXME whats goin on -- better follow `the rule of three`
+/*Scene::~Scene() {
+ * //take care of our dear objs
+    delete camera;
+    camera = nullptr;
+}*/
 
 void Scene::initialize() {
     Vector3 zero = Vector3();
@@ -33,7 +47,7 @@ void Scene::init(){
     Vector3 zero = Vector3();
    // std::unique_ptr<Primitive> sphere(new Sphere(zero, 10));
     objs.push_back(std::make_unique<Sphere>(new Sphere(zero, 10)));
-    //camera = new OrthoCamera();
+    camera = new OrthoCamera();
 }
 
 // TODO: Geometry module
@@ -74,6 +88,25 @@ void Scene::run() {
 //FIXME
 EngineImage Scene::renderScene() {
 //    return camera->renderScene(objs, <#initializer#>, <#initializer#>);
+}
+
+//FIXME
+ShadeInfo Scene::raytraceObjects(const Ray &ray) const {
+    ShadeInfo info = ShadeInfo();
+    //ShadeInfo info(*this);
+    /*float t = 0.0f, tmin = INFINITY;
+
+    for(unsigned int i = 0; i < objs.size(); i++){
+        rayState state = objs.at(i)->intersects((Ray &) ray, t);
+        if( (state == hit || state == tangent) && (t < tmin)){
+            //info.intersection = state;
+            tmin = t;
+            //FIXME add a material parameter to every primitive called `diffuse color` known from the very beginning
+            //info.color = objs.at(i)->getColor();
+        }
+    }*/
+
+    return info;
 }
 
 

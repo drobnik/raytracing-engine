@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Geometry/Vector3.h"
-#include "Scene.h"
-#include "Renderer.h"
+#include "Engine/Scene.h"
+#include "Engine/Renderer.h"
 
 int main(int argc, char* argv[]) {
     /*Scene sampleScene = Scene();

@@ -1,6 +1,7 @@
 #ifndef RAYTRACING_ENGINE_PRIMITIVE_H
 #define RAYTRACING_ENGINE_PRIMITIVE_H
 #include "../Ray.h"
+#include "../../Materials/Material.h"
 
 enum rayState{
     inner = -1,
@@ -13,6 +14,9 @@ enum rayState{
 class Primitive {
 public:
     virtual rayState intersects(Ray& r, float& a_dist)=0;
+    inline Material getMaterial(){return material;}
+protected:
+    Material material;
 };
 
 

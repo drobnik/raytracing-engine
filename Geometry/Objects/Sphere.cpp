@@ -7,6 +7,12 @@ Sphere::Sphere() {
 Sphere::Sphere(Vector3 &center, float rad) {
     this->center = center;
     radius = rad;
+    material = Material();
+}
+
+Sphere::Sphere(Sphere *s) {
+    center = s->getCenter();
+    radius = s ->getRadius();
 }
 
 rayState Sphere::intersects(Ray& r, float& t) {
@@ -51,11 +57,6 @@ rayState Sphere::intersects(Ray& r, float& t) {
 
 Vector3 Sphere::getCenter() {
     return center;
-}
-
-Sphere::Sphere(Sphere *s) {
-    center = s->getCenter();
-    radius = s ->getRadius();
 }
 
 float Sphere::getRadius() {

@@ -2,9 +2,9 @@
 #define RAYTRACING_ENGINE_IMAGE_H
 #include <vector>
 #include <cassert>
-#include "Geometry/Vector3.h"
-#include "Lights/LightIntensity.h"
-#include "lib/bitmap/bitmap_image.hpp"
+#include "../Geometry/Vector3.h"
+#include "../Lights/LightIntensity.h"
+#include "../lib/bitmap/bitmap_image.hpp"
 
 class EngineImage {
 private:
