@@ -1,6 +1,9 @@
 #ifndef RAYTRACING_ENGINE_ORTHOCAMERA_H
 #define RAYTRACING_ENGINE_ORTHOCAMERA_H
+#define MAX_DEPTH 3
+#define SPATIAL 0.05f
 #include <string>
+#include <algorithm>
 #include "Camera.h"
 #include "../Geometry/ViewPlane.h"
 #include "../Engine/Tracer.h"

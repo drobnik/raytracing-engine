@@ -18,12 +18,14 @@ public:
     float green() {return g;};
     float blue() {return b;};
 
-    LightIntensity operator+(LightIntensity& l);
+    //LightIntensity operator+(LightIntensity& l);
     LightIntensity operator-(LightIntensity& l);
     LightIntensity operator/(LightIntensity& l);
+    bool operator<(LightIntensity& l);
     bool operator==(LightIntensity& l);
     friend LightIntensity operator*(float scale, LightIntensity& l);
     friend LightIntensity operator*(LightIntensity& l, float scale);
+    friend LightIntensity operator+(LightIntensity& l1, LightIntensity& l2);
     friend std::ostream& operator<<(std::ostream &str, LightIntensity &l);
 };
 

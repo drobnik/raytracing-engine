@@ -1,8 +1,8 @@
 #include "LightIntensity.h"
 
-LightIntensity LightIntensity::operator+(LightIntensity &l) {
+/*LightIntensity LightIntensity::operator+(LightIntensity &l) {
     return LightIntensity(r + l.red(), g + l.green(), b + l.blue());
-}
+}*/
 
 LightIntensity LightIntensity::operator-(LightIntensity &l) {
     return LightIntensity(r - l.red(), g - l.green(), b - l.blue());
@@ -33,4 +33,12 @@ LightIntensity::LightIntensity(const LightIntensity &l) {
     r = l.r;
     g = l.g;
     b = l.b;
+}
+
+bool LightIntensity::operator<(LightIntensity &l) {
+    return (r < l.r) && (g < l.g) && (b < l.b);
+}
+
+LightIntensity operator+(LightIntensity &l1, LightIntensity &l2) {
+    return LightIntensity(l1.r + l2.red(), l1.g + l2.green(), l1.b + l2.blue());
 }
