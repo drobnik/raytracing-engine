@@ -7,6 +7,7 @@
 #include "../Geometry/Objects/Primitive.h"
 #include "../Geometry/Ray.h"
 #include "../Cameras/OrthoCamera.h"
+#include "../Cameras/PerspectiveCamera.h"
 #include "../Geometry/Objects/Sphere.h"
 #include "../Geometry/Objects/Plane.h"
 #include "../Geometry/Vector3.h"
@@ -36,6 +37,7 @@ public:
     ~Scene();
     void initialize();
     void init();
+    void initPers();
     void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);

@@ -59,12 +59,21 @@ void Scene::initialize() {
 
 void Scene::init(){
     Vector3 zero = Vector3();
-    Vector3 zero1 = Vector3(30.0f, 30.0f, 20.0f); //FIXME
-    objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 10)));
+    Vector3 zero1 = Vector3(0.0f, 0.0f, 50.0f);
+    objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 30.0f)));
+    //objs.push_back(std::make_unique<Sphere>(Sphere(zero, 50.0f)));
     camera = new OrthoCamera(Vector3(0.0f, 0.0f, -20.0f),
-                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, 5000);
+                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f);
     sceneName = sceneName + camera->toString();
-    float t = 0.0f;
+}
+
+void Scene::initPers() {
+    Vector3 zero = Vector3();
+    Vector3 zero1 = Vector3(0.0f, 0.0f, 50.0f);
+    objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 10.0f)));
+    camera = new PerspectiveCamera(Vector3(0.0f, 0.0f, -20.0f),
+                             Vector3(0.0f, 0.0f, 1.0f), 0.0f, 2000);
+    sceneName = sceneName + camera->toString();
 }
 
 // TODO: Geometry module

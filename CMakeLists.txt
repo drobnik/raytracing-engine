@@ -11,5 +11,5 @@ set(SOURCE_FILES main.cpp src/Geometry/Vector3.cpp src/Geometry/Vector3.h src/Ge
         src/Utilities/FileManager.h src/Lights/LightIntensity.cpp src/Lights/LightIntensity.h
         src/Cameras/OrthoCamera.cpp src/Cameras/OrthoCamera.h src/Engine/Renderer.cpp src/Engine/Renderer.h
         src/Cameras/Camera.cpp src/Geometry/ViewPlane.cpp src/Geometry/ViewPlane.h src/Engine/Tracer.cpp
-        src/Engine/Tracer.h src/Engine/ShadeInfo.cpp src/Engine/ShadeInfo.h src/Materials/Material.cpp src/Materials/Material.h)
+        src/Engine/Tracer.h src/Engine/ShadeInfo.cpp src/Engine/ShadeInfo.h src/Materials/Material.cpp src/Materials/Material.h src/Cameras/PerspectiveCamera.cpp src/Cameras/PerspectiveCamera.h)
 add_executable(raytracing_engine ${SOURCE_FILES})

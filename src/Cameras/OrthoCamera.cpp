@@ -21,14 +21,11 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
         for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
-            vc = (Vector3(x, y, Camera::nearPlane));//.normalize();
+            vc = (Vector3(x, y, Camera::nearPlane));
             ray.setOrigin(vc);
-          //  std::cout<<ray.getOrigin()<<"\n";
             color = tracer->rayTrace(ray);
             image.setPixel((int)r, (int)c, color);
         }
     }
     return image;
 }
-//x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
-//y = plane.getPixSize() * (r - 0.5f * (plane.getWRes() - 1.0f));
