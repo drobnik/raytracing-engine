@@ -45,7 +45,6 @@ void EngineImage::setPixel(int x, int y, LightIntensity &c) {
                               (const unsigned int &) (c.green() * 255),
                               (const unsigned int &) (c.blue() * 255));
     img.set_pixel(x, y, color);
-    //imgData.at((unsigned long long int) (x + y * width)) = c;
 }
 
 void EngineImage::resetPixels(LightIntensity &c) {

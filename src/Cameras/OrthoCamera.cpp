@@ -21,15 +21,9 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f * (plane.getWRes() - 1.0f));
             ray.setOrigin(Vector3(x, y, 0)); //nearplane
-            color = cdum;//tracer->rayTrace(ray);
+            color = tracer->rayTrace(ray);
             image.setPixel((int)r, (int)c, color);
         }
     }
     return image;
 }
-
-//FIXME why do i need this?
-Ray OrthoCamera::spawnRay(const Vector3 &point) {
-    return Ray();
-}
-

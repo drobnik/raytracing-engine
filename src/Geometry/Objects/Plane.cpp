@@ -31,3 +31,7 @@ Plane::Plane(const Plane &p)
           offset(p.offset)
           { }
 Plane::~Plane() { }
+
+Material Plane::getMaterial() {
+    return material;
+}

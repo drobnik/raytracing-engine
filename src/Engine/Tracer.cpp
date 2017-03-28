@@ -9,10 +9,9 @@ Tracer::Tracer(Scene *scene) {
 }
 
 LightIntensity Tracer::rayTrace(const Ray &ray) const {
-    ShadeInfo info(scene->raytraceObjects(ray)); //FIXME scene
-   // std::cout<<"state: "<<std::to_string(info.State())<<"\n";
-   // std::cout<<info.getMaterial().getColor().red()<<"\n"; //FIXME 0.5f!!!
-     if(info.State() == hit)
+    Ray r = Ray(Vector3(10.0f, 0.0f, -20.0f), Vector3(0.0f, 0.0f, 1.0f) ); //FIXME
+    ShadeInfo info(scene->raytraceObjects(r)); //FIXME &ray
+     if(info.State() == 2)
           return info.getMaterial().getColor();
      else
           return scene->Background();

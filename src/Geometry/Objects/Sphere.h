@@ -9,6 +9,7 @@ class Sphere : public Primitive{
 private:
     Vector3 center;
     float radius;
+    Material material;
 public:
     Sphere();
     ~Sphere();
@@ -18,6 +19,7 @@ public:
     rayState intersects(Ray& r, float& t) override;
     Vector3 getCenter();
     float getRadius();
+    virtual Material getMaterial();
 };
 
 

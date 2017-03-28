@@ -1,10 +1,10 @@
 #include "Material.h"
 
 Material::Material() {
-    diffuseColor = LightIntensity(0.5f, 0.5f, 0.5f);
+    //diffuseColor = LightIntensity(0.5f, 0.5f, 0.5f);
 }
 
-Material::Material(LightIntensity diff) {
+Material::Material(LightIntensity diff) : Material(){
     diffuseColor = diff;
 }
 

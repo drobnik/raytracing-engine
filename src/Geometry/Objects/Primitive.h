@@ -17,9 +17,7 @@ public:
     ~Primitive() = default;
     Primitive(const Primitive& p) = delete;
     virtual rayState intersects(Ray& r, float& a_dist)=0;
-    inline Material getMaterial(){return material;}
-protected:
-    Material material;
+    virtual Material getMaterial()=0;
 };
 
 

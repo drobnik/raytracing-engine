@@ -11,8 +11,6 @@ public:
     OrthoCamera(Vector3 e, Vector3 look, float near, float far);
     virtual EngineImage
     renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) override;
-    virtual Ray
-    spawnRay(const Vector3& point) override;
     std::string toString(){return "_ortho_cam";};
 };
 
