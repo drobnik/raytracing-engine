@@ -8,13 +8,13 @@ int main(int argc, char* argv[]) {
     sampleScene.initialize();
     sampleScene.run();*/
 
-    FileManager man = FileManager("/img");
-    Scene renderScene = Scene();
+    //add a name of produced image
+    FileManager man = FileManager("");// "img/"
+    Scene renderScene = Scene(100, 100, 1.0f);
     renderScene.init();
-    ViewPlane plane = renderScene.getViewPlane();
     Renderer renderer = Renderer(renderScene, man);
-    //FIXME
-    //EngineImage img = renderer.renderScene();
+
+    renderer.renderScene();
 
     return 0;
 }

@@ -1,15 +1,16 @@
 #include "ViewPlane.h"
 
 ViewPlane::ViewPlane()
-    : wResolution(600),
-      hResolution(400),
+    : wResolution(100),
+      hResolution(100),
       pixSize(1.0f),
       gamma(1.0f){ }
 
-ViewPlane::ViewPlane(int h, int w, float siz) : gamma(1.0f) {
-    hResolution = h;
+ViewPlane::ViewPlane(int w, int h, float siz) {
     wResolution = w;
+    hResolution = h;
     pixSize = siz;
+    gamma = 1.0f;
 }
 int ViewPlane::getHRes() const {
     return hResolution;

@@ -11,5 +11,6 @@ FileManager::FileManager(std::string path) {
 }
 
 void FileManager::saveImage(EngineImage img, const std::string name) {
+    // hey, img inside has no width and height
     img.getImg().save_image(path + name);
 }

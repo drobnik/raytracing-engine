@@ -1,6 +1,6 @@
 #include "Plane.h"
 
-Plane::Plane() {
+Plane::Plane() : Primitive() {
     normal = Vector3(0.0f, 1.0f, 0.0f);
     offset = 0.0f;
     material = Material();
@@ -18,12 +18,16 @@ rayState Plane::intersects(Ray &r, float &t) {
 
 }
 
-Plane::Plane(const Vector3 &nor, const float &off) : normal(nor) {
+Plane::Plane(const Vector3 &nor, const float &off)
+        : normal(nor),
+          Primitive(){
     normal.normalize();
     offset = off;
 }
 
+//FIXME no copy constructor
 Plane::Plane(const Plane &p)
         : normal(p.normal),
-          offset(p.offset){ }
+          offset(p.offset)
+          { }
 Plane::~Plane() { }

@@ -1,7 +1,4 @@
 #include "Primitive.h"
 
-Primitive::Primitive() { }
+Primitive::Primitive() { material = Material(); }
 
-Primitive::~Primitive() { }
-
-Primitive::Primitive(const Primitive &p) { material = p.material;}

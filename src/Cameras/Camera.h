@@ -4,10 +4,10 @@
 #include "../Geometry/Objects/Primitive.h"
 #include "../Engine/EngineImage.h"
 #include "../Geometry/ViewPlane.h"
-#include "../Engine/Tracer.h"
 #include <vector>
 #include <memory>
 
+class Tracer;
 class Camera {
 public:
     //renderScene had objs

@@ -3,9 +3,7 @@
 #include "../Lights/LightIntensity.h"
 #include "../Geometry/Ray.h"
 #include "../Engine/ShadeInfo.h"
-
-
-class Scene;
+#include "Scene.h"
 
 class Tracer {
 private:

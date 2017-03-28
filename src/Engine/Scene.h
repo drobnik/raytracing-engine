@@ -11,10 +11,12 @@
 #include "../Geometry/Objects/Plane.h"
 #include "../Geometry/Vector3.h"
 #include "../Utilities/Utility.h"
-#include "../Cameras/Camera.h"
 #include "../Utilities/Utility.h"
 #include "../Geometry/ViewPlane.h"
 #include "ShadeInfo.h"
+
+class Tracer;
+class Camera;
 
 class Scene {
 private:
@@ -24,10 +26,6 @@ private:
     std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
     Camera* camera;
     ViewPlane viewPlane;
-public:
-    const ViewPlane &getViewPlane() const;
-
-private:
     LightIntensity sceneBackground;
 
 public:
@@ -39,9 +37,11 @@ public:
     void init();
     void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
-    ShadeInfo raytraceObjects(const Ray& ray);
+    ShadeInfo raytraceObjects(const Ray &ray);
     EngineImage renderScene(Tracer *tracer);
     LightIntensity Background();
+    const ViewPlane &getViewPlane() const;
+
 };
 
 

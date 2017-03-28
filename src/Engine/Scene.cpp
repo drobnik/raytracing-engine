@@ -1,27 +1,23 @@
 #include "Scene.h"
 
-
-
+//NOTE: cam is initialized in init() method.
 Scene::Scene() {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
-    viewPlane = ViewPlane();
+    //viewPlane = ViewPlane();
+    viewPlane.setGamma(1.0f);
 }
 
 Scene::Scene(int w, int h, float p) {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
-   // camera = cam;
-    viewPlane = ViewPlane(w, h, p);
+    this->viewPlane = ViewPlane(w, h, p);
 }
-
-//FIXME
+//NOTE: objects are empty here. Probably it is a useless constructor
 Scene::Scene(const Scene &sc) {
     spheres = sc.spheres;
     samplePlane = sc.samplePlane;
     rays = sc.rays;
 
-    objs.clear(); //just to make sure
-    /*for(const auto& ptr : sc.objs)
-        objs.push_back(std::make_unique<Sphere>(*ptr));*/
+    objs.clear();
 
     camera = sc.camera;
     viewPlane = sc.viewPlane;
@@ -56,17 +52,13 @@ void Scene::initialize() {
     rays.push_back(r1);
     rays.push_back(r2);
     rays.push_back(r3);
-
-    viewPlane.WRes(500); //from the configuration file!!
-    viewPlane.HRes(500);
-    viewPlane.setPixSize(1.0f);
-    viewPlane.setGamma(1.0f);
 }
 
 void Scene::init(){
-    Vector3 zero = Vector3();
-    objs.push_back(std::make_unique<Sphere>(new Sphere(zero, 10)));
-    camera = new OrthoCamera();
+    Vector3 cen = Vector3(0.0f, 0.0f, 100.0f);
+    objs.push_back(std::make_unique<Sphere>(new Sphere(cen, 10)));
+    //add a default constructor
+    camera = new OrthoCamera(Vector3(0.0f, 0.0f, 50.0f), Vector3(), 400, 5000);
 }
 
 // TODO: Geometry module

@@ -1,22 +1,24 @@
 #include "Sphere.h"
 
 Sphere::Sphere()
-        : radius(10),
+        : Primitive(),
+          radius(10),
           center(Vector3(0.0f, 0.0f, 0.0f)){ }
 
 Sphere::~Sphere() { }
 
-Sphere::Sphere(const Sphere &s) {
+//FIXME no copy constructor
+Sphere::Sphere(const Sphere &s){
     radius = s.radius;
     center = s.center;
 }
-Sphere::Sphere(Vector3 &center, float rad) {
+Sphere::Sphere(Vector3 &center, float rad) : Primitive() {
     this->center = center;
     radius = rad;
     material = Material();
 }
 
-Sphere::Sphere(Sphere *s) {
+Sphere::Sphere(Sphere *s) : Primitive() {
     center = s->getCenter();
     radius = s ->getRadius();
 }

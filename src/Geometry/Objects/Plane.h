@@ -2,7 +2,7 @@
 #define RAYTRACING_ENGINE_PLANE_H
 #include "Primitive.h"
 
-class Plane : Primitive {
+class Plane : public Primitive {
 private:
     Vector3 normal;
     float offset;

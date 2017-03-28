@@ -4,8 +4,8 @@
 
 class ViewPlane {
 private:
-    int hResolution;
     int wResolution;
+    int hResolution;
     float pixSize;
     float gamma;    //- monitor gamma factor
 

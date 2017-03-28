@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
 Renderer::Renderer() {
-    img = EngineImage(0,0);
+    img = EngineImage(500,500);
     assert(false);
 }
 
@@ -22,11 +22,12 @@ Renderer::Renderer(Scene &s, FileManager& man) {
     Scene* scenePtr = &s;
     scene = &s;
     manager = &man;
-    img = EngineImage(0, 0);
+    img = EngineImage(s.getViewPlane().getWRes(),
+                      s.getViewPlane().getHRes(), s.Background());
     tracer = new Tracer(scenePtr); //ticking bomb..
 }
 
-void Renderer::renderScene(Tracer *tracer) {
+void Renderer::renderScene() {
     EngineImage image = scene->renderScene(tracer);
     img = image;
     saveImage();
@@ -34,6 +35,7 @@ void Renderer::renderScene(Tracer *tracer) {
 
 void Renderer::saveImage() {
     manager->saveImage(img,"test.bmp"); //TODO config.sceneName
+    std::cout<<"\nDone\n";
 }
 
 

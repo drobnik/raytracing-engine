@@ -30,12 +30,12 @@ EngineImage::EngineImage(int w, int h, LightIntensity light) {
 }
 
 /*Vector3 EngineImage::getPixel(int x, int y) {
-    assert((x >= 0 && x < width) && (y >= y && y < height));
+    assert((x >= 0 && x < width) && (y >= 0 && y < height));
     return imgData.at((unsigned long long int) (x + y * width));
 }*/
 
 void EngineImage::setPixel(int x, int y, const LightIntensity &c) {
-    assert((x >= 0 && x < width) && (y >= y && y < height));
+    assert((x >= 0 && x < width) && (y >= 0 && y < height));
     img.set_pixel(x, y, background.red() * 255, background.green() * 255, background.blue() * 255);
     //imgData.at((unsigned long long int) (x + y * width)) = c;
 }

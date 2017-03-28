@@ -20,7 +20,7 @@ public:
     ~Renderer();
     Renderer(const Renderer& r);
     Renderer(Scene& s, FileManager& man);
-    void renderScene(Tracer *tracer);
+    void renderScene();
 };
 
 
