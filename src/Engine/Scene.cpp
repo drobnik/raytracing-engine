@@ -57,10 +57,15 @@ void Scene::initialize() {
 }
 
 void Scene::init(){
-    Vector3 cen = Vector3(0.0f, 0.0f, 100.0f);
-    objs.push_back(std::make_unique<Sphere>(new Sphere(cen, 10)));
-    //add a default constructor
-    camera = new OrthoCamera(Vector3(0.0f, 0.0f, 50.0f), Vector3(), 400, 5000);
+    Vector3 zero = Vector3();
+    objs.push_back(std::make_unique<Sphere>(Sphere(zero, 10)));
+    camera = new OrthoCamera(Vector3(0.0f, 0.0f, -20.0f),
+                             Vector3(0.0f, 0.0f, 1.0f), -10, 5000);
+    sceneName = sceneName + camera->toString();
+    float t = 0.0f;
+    Ray r = Ray(Vector3(10.0f, 0.0f, -20.0f), Vector3(0.0f, 0.0f, 1.0f) );
+    rayState s =objs.at(0)->intersects((Ray &) r, t);
+    std::cout<<"s: "<<s<<"\n";
 }
 
 // TODO: Geometry module
@@ -110,7 +115,6 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
             info.setMaterial(objs.at(i)->getMaterial());
         }
     }
-
     return info;
 }
 

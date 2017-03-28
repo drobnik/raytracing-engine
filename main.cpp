@@ -4,7 +4,7 @@
 #include "src/Engine/Renderer.h"
 
 int main(int argc, char* argv[]) {
-    /*Scene sampleScene = Scene();
+   /* Scene sampleScene = Scene();
     sampleScene.initialize();
     sampleScene.run();*/
 

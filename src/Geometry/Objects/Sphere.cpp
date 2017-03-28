@@ -12,10 +12,13 @@ Sphere::Sphere(const Sphere &s){
     radius = s.radius;
     center = s.center;
 }
-Sphere::Sphere(Vector3 &center, float rad) : Primitive() {
+
+//TODO add material parameter
+Sphere::Sphere(Vector3 &center, float rad) {
+    LightIntensity l = LightIntensity(1.0f, 0.0f, 0.0f);
     this->center = center;
     radius = rad;
-    material = Material();
+    material = Material(l);
 }
 
 Sphere::Sphere(Sphere *s) : Primitive() {

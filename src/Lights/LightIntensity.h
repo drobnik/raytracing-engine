@@ -12,6 +12,7 @@ public:
     inline LightIntensity(float r1, float g1, float b1) {r=r1, g=g1, b=b1;};
     inline LightIntensity(float r1, float g1) {r=r1, g=g1, b=0.0f;};
     inline LightIntensity(float r1) {r=r1, g=0.0f, b=0.0f;};
+    LightIntensity(const LightIntensity& l);
 
     float red() {return r;};
     float green() {return g;};

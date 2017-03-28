@@ -16,6 +16,7 @@ public:
     virtual ~Camera();
     virtual EngineImage
     renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer)=0;
+    virtual std::string toString()=0;
     virtual Ray spawnRay(const Vector3& point)=0;
     void calcUVW();
 

@@ -23,7 +23,7 @@ public:
     EngineImage(const EngineImage& e);
     bitmap_image & getImg();
     const LightIntensity &getBackground() const;
-    void setPixel(int x, int y, const LightIntensity& c);
+    void setPixel(int x, int y, LightIntensity &c);
     void resetPixels(LightIntensity &c);
     inline std::string Name(){ return name;};
 };

@@ -28,3 +28,9 @@ std::ostream& operator<<(std::ostream &str, LightIntensity &l) {
     str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue()<<" ]\n";
     return str;
 }
+
+LightIntensity::LightIntensity(const LightIntensity &l) {
+    r = l.r;
+    g = l.g;
+    b = l.b;
+}

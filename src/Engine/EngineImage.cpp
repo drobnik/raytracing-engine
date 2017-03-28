@@ -37,9 +37,14 @@ EngineImage::EngineImage(const EngineImage &e) {
     return imgData.at((unsigned long long int) (x + y * width));
 }*/
 
-void EngineImage::setPixel(int x, int y, const LightIntensity &c) {
+// c == 0
+void EngineImage::setPixel(int x, int y, LightIntensity &c) {
     assert((x >= 0 && x < width) && (y >= 0 && y < height));
-    img.set_pixel(x, y, background.red() * 255, background.green() * 255, background.blue() * 255);
+
+    rgb_t color = make_colour((const unsigned int &) (c.red() * 255),
+                              (const unsigned int &) (c.green() * 255),
+                              (const unsigned int &) (c.blue() * 255));
+    img.set_pixel(x, y, color);
     //imgData.at((unsigned long long int) (x + y * width)) = c;
 }
 
