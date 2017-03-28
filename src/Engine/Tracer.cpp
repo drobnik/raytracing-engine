@@ -9,7 +9,7 @@ Tracer::Tracer(Scene *scene) {
 }
 
 LightIntensity Tracer::rayTrace(const Ray &ray) const {
-    ShadeInfo info(scene->raytraceObjects(ray));
+    ShadeInfo info(scene->raytraceObjects(ray)); //FIXME
      if(info.State() == hit)
           return info.getMaterial().getColor();
      else

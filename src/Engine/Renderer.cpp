@@ -6,6 +6,7 @@ Renderer::Renderer() {
 }
 
 Renderer::~Renderer() { //?!
+    delete tracer;
     tracer = nullptr;
     manager = nullptr;
     scene = nullptr;
@@ -24,17 +25,16 @@ Renderer::Renderer(Scene &s, FileManager& man) {
     manager = &man;
     img = EngineImage(s.getViewPlane().getWRes(),
                       s.getViewPlane().getHRes(), s.Background());
-    tracer = new Tracer(scenePtr); //ticking bomb..
+    tracer = new Tracer(scenePtr);
 }
 
 void Renderer::renderScene() {
-    EngineImage image = scene->renderScene(tracer);
-    img = image;
+    img = scene->renderScene(tracer);
     saveImage();
 }
 
 void Renderer::saveImage() {
-    manager->saveImage(img,"test.bmp"); //TODO config.sceneName
+    manager->saveImage(img,"test.bmp");
     std::cout<<"\nDone\n";
 }
 

@@ -10,11 +10,11 @@
 class FileManager {
 //private: some configuration file here
 private:
-    std::string path; //FIXME only for the renders; ie "\users\winds\"
+    std::string path; //FIXME directory for renders only
 public:
     FileManager(std::string path);
     EngineImage* loadImage(const std::string path);
-    void saveImage(EngineImage img, const std::string name); //later: return a status and handle it somehow?
+    void saveImage(EngineImage &img, const std::string name);
 };
 
 

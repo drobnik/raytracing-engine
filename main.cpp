@@ -9,8 +9,8 @@ int main(int argc, char* argv[]) {
     sampleScene.run();*/
 
     //add a name of produced image
-    FileManager man = FileManager("");// "img/"
-    Scene renderScene = Scene(100, 100, 1.0f);
+    FileManager man = FileManager("../img/");
+    Scene renderScene = Scene(600, 400, 1.0f);
     renderScene.init();
     Renderer renderer = Renderer(renderScene, man);
 
