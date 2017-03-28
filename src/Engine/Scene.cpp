@@ -37,6 +37,7 @@ EngineImage Scene::renderScene(Tracer *tracer) {
 
 void Scene::initialize() {
     Vector3 zero = Vector3();
+    //Vector3 zero = Vector3(10.0f, 10.0f, 0.0f);
     Vector3 rayOrigin = Vector3(0.0f, 0.0f, -20.0f);
 
     Sphere s = Sphere(zero, 10);
@@ -58,15 +59,12 @@ void Scene::initialize() {
 
 void Scene::init(){
     Vector3 zero = Vector3();
-    objs.push_back(std::make_unique<Sphere>(Sphere(zero, 10)));
-   // std::cout<<objs.at(0)->getMaterial().getColor().red()<<"\n";
+    Vector3 zero1 = Vector3(30.0f, 30.0f, 20.0f); //FIXME
+    objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 10)));
     camera = new OrthoCamera(Vector3(0.0f, 0.0f, -20.0f),
-                             Vector3(0.0f, 0.0f, 1.0f), -10, 5000);
+                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, 5000);
     sceneName = sceneName + camera->toString();
     float t = 0.0f;
-    /*Ray r = Ray(Vector3(10.0f, 0.0f, -20.0f), Vector3(0.0f, 0.0f, 1.0f) );
-    rayState s =objs.at(0)->intersects((Ray &) r, t);
-    std::cout<<"s: "<<s<<"\n";*/
 }
 
 // TODO: Geometry module
@@ -108,10 +106,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
     float t = 0.0f, tmin = INFINITY;
 
-    //no objects are intersected
-
     for(unsigned int i = 0; i < objs.size(); i++){
-        //if((ray.getOrigin().getY() > 0) && (ray.getOrigin().getY() < 100)) std::cout<<ray.getOrigin()<<"\n";
         rayState state = objs.at(i)->intersects((Ray &) ray, t);
         if( (state == 2 || state == 1) && (t < tmin)){
             info.setState(state);
@@ -119,7 +114,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
             info.setMaterial(objs.at(i)->getMaterial());
         }
     }
-    //std::cout<<objs.at(0)->getMaterial().getColor().red()<<"\n"; //0.5f
+
     return info;
 }
 
