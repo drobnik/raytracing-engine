@@ -3,6 +3,7 @@
 #include <string>
 #include "../../lib/bitmap/bitmap_image.hpp"
 #include "../Engine/EngineImage.h"
+#define BITMAP_FORMAT "bmp"
 
 // this class is used for load/save operations; now it is only dedicated
 // to BMP images. OBJs to be introduced.
@@ -14,7 +15,7 @@ private:
 public:
     FileManager(std::string path);
     EngineImage* loadImage(const std::string path);
-    void saveImage(EngineImage &img, const std::string name);
+    void saveImage(EngineImage &img);
 };
 
 

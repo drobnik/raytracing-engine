@@ -3,13 +3,15 @@
 //NOTE: cam is initialized in init() method.
 Scene::Scene() {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
+    sceneName = "sample";
     //viewPlane = ViewPlane();
     viewPlane.setGamma(1.0f);
 }
 
-Scene::Scene(int w, int h, float p) {
+Scene::Scene(int w, int h, float p, const std::string &n) {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
     this->viewPlane = ViewPlane(w, h, p);
+    sceneName = n;
 }
 //NOTE: objects are empty here. Probably it is a useless constructor
 Scene::Scene(const Scene &sc) {

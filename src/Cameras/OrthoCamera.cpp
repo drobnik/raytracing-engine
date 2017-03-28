@@ -8,7 +8,9 @@ OrthoCamera::OrthoCamera(Vector3 e, Vector3 look, float near, float far)
 EngineImage
 OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) {
     LightIntensity color;
-    EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light); //EngineImage()
+    std::string name = tracer->sceneName();
+    EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light,
+                                    name); //getScene here!!
     image.resetPixels(light);
     float x, y;
     Ray ray;// zw == nearPlane

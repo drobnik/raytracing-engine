@@ -15,3 +15,8 @@ LightIntensity Tracer::rayTrace(const Ray &ray) const {
      else
           return scene->Background();
 }
+
+std::string Tracer::sceneName() {
+    assert(scene != nullptr);
+    return scene->SceneName();
+}

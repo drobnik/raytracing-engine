@@ -27,10 +27,11 @@ private:
     Camera* camera;
     ViewPlane viewPlane;
     LightIntensity sceneBackground;
+    std::string sceneName;
 
 public:
     Scene();
-    Scene(int w, int h, float p);
+    Scene(int w, int h, float p, const std::string &n);
     Scene(const Scene& sc);
     ~Scene();
     void initialize();
@@ -41,7 +42,7 @@ public:
     EngineImage renderScene(Tracer *tracer);
     LightIntensity Background();
     const ViewPlane &getViewPlane() const;
-
+    const std::string SceneName() { return sceneName; };
 };
 
 

@@ -4,29 +4,32 @@ EngineImage::EngineImage()
     : width(600),
       height(400),
       img(bitmap_image()),
-      background(LightIntensity(0.0f, 0.0f, 0.0f))
-    {  std::cout<<"engineimage() used!"; }
+      background(LightIntensity(0.0f, 0.0f, 0.0f)),
+      name("dummy") { }
 
-EngineImage::EngineImage(int w, int h) {
+EngineImage::EngineImage(int w, int h, std::string &imgName) {
     width = w;
     height = h;
+    name = imgName;
     img = bitmap_image((const unsigned int) w, (const unsigned int) h);
     background = LightIntensity(0.0f, 0.0f, 0.0f);
 }
 
-EngineImage::EngineImage(const EngineImage &e) {
-    width = e.width;
-    height = e.height;
-}
-
-EngineImage::EngineImage(int w, int h, LightIntensity light) {
+EngineImage::EngineImage(int w, int h, LightIntensity light, std::string &imgName) {
     width = w;
     height = h;
+    name = imgName;
     img = bitmap_image((const unsigned int) w, (const unsigned int) h);
     background = light;
     img.set_all_channels((const unsigned char &) (background.red() * 255),
                          (const unsigned char &) (background.green() * 255),
                          (const unsigned char &) (background.blue() * 255));
+}
+EngineImage::EngineImage(const EngineImage &e) {
+    width = e.width;
+    height = e.height;
+    background = e.background;
+    name = e.name;
 }
 
 /*Vector3 EngineImage::getPixel(int x, int y) {

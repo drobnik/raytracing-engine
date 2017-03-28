@@ -1,7 +1,8 @@
 #include "Renderer.h"
 
 Renderer::Renderer() {
-    img = EngineImage(500,500);
+    std::string name = "dummy_ren";
+    img = EngineImage(500, 500, name);
     assert(false);
 }
 
@@ -21,10 +22,11 @@ Renderer::Renderer(const Renderer &r) {
 
 Renderer::Renderer(Scene &s, FileManager& man) {
     Scene* scenePtr = &s;
+    std::string name = s.SceneName();
     scene = &s;
     manager = &man;
-    img = EngineImage(s.getViewPlane().getWRes(),
-                      s.getViewPlane().getHRes(), s.Background());
+    img = EngineImage(s.getViewPlane().getWRes(), s.getViewPlane().getHRes(),
+                      s.Background(), name);
     tracer = new Tracer(scenePtr);
 }
 
@@ -34,8 +36,8 @@ void Renderer::renderScene() {
 }
 
 void Renderer::saveImage() {
-    manager->saveImage(img,"test.bmp");
-    std::cout<<"\nDone\n";
+    manager->saveImage(img);
+    std::cout<<"Done\n";
 }
 
 

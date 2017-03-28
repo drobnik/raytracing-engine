@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 
     //add a name of produced image
     FileManager man = FileManager("../img/");
-    Scene renderScene = Scene(600, 400, 1.0f);
+    Scene renderScene = Scene(600, 400, 1.0f, "scene_1");
     renderScene.init();
     Renderer renderer = Renderer(renderScene, man);
 
