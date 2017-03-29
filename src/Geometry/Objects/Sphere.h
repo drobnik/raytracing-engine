@@ -20,6 +20,8 @@ public:
     Vector3 getCenter();
     float getRadius();
     virtual Material getMaterial();
+
+    void setMaterial(const Material &material);
 };
 
 

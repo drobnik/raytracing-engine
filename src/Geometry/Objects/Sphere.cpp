@@ -79,3 +79,7 @@ float Sphere::getRadius() {
 Material Sphere::getMaterial() {
     return material;
 }
+
+void Sphere::setMaterial(const Material &material) {
+    Sphere::material = material;
+}
