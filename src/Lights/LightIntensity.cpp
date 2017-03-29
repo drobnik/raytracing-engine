@@ -42,3 +42,7 @@ bool LightIntensity::operator<(LightIntensity &l) {
 LightIntensity operator+(LightIntensity &l1, LightIntensity &l2) {
     return LightIntensity(l1.r + l2.red(), l1.g + l2.green(), l1.b + l2.blue());
 }
+
+bool LightIntensity::operator!=(LightIntensity &l) {
+    return !(r == l.red() && g == l.green() && b == l.blue());
+}

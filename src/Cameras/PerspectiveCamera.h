@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "../Geometry/ViewPlane.h"
 #include "../Engine/Tracer.h"
+#define ANTI_MAX 3
 
 class PerspectiveCamera : public Camera {
 public:
