@@ -17,9 +17,9 @@ public:
     Vector3 neg(Vector3 v);
 
     Vector3 operator*(const float& k);
-    Vector3 operator/(float k);
-    Vector3 operator+(const Vector3& v2);
-    Vector3 operator-(const Vector3& v2);
+    const Vector3 operator/(float k);
+    const Vector3 operator+(const Vector3 &v2);
+    const Vector3 operator-(const Vector3 &v2);
     bool operator==(const Vector3& v2);// 92
 
     float dot(Vector3 v2);

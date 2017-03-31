@@ -7,6 +7,7 @@ PerspectiveCamera::PerspectiveCamera(Vector3 e, Vector3 look, float near,
     Camera::fieldOfView = 45;
 }
 //FIXME
+int is = 0, ia = 0;
 LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
 
     LightIntensity la, lb, lc, ld, le, final;
@@ -28,17 +29,15 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         offset = 1.0f * (float)pow(0.5f, (depth + 1));
 
 
-        ra.setDirection(Vector3(ray.getDirection().getX() /*- offset*/,
+        ra.setDirection(Vector3(ray.getDirection().getX() - offset,
                                 ray.getDirection().getY(),
                                 ray.getDirection().getZ()).normalize());
         rb.setDirection(Vector3(ray.getDirection().getX() - offset,
                                 ray.getDirection().getY()  - offset,
                                 ray.getDirection().getZ()).normalize());
-
         rc.setDirection(Vector3(ray.getDirection().getX(),
                                 ray.getDirection().getY(),
                              ray.getDirection().getZ()).normalize());
-
         rd.setDirection(Vector3(ray.getDirection().getX(),
                                 ray.getDirection().getY() - offset,
                              ray.getDirection().getZ()).normalize());
@@ -61,10 +60,9 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         lb = tracer->rayTrace(rb);
         lc = tracer->rayTrace(rc);
         ld = tracer->rayTrace(rd);
-
-        if(le != la){
-            la = sampler1((depth + 1), ra, tracer); //tutaj problem jst!
-            //la = LightIntensity(0.8f, 0.0f, 0.0f);
+        if(le != la){ //FIXME
+            //la = sampler1((depth + 1), ra, tracer); //tutaj problem jst!
+            la = LightIntensity(0.5f, 0.5f, 0.5f); //na kazdym pikselu wchodzi
         }
         else if(le != lb){
             lb = sampler1((depth + 1), rb, tracer);
