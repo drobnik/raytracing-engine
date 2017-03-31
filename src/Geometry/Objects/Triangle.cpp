@@ -5,6 +5,7 @@ Triangle::Triangle() : Primitive(){
     b = Vector3(0.0f, 0.0f, 1.0f);
     c = Vector3(1.0f, 0.0f, 0.0f);
     normal = Vector3(0.0f, 1.0f, 0.0f);
+    material = Material(LightIntensity(0.5f, 0.5f, 0.0f));
 }
 
 Triangle::~Triangle(){ }
@@ -14,21 +15,26 @@ Triangle::Triangle(const Triangle &t) : Primitive() {
     b = t.b;
     c = t.c;
     normal = t.normal;
+    material = t.material;
 }
 
 Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c)
-        : Primitive(), a(a), b(b), c(c) {
+        : Primitive() {
+    this->a = a;
+    this->b = b;
+    this->c = c;
     Vector3 v1 = b - a;
     Vector3 v2 = c - a;
     normal = v1.crossProd(v2);
     normal.normalize();
+    material = Material(LightIntensity(0.5f, 0.5f, 0.0f));
 }
 
 // FIXME add hit info!
 rayState Triangle::intersects(Ray &ray, float &t) {
     float a, b, c, d, e, f, g, h, i, j, k, l;
     float m, n, p, q, s, r, d1, d2, d3, invDem;
-    float beta, gamma, tet; // for t
+    float beta, gamma, tet = 0.0f; // for t
     Vector3 ori = ray.getOrigin();
     Vector3 dir = ray.getDirection();
 
@@ -36,25 +42,34 @@ rayState Triangle::intersects(Ray &ray, float &t) {
     c = ray.getDirection().getX(), d = this->a.getX() - ori.getX();
     e = this->a.getY() - this->b.getY(), f = this->a.getY() - this->c.getY();
     g = dir.getY(), h = this->a.getY() - ori.getY(), i = this->a.getZ();
-    j = this->a.getZ() - this->c.getZ(), k = dir.getY();
+    j = this->a.getZ() - this->c.getZ(), k = dir.getZ();
     l = this->a.getZ() - ori.getZ();
 
     m = f * k - g * j, n = h * k - g * l, p = f * l - h * j, q = g * i - e * k;
     s = e * j - f * i;
     d1 = a * m, d2 = b * q, d3 = c * s;
     invDem = 1.0f / (d1 + d2 + d3);
+
     beta = (d * m - b * n - c * p) * invDem;
-    if(beta < 0.0f) return miss;
+    if(beta < 0.0f) {
+        return miss;
+    }
 
     r = e * l - h * i;
     gamma = (a * n + d * q + c * r) *invDem;
-    if(gamma < 0.0f || gamma + beta > 1.0f) return miss;
+    if(gamma < 0.0f || gamma + beta > 1.0f){
+        return miss;
+    }
 
     tet = (a * p - b * r + d * s) * invDem;
-    if(tet < e-6) return miss;
 
+    if(tet < e-6) return miss;
     t = tet;
     //info.normal = normal;
     //info.point = ray.getOrigin() + t * ray.getDirection()
     return tangent;
+}
+
+Material Triangle::getMaterial() {
+    return material;
 }

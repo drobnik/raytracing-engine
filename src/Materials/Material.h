@@ -5,7 +5,7 @@
 
 class Material {
 private:
-    LightIntensity diffuseColor; //TEMP
+    LightIntensity ambientColor; //TEMP
 public:
     Material(); //TEMP
     Material(LightIntensity diff);

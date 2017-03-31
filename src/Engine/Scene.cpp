@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "../Geometry/Objects/Triangle.h"
 
 //NOTE: cam is initialized in init() method.
 Scene::Scene() {
@@ -60,10 +61,15 @@ void Scene::initialize() {
 void Scene::init(){
     Vector3 zero1 = Vector3(0.0f, 0.0f, 50.0f);
     Vector3 zero2 = Vector3(0.0f, 10.0f, 10.0f);
+    Vector3 a, b, c;
+    a = Vector3(30.0f, 10.0f, 0.0f), b = Vector3(10.0f, 2.0f, 0.0f),
+        c = Vector3(-10.0f, 20.0f, 0.0f);
+    Triangle t = Triangle(a, b, c);
     Sphere s2 = Sphere(zero2, 10.0f);
     s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 30.0f)));
     objs.push_back(std::make_unique<Sphere>(s2));
+    objs.push_back(std::make_unique<Triangle>(t));
     camera = new OrthoCamera(Vector3(0.0f, 0.0f, -20.0f),
                              Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f);
     sceneName = sceneName + camera->toString();
@@ -74,8 +80,13 @@ void Scene::initPers() {
     Vector3 zero2 = Vector3(0.0f, 10.0f, 10.0f);
     Sphere s2 = Sphere(zero2, 10.0f);
     s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+    Vector3 a, b, c;
+    a = Vector3(30.0f, 10.0f, 0.0f), b = Vector3(10.0f, 2.0f, 0.0f),
+    c = Vector3(-10.0f, 20.0f, 0.0f);
+    Triangle t = Triangle(a, b, c);
     objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 10.0f)));
     objs.push_back(std::make_unique<Sphere>(s2));
+    objs.push_back(std::make_unique<Triangle>(t));
     camera = new PerspectiveCamera(Vector3(0.0f, 0.0f, -20.0f),
                              Vector3(0.0f, 0.0f, 1.0f), 200.0f, 2000);
     sceneName = sceneName + camera->toString();
