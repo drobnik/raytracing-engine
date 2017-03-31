@@ -34,15 +34,14 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
                              ray.getOrigin().getZ()));
         rd.setOrigin(Vector3(ray.getOrigin().getX(), ray.getOrigin().getY() - offset,
                              ray.getOrigin().getZ()));
-        /* std::cout<<" ray: "<< sampleR.getDirection()<<" ra: "<<ra.getDirection()<<" rb: "<<
-                   rb.getDirection()<<" rc: "<<rc.getDirection()<<" rd: "<<rd.getDirection();*/
+
         //middle first
         le = tracer->rayTrace(ray);
         la = tracer->rayTrace(ra);
         lb = tracer->rayTrace(rb);
         lc = tracer->rayTrace(rc);
         ld = tracer->rayTrace(rd);
-        //std::cout<<depth<<"\n";
+
         if(le != la){
             la = sampler((depth + 1), ra, tracer);
         }

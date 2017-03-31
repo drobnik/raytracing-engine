@@ -10,44 +10,61 @@ PerspectiveCamera::PerspectiveCamera(Vector3 e, Vector3 look, float near,
 LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
 
     LightIntensity la, lb, lc, ld, le, final;
-    Vector3 direction = Vector3(0.0f, 0.0f, 1.0f);
+    Vector3 direction = ray.getDirection();//Vector3(0.0f, 0.0f, 1.0f);
+    Vector3 orgi = ray.getOrigin();
+   //
+    // std::cout<<direction<<"\n";
     Ray sampleR = ray;
     Ray ra, rb, rc, rd;
-    ra.setDirection(direction);
-    rb.setDirection(direction);
-    rc.setDirection(direction);
-    rd.setDirection(direction);
     float offset;
 
     if(depth >= ANTI_MAX){
         // FIXME
         final = tracer->rayTrace(ray);
-        std::cout << "Sampling completed.\n";
+        std::cout << "Sampling completedPers.\n";
         return final;
     }
     else{
-        offset = 1.0f * (float)pow(0.5f, (depth + 1)); //FIXME 0.5f
-        ra.setOrigin(Vector3(ray.getOrigin().getX() - offset, ray.getOrigin().getY(), //directio
+        offset = 1.0f * (float)pow(0.5f, (depth + 1));
+
+
+        ra.setDirection(Vector3(ray.getDirection().getX() /*- offset*/,
+                                ray.getDirection().getY(),
+                                ray.getDirection().getZ()).normalize());
+        rb.setDirection(Vector3(ray.getDirection().getX() - offset,
+                                ray.getDirection().getY()  - offset,
+                                ray.getDirection().getZ()).normalize());
+
+        rc.setDirection(Vector3(ray.getDirection().getX(),
+                                ray.getDirection().getY(),
+                             ray.getDirection().getZ()).normalize());
+
+        rd.setDirection(Vector3(ray.getDirection().getX(),
+                                ray.getDirection().getY() - offset,
+                             ray.getDirection().getZ()).normalize());
+
+        ra.setOrigin(Vector3(ray.getOrigin().getX(),
+                             ray.getOrigin().getY(), //directio
                              ray.getOrigin().getZ()));
-        rb.setOrigin(Vector3(ray.getOrigin().getX() - offset,
-                             ray.getOrigin().getY()  - offset,
+        rb.setOrigin(Vector3(ray.getOrigin().getX(),
+                             ray.getOrigin().getY(), //directio
+                                     ray.getOrigin().getZ()));
+        rc.setOrigin(Vector3(ray.getOrigin().getX(),
+                             ray.getOrigin().getY(), //directio
                              ray.getOrigin().getZ()));
-        rc.setOrigin(Vector3(ray.getOrigin().getX(), ray.getOrigin().getY(),
+        rd.setOrigin(Vector3(ray.getOrigin().getX() ,
+                             ray.getOrigin().getY(), //directio
                              ray.getOrigin().getZ()));
-        rd.setOrigin(Vector3(ray.getOrigin().getX(), ray.getOrigin().getY() - offset,
-                             ray.getOrigin().getZ()));
-        //ray.normalize();
-        /* std::cout<<" ray: "<< sampleR.getDirection()<<" ra: "<<ra.getDirection()<<" rb: "<<
-                   rb.getDirection()<<" rc: "<<rc.getDirection()<<" rd: "<<rd.getDirection();*/
-        //middle first
+
         le = tracer->rayTrace(ray);
         la = tracer->rayTrace(ra);
         lb = tracer->rayTrace(rb);
         lc = tracer->rayTrace(rc);
         ld = tracer->rayTrace(rd);
-        //std::cout<<depth<<"\n";
+
         if(le != la){
-            la = sampler1((depth + 1), ra, tracer);
+            la = sampler1((depth + 1), ra, tracer); //tutaj problem jst!
+            //la = LightIntensity(0.8f, 0.0f, 0.0f);
         }
         else if(le != lb){
             lb = sampler1((depth + 1), rb, tracer);
@@ -91,8 +108,6 @@ PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
             vo = Vector3(x, y, nearPlane) - eye;
             d = vo.length();
             ray.setDirection(Vector3(x, y, d));
-           // vo = ray.getDirection().normalize();
-           // ray.setDirection(vo);
             color = sampler1(0,ray,tracer);//tracer->rayTrace(ray);
             image.setPixel((int)r, (int)c, color);
         }
