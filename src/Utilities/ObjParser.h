@@ -30,14 +30,22 @@ enum faceState{
 
 class ObjParser {
 private:
-    faceState faceMode;
+    faceState faceMode; //i can store it locally I think
+    bool groupMode; //add a name of group in every triangle?
     std::vector<Vector3> verticles;//TODO pair <vector3, float> aka weight
     std::vector<Vector3> normals;
     std::vector<Vector3> texCoords; //to be used later?
     std::vector<Triangle> triangles;
     Material currentMaterial;
     std::map<const std::string, objCommand> objFormat;
-    void parseLine(std::vector<std::string> vec);
+    int parseLine(std::vector<std::string> vec);
+    int parseVerticle(std::vector<std::string> vec);
+    int parseNorVerticle(std::vector<std::string> vec);
+    int parseTexVerticle(std::vector<std::string> vec);
+    int parseGroup(std::vector<std::string> vec);
+    int parseFace(std::vector<std::string> vec);
+    int parseMatFile(std::vector<std::string> vec);
+    int parseUseMaterial(std::vector<std::string> vec);
 public:
     ObjParser();
     ~ObjParser();
