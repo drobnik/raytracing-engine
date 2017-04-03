@@ -14,6 +14,7 @@ public:
     Triangle(Vector3& a, Vector3& b, Vector3& c);
     rayState intersects(Ray& ray, float& t) override;
     Material getMaterial();
+    void show();
 };
 
 

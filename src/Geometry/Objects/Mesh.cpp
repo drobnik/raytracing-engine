@@ -16,3 +16,11 @@ Mesh::Mesh(std::vector<Triangle> tris) {
 rayState Mesh::intersects(Ray &ray) {
    // return backward;
 }
+
+void Mesh::show() {
+    std::vector<Triangle>::iterator kek;
+
+    for(kek = triangles.begin(); kek != triangles.end(); kek++){
+        kek->show();
+    }
+}

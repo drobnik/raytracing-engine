@@ -24,44 +24,57 @@ ObjParser::ObjParser(const ObjParser &p) {
     currentGroup = p.currentGroup;
 }
 
+template<typename Out>
+void split(const std::string &s, char delim, Out result) {
+    std::stringstream ss;
+    ss.str(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        *(result++) = item;
+    }
+}
+
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, std::back_inserter(elems));
+    return elems;
+}
+
 Mesh ObjParser::loadMesh(std::ifstream &file) {
     std::string line, token;
     int state;
     std::vector<std::string> tokens;
 
     while(!file.eof()){
-        while(std::getline(file, line, ' ')){
-            std::stringstream str(line);
-            str >> token;
-            tokens.push_back(token);
+        while(std::getline(file, line)) {
+            tokens = split(line, ' ');
+            state = parseLine(tokens);
+
+            if (state != 0) {
+                std::cout << "WARNING! OBJ parsing finished with errors. "
+                        "Incomplete mesh loaded.\n";
+                return Mesh(triangles);
+            }
+
+            tokens.clear();
         }
-
-        state = parseLine(tokens);
-
-        if(state != 0){
-            std::cout<<"WARNING! OBJ parsing finished with errors. "
-                    "Incomplete mesh loaded.\n";
-            return Mesh(triangles);
-        }
-
-        tokens.clear();
     }
     return Mesh(triangles);
 }
 
 int ObjParser::parseLine(std::vector<std::string> vec) {
 
-    std::map<const std::string, objCommand>::const_iterator
+    std::map<const std::string, ObjCommand>::const_iterator
             i = objFormat.find(vec.at(0));
 
     if (i == objFormat.end()) {
         std::cout << "Syntax error!\n";
         return -1;
     } else {
-        objCommand token = i->second;
-        vec.erase(vec.begin()); //!!
+        ObjCommand token = i->second;
+        vec.erase(vec.begin());
 
-        if (token == comment) return 0; //nothing to do here
+        if (token == comment) return 0;
         else if (token == geoVerticle) return parseVerticle(vec);
         else if (token == norVerticle) return parseNorVerticle(vec);
         else if (token == texVerticle) return parseTexVerticle(vec);
@@ -75,7 +88,7 @@ int ObjParser::parseLine(std::vector<std::string> vec) {
 
 Vector3 ObjParser::createVerticle(std::vector<std::string> vec) {
     float x, y, z;
-    assert(vec.size() < 3);
+    assert(vec.size() == 3);
 
     x = (float)std::stod(vec.at(0));
     y = (float)std::stod(vec.at(1));
@@ -236,28 +249,29 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
     if(state == geoOnly){
         Vector3 a, b, c;
         Triangle t;
-        a = verticles.at((unsigned long long int) geo.at(0));
-        b = verticles.at((unsigned long long int) geo.at(1));
-        c = verticles.at((unsigned long long int) geo.at(2));
+
+        a = verticles.at((unsigned long long int) (geo.at(0)-1));
+        b = verticles.at((unsigned long long int) (geo.at(1)-1));
+        c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
         t = Triangle(a, b, c);
-        triangles.push_back(t);
+        triangles.push_back(t); //4968
 
     } else if(state == geoNor){ //FIXME IGNORE NORMALS
         Vector3 a, b, c;
         Triangle t;
-        a = verticles.at((unsigned long long int) geo.at(0));
-        b = verticles.at((unsigned long long int) geo.at(1));
-        c = verticles.at((unsigned long long int) geo.at(2));
+        a = verticles.at((unsigned long long int) (geo.at(0)-1));
+        b = verticles.at((unsigned long long int) (geo.at(1)-1));
+        c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
         t = Triangle(a, b, c);
         triangles.push_back(t);
     } else if(state == geoTexNor){//FIXME IGNORE TEXTURE
         Vector3 a, b, c;
         Triangle t;
-        a = verticles.at((unsigned long long int) geo.at(0));
-        b = verticles.at((unsigned long long int) geo.at(1));
-        c = verticles.at((unsigned long long int) geo.at(2));
+        a = verticles.at((unsigned long long int) (geo.at(0)-1));
+        b = verticles.at((unsigned long long int) (geo.at(1)-1));
+        c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
         t = Triangle(a, b, c);
         triangles.push_back(t);

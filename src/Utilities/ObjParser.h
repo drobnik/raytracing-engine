@@ -12,7 +12,7 @@
 
 //typedef groupName std::string;
 
-enum objCommand{
+enum ObjCommand{
     comment,
     geoVerticle,
     texVerticle,
@@ -37,7 +37,7 @@ private:
     std::vector<Vector3> texCoords; //to be used later?
     std::vector<Triangle> triangles;
     Material currentMaterial;
-    std::map<const std::string, objCommand> objFormat;
+    std::map<const std::string, ObjCommand> objFormat;
     std::string currentGroup;
     std::map<std::string, Vector3*> groups; //string -> group name
 

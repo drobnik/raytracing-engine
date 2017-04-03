@@ -73,3 +73,7 @@ rayState Triangle::intersects(Ray &ray, float &t) {
 Material Triangle::getMaterial() {
     return material;
 }
+
+void Triangle::show() {
+    std::cout<<"a: "<<a<<" b: "<<b<<" c: "<<c<<"\n";
+}

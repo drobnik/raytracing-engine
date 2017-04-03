@@ -12,6 +12,7 @@ public:
     Mesh(const Mesh& m);
     Mesh(std::vector<Triangle> tris);
     rayState intersects(Ray& ray); //TODO: one list for all of them
+    void show();
 };
 
 

@@ -17,7 +17,6 @@ void FileManager::saveImage(EngineImage &img) {
 }
 
 Mesh FileManager::loadModel(const std::string name) {
-    std::cout<<assetPath + name + "." + MESH_FORMAT<<"\n";
     std::ifstream infile(assetPath + name + "." + MESH_FORMAT);
     Mesh m = parser.loadMesh(infile);
     return m;
