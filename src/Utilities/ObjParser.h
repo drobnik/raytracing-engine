@@ -25,7 +25,6 @@ enum objCommand{
 
 //to avoid illegal statements
 enum faceState{
-    none, // no face is processed
     geoOnly, //a
     geoNor,  // a//b
     geoTexNor, //a/b/c
@@ -52,6 +51,10 @@ private:
     int parseUseMaterial(std::vector<std::string> vec);
     Vector3 createVerticle(std::vector<std::string> vec);
     faceState faceMode(std::string str);
+    std::vector<int> faceIntoTokens(std::string delimiter,
+                                             std::string s);
+    int makeFace(std::vector<int>, std::vector<int>, std::vector<int>, faceState);
+
 public:
     ObjParser();
     ~ObjParser();

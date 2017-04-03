@@ -131,14 +131,72 @@ int ObjParser::parseGroup(std::vector<std::string> vec) {
 
 int ObjParser::parseFace(std::vector<std::string> vec) {
     faceState globalState = faceMode(vec.at(0));
+    faceState currentState;
+    std::vector<int> verticleIndexes;
+    std::vector<int> verticleNorIndexes;
+    std::vector<int> verticleTexIndexes;
+    std::vector<int> temp;
+
+    if(globalState == geoOnly){
+        for(std::vector<std::string>::iterator i = vec.begin(); i != vec.end();
+                i++){
+            currentState = faceMode(*i);
+            if(currentState == globalState){
+                verticleIndexes.push_back(stoi(*i));
+            } else{
+                std::cout<<"Syntax error in face definition!\n";
+                return -1;
+            }
+        }
+    } else if(globalState == geoNor){
+        for(std::vector<std::string>::iterator i = vec.begin(); i != vec.end();
+            i++){
+            currentState = faceMode(*i);
+            if(currentState == globalState){
+                temp = faceIntoTokens("//", *i);
+                assert(temp.size() == 2);
+
+                int geo = temp.at(0);
+                int nor = temp.at(1);
+
+                verticleIndexes.push_back(geo);
+                verticleNorIndexes.push_back(nor);
+            } else{
+                std::cout<<"Syntax error in face definition!\n";
+                return -1;
+            }
+        }
+    } else if(globalState == geoTexNor){
+        for(std::vector<std::string>::iterator i = vec.begin(); i != vec.end();
+            i++){
+            currentState = faceMode(*i);
+            if(currentState == globalState){
+                temp = faceIntoTokens("/", *i);
+                assert(temp.size() == 3);
+
+                int geo = temp.at(0);
+                int tex = temp.at(1);
+                int nor = temp.at(2);
+
+                verticleIndexes.push_back(geo);
+                verticleNorIndexes.push_back(nor);
+                verticleTexIndexes.push_back(tex);
+            } else{
+                std::cout<<"Syntax error in face definition!\n";
+                return -1;
+            }
+        }
+    }
+
+    return makeFace(verticleIndexes, verticleTexIndexes, verticleNorIndexes,
+           globalState);
+}
+
+int ObjParser::parseMatFile(std::vector<std::string> vec) { //ignore
     return 0;
 }
 
-int ObjParser::parseMatFile(std::vector<std::string> vec) {
-    return 0;
-}
-
-int ObjParser::parseUseMaterial(std::vector<std::string> vec) {
+int ObjParser::parseUseMaterial(std::vector<std::string> vec) { //ignore
     return 0;
 }
 
@@ -155,4 +213,54 @@ faceState ObjParser::faceMode(std::string str) {
     }
 
     return geoOnly;
+}
+
+std::vector<int>
+ObjParser::faceIntoTokens(std::string delimiter, std::string s) {
+    std::vector<int> tokens;
+    std::string token;
+    std::size_t next = 0;
+
+    while((next = s.find(delimiter)) != std::string::npos){
+        token = s.substr(0, next);
+        tokens.push_back(stoi(token));
+        s.erase(0, next + delimiter.length());
+    }
+
+    return tokens;
+}
+
+int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<int> nor,
+                        faceState state) {
+
+    if(state == geoOnly){
+        Vector3 a, b, c;
+        Triangle t;
+        a = verticles.at((unsigned long long int) geo.at(0));
+        b = verticles.at((unsigned long long int) geo.at(1));
+        c = verticles.at((unsigned long long int) geo.at(2));
+
+        t = Triangle(a, b, c);
+        triangles.push_back(t);
+
+    } else if(state == geoNor){ //FIXME IGNORE NORMALS
+        Vector3 a, b, c;
+        Triangle t;
+        a = verticles.at((unsigned long long int) geo.at(0));
+        b = verticles.at((unsigned long long int) geo.at(1));
+        c = verticles.at((unsigned long long int) geo.at(2));
+
+        t = Triangle(a, b, c);
+        triangles.push_back(t);
+    } else if(state == geoTexNor){//FIXME IGNORE TEXTURE
+        Vector3 a, b, c;
+        Triangle t;
+        a = verticles.at((unsigned long long int) geo.at(0));
+        b = verticles.at((unsigned long long int) geo.at(1));
+        c = verticles.at((unsigned long long int) geo.at(2));
+
+        t = Triangle(a, b, c);
+        triangles.push_back(t);
+    }
+    return 0;
 }
