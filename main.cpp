@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 
     //add a name of produced image
     FileManager man = FileManager("../img/", "../assets/");
-    man.loadModel("bunny");
+    man.loadModel("cube");
     Scene renderScene = Scene(500, 500, 1.0f, "scene_1");
     Scene renderScenePers = Scene(500, 500, 1.0f, "scene_2");
     renderScene.init();

@@ -11,9 +11,7 @@ ObjParser::ObjParser() {
                  {"usemtl", useMaterial}};
 }
 
-ObjParser::~ObjParser() {
-
-}
+ObjParser::~ObjParser() { }
 
 ObjParser::ObjParser(const ObjParser &p) {
     verticles = p.verticles;
@@ -59,10 +57,16 @@ Mesh ObjParser::loadMesh(std::ifstream &file) {
             tokens.clear();
         }
     }
+    std::cout << "Mesh loaded.\n";
     return Mesh(triangles);
 }
 
 int ObjParser::parseLine(std::vector<std::string> vec) {
+    if(!vec.empty()){
+        if(vec.at(0).empty()){
+            return 0;
+        }
+    } else return 0;
 
     std::map<const std::string, ObjCommand>::const_iterator
             i = objFormat.find(vec.at(0));
@@ -238,6 +242,9 @@ ObjParser::faceIntoTokens(std::string delimiter, std::string s) {
         token = s.substr(0, next);
         tokens.push_back(stoi(token));
         s.erase(0, next + delimiter.length());
+    }
+    if(!s.empty()){
+        tokens.push_back(stoi(s));
     }
 
     return tokens;
