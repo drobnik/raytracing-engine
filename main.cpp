@@ -9,7 +9,8 @@ int main(int argc, char* argv[]) {
     sampleScene.run();*/
 
     //add a name of produced image
-    FileManager man = FileManager("../img/");
+    FileManager man = FileManager("../img/", "../assets/");
+    man.loadModel("bunny");
     Scene renderScene = Scene(500, 500, 1.0f, "scene_1");
     Scene renderScenePers = Scene(500, 500, 1.0f, "scene_2");
     renderScene.init();

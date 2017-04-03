@@ -59,7 +59,7 @@ public:
     ObjParser();
     ~ObjParser();
     ObjParser(const ObjParser& p);
-    Mesh loadMesh(std::ifstream file);
+    Mesh loadMesh(std::ifstream &file);
 };
 
 

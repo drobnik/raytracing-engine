@@ -1,10 +1,6 @@
 #include "ObjParser.h"
 
 ObjParser::ObjParser() {
-
-}
-
-ObjParser::~ObjParser() {
     objFormat = {{"#", comment},
                  {"v", geoVerticle},
                  {"vt", norVerticle},
@@ -13,6 +9,10 @@ ObjParser::~ObjParser() {
                  {"f", face},
                  {"mtlib", loadMaterial},
                  {"usemtl", useMaterial}};
+}
+
+ObjParser::~ObjParser() {
+
 }
 
 ObjParser::ObjParser(const ObjParser &p) {
@@ -24,7 +24,7 @@ ObjParser::ObjParser(const ObjParser &p) {
     currentGroup = p.currentGroup;
 }
 
-Mesh ObjParser::loadMesh(std::ifstream file) {
+Mesh ObjParser::loadMesh(std::ifstream &file) {
     std::string line, token;
     int state;
     std::vector<std::string> tokens;
@@ -40,7 +40,7 @@ Mesh ObjParser::loadMesh(std::ifstream file) {
 
         if(state != 0){
             std::cout<<"WARNING! OBJ parsing finished with errors. "
-                    "Incomplete mesh loaded.";
+                    "Incomplete mesh loaded.\n";
             return Mesh(triangles);
         }
 
