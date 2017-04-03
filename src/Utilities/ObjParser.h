@@ -5,9 +5,12 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <utility>
 #include "../Geometry/Vector3.h"
 #include "../Materials/Material.h"
 #include "../Geometry/Objects/Mesh.h"
+
+//typedef groupName std::string;
 
 enum objCommand{
     comment,
@@ -30,14 +33,15 @@ enum faceState{
 
 class ObjParser {
 private:
-    faceState faceMode; //i can store it locally I think
-    bool groupMode; //add a name of group in every triangle?
     std::vector<Vector3> verticles;//TODO pair <vector3, float> aka weight
     std::vector<Vector3> normals;
     std::vector<Vector3> texCoords; //to be used later?
     std::vector<Triangle> triangles;
     Material currentMaterial;
     std::map<const std::string, objCommand> objFormat;
+    std::string currentGroup;
+    std::map<std::string, Vector3*> groups; //string -> group name
+
     int parseLine(std::vector<std::string> vec);
     int parseVerticle(std::vector<std::string> vec);
     int parseNorVerticle(std::vector<std::string> vec);
@@ -46,6 +50,8 @@ private:
     int parseFace(std::vector<std::string> vec);
     int parseMatFile(std::vector<std::string> vec);
     int parseUseMaterial(std::vector<std::string> vec);
+    Vector3 createVerticle(std::vector<std::string> vec);
+    faceState faceMode(std::string str);
 public:
     ObjParser();
     ~ObjParser();
