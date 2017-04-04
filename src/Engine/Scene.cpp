@@ -133,11 +133,18 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
 
     for(unsigned int i = 0; i < objs.size(); i++){
         rayState state = objs.at(i)->intersects((Ray &) ray, t);
-        if( (state == 2 || state == 1) && (t < tmin)){
+        if( (state == tangent || state == hit) && (t < tmin)){
             info.setState(state);
             tmin = t;
             info.setMaterial(objs.at(i)->getMaterial());
         }
+    }
+
+    rayState meshState = sampleMesh.intersects((Ray &)ray);
+    if( (meshState == tangent || meshState == hit)){
+        info.setState(meshState);
+        tmin = t;
+        info.setMaterial(LightIntensity(0.5f, 0.5f, 0.5f));
     }
 
     return info;
@@ -149,6 +156,10 @@ LightIntensity Scene::Background() {
 
 const ViewPlane &Scene::getViewPlane() const {
     return viewPlane;
+}
+
+void Scene::addMesh(Mesh &m) {
+    sampleMesh = m;
 }
 
 

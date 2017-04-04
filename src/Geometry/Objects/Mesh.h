@@ -2,6 +2,7 @@
 #define RAYTRACING_ENGINE_MESH_H
 #include <vector>
 #include "Triangle.h"
+#include "../../Engine/ShadeInfo.h"
 
 class Mesh {
 private:
@@ -11,7 +12,7 @@ public:
     ~Mesh();
     Mesh(const Mesh& m);
     Mesh(std::vector<Triangle> tris);
-    rayState intersects(Ray& ray); //TODO: one list for all of them
+    rayState intersects(Ray &ray); //TODO: one list for all of them
     void show();
 };
 

@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+
 Mesh::Mesh() { }
 
 Mesh::~Mesh() { }
@@ -14,7 +15,14 @@ Mesh::Mesh(std::vector<Triangle> tris) {
 
 //FIXME
 rayState Mesh::intersects(Ray &ray) {
-   // return backward;
+    float t = 0.0f;
+    rayState triangleS = miss;
+    for(std::vector<Triangle>::iterator i = triangles.begin();
+        i != triangles.end(); i++){
+        triangleS = i->intersects(ray, t);
+    }
+
+    return triangleS;
 }
 
 void Mesh::show() {
