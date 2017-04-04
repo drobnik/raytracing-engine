@@ -17,9 +17,13 @@ Mesh::Mesh(std::vector<Triangle> tris) {
 rayState Mesh::intersects(Ray &ray) {
     float t = 0.0f;
     rayState triangleS = miss;
+    int iu = 0;
     for(std::vector<Triangle>::iterator i = triangles.begin();
         i != triangles.end(); i++){
+        iu++;
         triangleS = i->intersects(ray, t);
+        //std::cout<<iu<<"\n";
+        //i->show();
     }
 
     return triangleS;

@@ -143,7 +143,6 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     rayState meshState = sampleMesh.intersects((Ray &)ray);
     if( (meshState == tangent || meshState == hit)){
         info.setState(meshState);
-        tmin = t;
         info.setMaterial(LightIntensity(0.5f, 0.5f, 0.5f));
     }
 

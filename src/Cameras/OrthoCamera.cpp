@@ -20,7 +20,7 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
     if(depth >= ANTI_MAX){
         // FIXME
         final = tracer->rayTrace(ray);
-        std::cout << "Sampling completed.\n";
+       // std::cout << "Sampling completed.\n";
         return final;
     }
     else{
@@ -43,16 +43,16 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         ld = tracer->rayTrace(rd);
 
         if(le != la){
-            la = sampler((depth + 1), ra, tracer);
+            la = sampler((depth + 1), ray, tracer);
         }
         else if(le != lb){
-            lb = sampler((depth + 1), rb, tracer);
+            lb = sampler((depth + 1), ray, tracer);
         }
         else if(le != lc){
-            lc = sampler((depth + 1), rc, tracer);
+            lc = sampler((depth + 1), ray, tracer);
         }
         else if(le != ld){
-            ld = sampler((depth + 1), rd, tracer);
+            ld = sampler((depth + 1), ray, tracer);
         }
 
         float finR, finG, finB;

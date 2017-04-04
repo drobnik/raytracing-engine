@@ -22,38 +22,30 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
     if(depth >= ANTI_MAX){
         // FIXME
         final = tracer->rayTrace(ray);
-        std::cout << "Sampling completedPers.\n";
+        //std::cout << "Sampling completedPers.\n";
         return final;
     }
     else{
-        offset = 1.0f * (float)pow(0.5f, (depth + 1));
+        //offset = 1.0f * (float)pow(0.5f, (depth + 1));
+        offset = 1.0f * (float)pow(0.5f, (depth+1));
 
+        ra.setOrigin(orgi);
+        rb.setOrigin(orgi);
+        rc.setOrigin(orgi);
+        rd.setOrigin(orgi);
 
         ra.setDirection(Vector3(ray.getDirection().getX() - offset,
-                                ray.getDirection().getY(),
+                                ray.getDirection().getY() - offset,
                                 ray.getDirection().getZ()).normalize());
-        rb.setDirection(Vector3(ray.getDirection().getX() - offset,
+        rb.setDirection(Vector3(ray.getDirection().getX() + offset,
                                 ray.getDirection().getY()  - offset,
                                 ray.getDirection().getZ()).normalize());
-        rc.setDirection(Vector3(ray.getDirection().getX(),
-                                ray.getDirection().getY(),
+        rc.setDirection(Vector3(ray.getDirection().getX() + offset,
+                                ray.getDirection().getY() + offset,
                              ray.getDirection().getZ()).normalize());
-        rd.setDirection(Vector3(ray.getDirection().getX(),
-                                ray.getDirection().getY() - offset,
+        rd.setDirection(Vector3(ray.getDirection().getX() - offset,
+                                ray.getDirection().getY() + offset,
                              ray.getDirection().getZ()).normalize());
-
-        ra.setOrigin(Vector3(ray.getOrigin().getX(),
-                             ray.getOrigin().getY(), //directio
-                             ray.getOrigin().getZ()));
-        rb.setOrigin(Vector3(ray.getOrigin().getX(),
-                             ray.getOrigin().getY(), //directio
-                                     ray.getOrigin().getZ()));
-        rc.setOrigin(Vector3(ray.getOrigin().getX(),
-                             ray.getOrigin().getY(), //directio
-                             ray.getOrigin().getZ()));
-        rd.setOrigin(Vector3(ray.getOrigin().getX() ,
-                             ray.getOrigin().getY(), //directio
-                             ray.getOrigin().getZ()));
 
         le = tracer->rayTrace(ray);
         la = tracer->rayTrace(ra);
@@ -61,17 +53,17 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         lc = tracer->rayTrace(rc);
         ld = tracer->rayTrace(rd);
         if(le != la){ //FIXME
-            //la = sampler1((depth + 1), ra, tracer); //tutaj problem jst!
-            la = LightIntensity(0.5f, 0.5f, 0.5f); //na kazdym pikselu wchodzi
+            la = sampler1((depth + 1), ray, tracer); //tutaj problem jst!
+            //la = LightIntensity(0.5f, 0.5f, 0.5f); //na kazdym pikselu wchodzi
         }
         else if(le != lb){
-            lb = sampler1((depth + 1), rb, tracer);
+            lb = sampler1((depth + 1), ray, tracer);
         }
         else if(le != lc){
-            lc = sampler1((depth + 1), rc, tracer);
+            lc = sampler1((depth + 1), ray, tracer);
         }
         else if(le != ld){
-            ld = sampler1((depth + 1), rd, tracer);
+            ld = sampler1((depth + 1), ray, tracer);
         }
 
         float finR, finG, finB;
