@@ -75,5 +75,27 @@ Material Triangle::getMaterial() {
 }
 
 void Triangle::show() {
-    std::cout<<"a: "<<a<<" b: "<<b<<" c: "<<c<<"\n";
+    /*std::cout<<"a: "<<a.getX()<<" "<<a.getY()<<" "<<a.getZ()<<"\n"
+            "b: "<<b.getX()<<" "<<b.getY()<<" "<<b.getZ()<<"\n"
+            "c: "<<c.getX()<<" "<<c.getY()<<" "<<c.getZ()<<"\n"
+             <<"\n";
+    std::cout<<"colorr! "<<"r: "<<material.getColor().red()<<" g: "
+             <<material.getColor().green()<<" b: "<<material.getColor().blue()<<"\n";*/
+}
+
+Vector3 & Triangle::getNormal() {
+    return normal;
+}
+
+Triangle Triangle::flipNormal(Triangle &t) {
+    Vector3 a, b, c;
+    a = t.a, b = t.b, c = t.c;
+    Vector3 v1 = b - c;
+    Vector3 v2 = a - c;
+    t.normal = v1.crossProd(v2);
+    normal.normalize();
+}
+
+void Triangle::setNormal(const Vector3 &normal) {
+    Triangle::normal = normal;
 }

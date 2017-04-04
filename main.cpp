@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
     renderScene.init();
     renderScenePers.initPers();
 
+    k.show();
     renderScene.addMesh(k);
     renderScenePers.addMesh(k);
 

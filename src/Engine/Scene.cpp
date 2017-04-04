@@ -140,6 +140,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
         }
     }
 
+    //sampleMesh.show();
     rayState meshState = sampleMesh.intersects((Ray &)ray);
     if( (meshState == tangent || meshState == hit)){
         info.setState(meshState);

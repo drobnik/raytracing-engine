@@ -22,7 +22,6 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
     if(depth >= ANTI_MAX){
         // FIXME
         final = tracer->rayTrace(ray);
-        //std::cout << "Sampling completedPers.\n";
         return final;
     }
     else{
@@ -52,9 +51,8 @@ LightIntensity sampler1(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         lb = tracer->rayTrace(rb);
         lc = tracer->rayTrace(rc);
         ld = tracer->rayTrace(rd);
-        if(le != la){ //FIXME
-            la = sampler1((depth + 1), ray, tracer); //tutaj problem jst!
-            //la = LightIntensity(0.5f, 0.5f, 0.5f); //na kazdym pikselu wchodzi
+        if(le != la){
+            la = sampler1((depth + 1), ray, tracer);
         }
         else if(le != lb){
             lb = sampler1((depth + 1), ray, tracer);
@@ -98,7 +96,7 @@ PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
             vo = Vector3(x, y, nearPlane) - eye;
             d = vo.length();
             ray.setDirection(Vector3(x, y, d));
-            color = sampler1(0,ray,tracer);//tracer->rayTrace(ray);
+            color = sampler1(0,ray,tracer);
             image.setPixel((int)r, (int)c, color);
         }
     }

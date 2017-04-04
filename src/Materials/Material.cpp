@@ -1,8 +1,6 @@
 #include "Material.h"
 
-Material::Material() {
-    //ambientColor = LightIntensity(0.5f, 0.5f, 0.5f);
-}
+Material::Material() { }
 
 Material::Material(LightIntensity diff) : Material(){
     ambientColor = diff;

@@ -57,6 +57,12 @@ Mesh ObjParser::loadMesh(std::ifstream &file) {
             tokens.clear();
         }
     }
+
+   /* std::cout<<"takie sa trojkaty!!!\n"<<triangles.size()<<"\n";
+    for(int i = 0; i < triangles.size(); i++){
+        triangles.at(i).show();
+    }*/
+
     std::cout << "Mesh loaded.\n";
     return Mesh(triangles);
 }
@@ -67,6 +73,7 @@ int ObjParser::parseLine(std::vector<std::string> vec) {
             return 0;
         }
     } else return 0;
+
 
     std::map<const std::string, ObjCommand>::const_iterator
             i = objFormat.find(vec.at(0));
@@ -114,6 +121,7 @@ int ObjParser::parseVerticle(std::vector<std::string> vec) {
 
 int ObjParser::parseNorVerticle(std::vector<std::string> vec) {
     Vector3 point = createVerticle(vec);
+    point.normalize();
     Vector3* ptr = &point;
     if(!currentGroup.empty()){
         groups.insert(std::pair<std::string, Vector3*>(currentGroup, ptr));
@@ -204,7 +212,8 @@ int ObjParser::parseFace(std::vector<std::string> vec) {
             }
         }
     }
-
+   /* for(int i = 0; i < verticleIndexes.size(); i++) std::cout<<verticleIndexes.at(i)<<" ";
+    std::cout<<"\n";*/
     return makeFace(verticleIndexes, verticleTexIndexes, verticleNorIndexes,
            globalState);
 }
@@ -252,7 +261,8 @@ ObjParser::faceIntoTokens(std::string delimiter, std::string s) {
 
 int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<int> nor,
                         faceState state) {
-
+    //for(int i = 0; i < geo.size(); i++) std::cout<<geo.at(i)<<" ";
+    //std::cout<<"\n";
     if(state == geoOnly){
         Vector3 a, b, c;
         Triangle t;
@@ -264,14 +274,23 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
         t = Triangle(a, b, c);
         triangles.push_back(t); //4968
 
-    } else if(state == geoNor){ //FIXME IGNORE NORMALS
+    } else if(state == geoNor){
         Vector3 a, b, c;
-        Triangle t;
+        Vector3 v1, v2, v3; //normals
+        Triangle t, temp;
+
         a = verticles.at((unsigned long long int) (geo.at(0)-1));
         b = verticles.at((unsigned long long int) (geo.at(1)-1));
         c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
+        v1 = verticles.at((unsigned long long int) (nor.at(0)-1));
+        v2 = verticles.at((unsigned long long int) (nor.at(1)-1));
+        v3 = verticles.at((unsigned long long int) (nor.at(2)-1));
+        assert(v1 == v2 && v2 == v3 && v1 == v3);
+
         t = Triangle(a, b, c);
+        t.setNormal(v1);
+        
         triangles.push_back(t);
     } else if(state == geoTexNor){//FIXME IGNORE TEXTURE
         Vector3 a, b, c;

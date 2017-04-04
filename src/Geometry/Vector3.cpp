@@ -88,5 +88,9 @@ Vector3 Vector3::lerp(Vector3 v, float t) {
     return Vector3();
 }
 
+bool Vector3::operator!=(const Vector3 &v2) {
+    return !((*this) == v2);
+}
+
 
 
