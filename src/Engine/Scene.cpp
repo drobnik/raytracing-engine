@@ -141,10 +141,11 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     }
 
     //sampleMesh.show();
+    // mozna tutaj popatrzec
     rayState meshState = sampleMesh.intersects((Ray &)ray);
-    if( (meshState == tangent || meshState == hit)){
+    if( (meshState == hit)){
         info.setState(meshState);
-        info.setMaterial(LightIntensity(0.5f, 0.5f, 0.5f));
+        info.setMaterial(LightIntensity(1.0f, 1.0f, 1.0f));
     }
 
     return info;

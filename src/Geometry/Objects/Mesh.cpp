@@ -23,20 +23,17 @@ Mesh::Mesh(std::vector<Triangle> tris) {
 rayState Mesh::intersects(Ray &ray) {
     float t = 0.0f;
     rayState triangleS = miss;
-    int kek;
-    Vector3 hehe;
-    triangleS = simpleBounding.intersects(ray, t);
-    if(triangleS == hit || triangleS == tangent){
-        //std::cout<<"trafia\n";
+    int distInVec;
+    Vector3 normalS;
+
         for(std::vector<Triangle>::iterator i = triangles.begin();
             i != triangles.end(); i++){
-            kek = std::distance(triangles.begin(), i);
-            hehe = i->getNormal();
+            distInVec = std::distance(triangles.begin(), i);
+            normalS = i->getNormal();
             //std::cout<<std::distance(triangles.begin(), i)<<"\n";
             triangleS = i->intersects(ray, t);
             //i->show();
         }
-    }
 
     return triangleS;
 }

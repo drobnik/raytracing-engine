@@ -289,7 +289,7 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
         assert(v1 == v2 && v2 == v3 && v1 == v3);
 
         t = Triangle(a, b, c);
-        t.setNormal(v1);
+        //t.setNormal(v1);
         
         triangles.push_back(t);
     } else if(state == geoTexNor){//FIXME IGNORE TEXTURE
