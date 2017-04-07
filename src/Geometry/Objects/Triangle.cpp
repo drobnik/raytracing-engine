@@ -28,7 +28,7 @@ Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c)
     normal = v1.crossProd(v2);
     normal.normalize();
     normal = normal.neg(normal);
-    material = Material(LightIntensity(1.0f, 1.0f, 1.0f));
+    material = Material(LightIntensity(0.0f, 1.0f, 0.0f));
 }
 
 // FIXME add hit info!
@@ -66,8 +66,7 @@ rayState Triangle::intersects(Ray &ray, float &t) {
 
     if(tet < e-6) return miss;
     t = tet;
-    //info.normal = normal;
-    //info.point = ray.getOrigin() + t * ray.getDirection()
+
     return hit;
 /*
     static float denom, party, d;

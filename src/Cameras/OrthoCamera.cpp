@@ -94,7 +94,7 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
             vc = (Vector3(x, y, eye.getZ()));
             ray.setOrigin(vc);
-            color = sampler(0, ray, tracer, plane.getPixSize());//tracer->rayTrace(ray);
+            color = sampler(0, ray, tracer, plane.getPixSize());//t
             image.setPixel((int)r, (int)c, color);
         }
     }

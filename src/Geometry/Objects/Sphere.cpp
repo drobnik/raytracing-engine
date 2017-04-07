@@ -42,24 +42,20 @@ rayState Sphere::intersects(Ray& r, float& t) {
         t = r.getDistance();
 
         if (i2 > 0){
-            if (i1 < 0)
-            { 
+            if (i1 < 0) {
                 if (i2 < t){
                     t = i2;
                     state = inner;
                 }
                 
-            }
-            else
-            {
+            } else {
                 if (i1 < t) {
                     t = i1;
                     state = hit;
                 }
             }
         }
-    }
-    else if (det == 0){
+    } else if (det == 0){
         float t_temp = b;
         t = t_temp;
         state = tangent;

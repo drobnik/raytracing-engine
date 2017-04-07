@@ -37,10 +37,8 @@ public:
     Scene(int w, int h, float p, const std::string &n);
     Scene(const Scene& sc);
     ~Scene();
-    void initialize();
     void init();
     void initPers();
-    void run();
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);
     EngineImage renderScene(Tracer *tracer);

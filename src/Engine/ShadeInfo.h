@@ -20,7 +20,10 @@ public:
     void setMaterial(const Material &material);
     rayState State() const;
     void setState(rayState state);
-
+    const Vector3 &getNormal() const;
+    void setNormal(const Vector3 &normal);
+    const Vector3 &getHit() const;
+    void setIntersection(const Vector3 &intersection);
 };
 
 

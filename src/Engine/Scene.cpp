@@ -7,12 +7,14 @@ Scene::Scene() {
     sceneName = "sample";
     viewPlane = ViewPlane();
     viewPlane.setGamma(1.0f);
+    sampleMesh = Mesh();
 }
 
 Scene::Scene(int w, int h, float p, const std::string &n) {
     sceneBackground = LightIntensity(1.0f, 1.0f, 1.0f);
     this->viewPlane = ViewPlane(w, h, p);
     sceneName = n;
+    sampleMesh = Mesh();
 }
 //NOTE: objects are empty here. Probably it is a useless constructor
 Scene::Scene(const Scene &sc) {
@@ -72,16 +74,35 @@ Vector3 Scene::calcPoint(Ray &r, float &t, rayState &state){
 
 ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
+    rayState state;
+    Ray ta = ray; //FIXME const getOrigin and direction
     float t = 0.0f, tmin = INFINITY;
 
     for(unsigned int i = 0; i < objs.size(); i++){
-        rayState state = objs.at(i)->intersects((Ray &) ray, t);
+        state = objs.at(i)->intersects((Ray &) ray, t);
         if( (state == tangent || state == hit) && (t < tmin)){
             info.setState(state);
             tmin = t;
             info.setMaterial(objs.at(0)->getMaterial());
+            info.setHit(ta.getOrigin() + ta.getDirection() * t);
         }
     }
+
+    ShadeInfo meshInfo = ShadeInfo(sampleMesh.intersects(ray, *this));
+    if(meshInfo.State() == hit){
+        /*std::cout<<"\n";
+        std::cout<<"R: "<<meshInfo.getMaterial().getColor().red()<<"\n";
+        std::cout<<"G: "<<meshInfo.getMaterial().getColor().green()<<"\n";
+        std::cout<<"B: "<<meshInfo.getMaterial().getColor().blue()<<"\n";*/
+        return meshInfo;
+    }
+    /*if(meshInfo.getState() == tangent || meshInfo.getState() == hit) {
+        float distMesh = meshInfo.getHit().length();
+        float distPri =;
+        if ()
+            return meshInfo;
+    }*/
+
     return info;
 }
 

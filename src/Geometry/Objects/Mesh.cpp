@@ -20,22 +20,25 @@ Mesh::Mesh(std::vector<Triangle> tris) {
 }
 
 //FIXME
-rayState Mesh::intersects(Ray &ray) {
-    float t = 0.0f;
+ShadeInfo Mesh::intersects(const Ray &ray, Scene &scene) {
+    float t = 0.0f, tmin = INFINITY;
+    Ray r = ray; //FIXME
     rayState triangleS = miss;
-    int distInVec;
-    Vector3 normalS;
 
+    ShadeInfo info = ShadeInfo(scene);
         for(std::vector<Triangle>::iterator i = triangles.begin();
             i != triangles.end(); i++){
-            distInVec = std::distance(triangles.begin(), i);
-            normalS = i->getNormal();
-            //std::cout<<std::distance(triangles.begin(), i)<<"\n";
-            triangleS = i->intersects(ray, t);
-            //i->show();
+            triangleS = i->intersects(r, t);
+            if( (triangleS == tangent || triangleS == hit) && (t < tmin)){
+                info.setState(triangleS);
+                tmin = t;
+                info.setMaterial(i->getMaterial());
+                info.setNormal(i->getNormal());
+                info.setHit(r.getOrigin() + r.getDirection() * t);
+            }
         }
 
-    return triangleS;
+    return info;
 }
 
 void Mesh::show() {
