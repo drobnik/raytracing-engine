@@ -18,7 +18,7 @@ Vector3::Vector3(float x, float y, float z){
     this->z = z;
 }
 
-float Vector3::length(){
+float Vector3::length()const {
     return sqrtf((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 }
 

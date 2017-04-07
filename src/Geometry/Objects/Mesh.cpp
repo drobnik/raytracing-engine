@@ -19,7 +19,6 @@ Mesh::Mesh(std::vector<Triangle> tris) {
     simpleBounding = Sphere(ce, 5);
 }
 
-//FIXME
 ShadeInfo Mesh::intersects(const Ray &ray, Scene &scene) {
     float t = 0.0f, tmin = INFINITY;
     Ray r = ray; //FIXME
@@ -39,15 +38,5 @@ ShadeInfo Mesh::intersects(const Ray &ray, Scene &scene) {
         }
 
     return info;
-}
-
-void Mesh::show() {
-    std::cout<<"Mesh: triangles num:"<<triangles.size()<<"\n";
-    std::vector<Triangle>::iterator kek;
-
-    std::cout<<"Triangles: "<<"\n";
-    for(kek = triangles.begin(); kek != triangles.end(); kek++){
-        kek->show();
-    }
 }
 

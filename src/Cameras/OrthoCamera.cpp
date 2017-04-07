@@ -5,13 +5,6 @@ OrthoCamera::OrthoCamera() : Camera() { }
 OrthoCamera::OrthoCamera(Vector3 e, Vector3 look, float near, float far)
         : Camera(e, look, near, far){ }
 
-
-float clamp(float c, float down, float upper) {
-    if(c > upper) c = upper;
-    if(c < down) c = down;
-    return c;
-}
-
 LightIntensity sampler(int depth, Ray &ray, Tracer *tracer, float pixSize) { //add viewplane
 
     LightIntensity la, lb, lc, ld, le, final;

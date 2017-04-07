@@ -49,17 +49,11 @@ void Scene::init(){
 }
 
 void Scene::initPers() {
-    Vector3 zero1 = Vector3(0.0f, 0.0f, 50.0f);
-    Vector3 zero2 = Vector3(0.0f, 10.0f, 10.0f);
-    Sphere s2 = Sphere(zero2, 10.0f);
+    Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
+    Sphere s2 = Sphere(zero2, 6.0f);
+
     s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
-    Vector3 a, b, c;
-    a = Vector3(30.0f, 10.0f, 0.0f), b = Vector3(10.0f, 2.0f, 0.0f),
-    c = Vector3(-10.0f, 20.0f, 0.0f);
-    Triangle t = Triangle(a, b, c);
-    objs.push_back(std::make_unique<Sphere>(Sphere(zero1, 10.0f)));
-    //objs.push_back(std::make_unique<Sphere>(s2));
-    //objs.push_back(std::make_unique<Triangle>(t));
+    objs.push_back(std::make_unique<Sphere>(s2));
     camera = new PerspectiveCamera(Vector3(0.0f, 0.0f, -20.0f),
                              Vector3(0.0f, 0.0f, 1.0f), 200.0f, 2000);
     sceneName = sceneName + camera->toString();
@@ -90,18 +84,10 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
 
     ShadeInfo meshInfo = ShadeInfo(sampleMesh.intersects(ray, *this));
     if(meshInfo.State() == hit){
-        /*std::cout<<"\n";
-        std::cout<<"R: "<<meshInfo.getMaterial().getColor().red()<<"\n";
-        std::cout<<"G: "<<meshInfo.getMaterial().getColor().green()<<"\n";
-        std::cout<<"B: "<<meshInfo.getMaterial().getColor().blue()<<"\n";*/
-        return meshInfo;
-    }
-    /*if(meshInfo.getState() == tangent || meshInfo.getState() == hit) {
-        float distMesh = meshInfo.getHit().length();
-        float distPri =;
-        if ()
+        if(info.getHit().length() < meshInfo.getHit().length()) {
             return meshInfo;
-    }*/
+        }
+    }
 
     return info;
 }

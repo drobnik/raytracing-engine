@@ -3,7 +3,7 @@
 ShadeInfo::ShadeInfo(Scene &scene) : scene(scene), state(miss) {}
 
 ShadeInfo::~ShadeInfo() {
-    //delete scene ?!?!
+
 }
 
 ShadeInfo::ShadeInfo(const ShadeInfo &info)
@@ -37,14 +37,6 @@ void ShadeInfo::setNormal(const Vector3 &normal) {
     ShadeInfo::normal = normal;
 }
 
-const Vector3 &ShadeInfo::getNormal() const {
-    return normal;
-}
-
 const Vector3 &ShadeInfo::getHit() const {
     return intersection;
-}
-
-void ShadeInfo::setIntersection(const Vector3 &intersection) {
-    ShadeInfo::intersection = intersection;
 }

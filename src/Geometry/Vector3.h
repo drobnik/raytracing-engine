@@ -25,7 +25,7 @@ public:
     float dot(Vector3 v2);
     float absDot(Vector3 v2);
     Vector3 crossProd(Vector3 v2);
-    float length();
+    float length()const;
     Vector3 normalize();
     Vector3 reflect(Vector3 normal);
     Vector3 lerp(Vector3 v, float t);
