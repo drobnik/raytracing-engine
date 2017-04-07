@@ -58,11 +58,6 @@ Mesh ObjParser::loadMesh(std::ifstream &file) {
         }
     }
 
-   /* std::cout<<"takie sa trojkaty!!!\n"<<triangles.size()<<"\n";
-    for(int i = 0; i < triangles.size(); i++){
-        triangles.at(i).show();
-    }*/
-
     std::cout << "Mesh loaded.\n";
     return Mesh(triangles);
 }
@@ -212,8 +207,6 @@ int ObjParser::parseFace(std::vector<std::string> vec) {
             }
         }
     }
-   /* for(int i = 0; i < verticleIndexes.size(); i++) std::cout<<verticleIndexes.at(i)<<" ";
-    std::cout<<"\n";*/
     return makeFace(verticleIndexes, verticleTexIndexes, verticleNorIndexes,
            globalState);
 }

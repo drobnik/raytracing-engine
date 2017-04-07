@@ -10,8 +10,8 @@
 class Tracer;
 class Camera {
 public:
-    //renderScene had objs
-    Camera(); //+ copy constructor
+    Camera();
+    Camera(const Camera& cam);
     Camera(Vector3 e, Vector3 look, float near, float far);
     virtual ~Camera();
     virtual EngineImage

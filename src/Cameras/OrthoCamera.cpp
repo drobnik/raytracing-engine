@@ -20,7 +20,6 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
     if(depth >= ANTI_MAX){
         // FIXME
         final = tracer->rayTrace(ray);
-       // std::cout << "Sampling completed.\n";
         return final;
     }
     else{
@@ -72,19 +71,30 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
     std::string name = tracer->sceneName();
     EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light,
                                     name);
-    image.resetPixels(light);
-    float x, y;
     Ray ray;
     Vector3 vc;
 
-    ray.setDirection(Vector3(0.0f, 0.0f, 1.0f));
+    float x, y, pixWidth, pixHeight, pixelCenterX, pixelCenterY, aspect;
+    float xAspect, yAspect;
+    pixWidth = 2.0f / plane.getHRes();
+    pixHeight = 2.0f / plane.getWRes();
+    image.resetPixels(light);
+    calcUVW();
+    aspect = plane.getWRes() / plane.getHRes();
+
+    std::cout<<pixWidth<< " " << pixHeight <<"\n";
+    Vector3 direction = u * lookAt.getX() + (v * lookAt.getY() - w * lookAt.getZ());
+    direction = direction.normalize();
+    ray.setDirection(direction);
+
     for(unsigned int r = 0; r < plane.getWRes(); r++){ //up
+
         for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
-            x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
-            y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
-            vc = (Vector3(x, y, Camera::nearPlane));
+            x = 0.05f * (c - 0.5f *(plane.getHRes() - 1.0f));
+            y = 0.05f * (r - 0.5f *(plane.getWRes() - 1.0f));
+            vc = (Vector3(x, y, eye.getZ()));
             ray.setOrigin(vc);
-            color = sampler(0, ray, tracer);//tracer->rayTrace(ray);
+            color = tracer->rayTrace(ray);//sampler(0, ray, tracer);//
             image.setPixel((int)r, (int)c, color);
         }
     }

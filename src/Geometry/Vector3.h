@@ -22,7 +22,6 @@ public:
     const Vector3 operator-(const Vector3 &v2);
     bool operator==(const Vector3& v2);// 92
     bool operator!=(const Vector3& v2);// 92
-
     float dot(Vector3 v2);
     float absDot(Vector3 v2);
     Vector3 crossProd(Vector3 v2);

@@ -3,7 +3,7 @@
 ViewPlane::ViewPlane()
     : wResolution(100),
       hResolution(100),
-      pixSize(1.0f),
+      pixSize(0.05f),
       gamma(1.0f){ }
 
 ViewPlane::ViewPlane(int w, int h, float siz) {
