@@ -46,3 +46,7 @@ LightIntensity operator+(LightIntensity &l1, LightIntensity &l2) {
 bool LightIntensity::operator!=(LightIntensity &l) {
     return !(r == l.red() && g == l.green() && b == l.blue());
 }
+
+
+
+

@@ -1,14 +1,12 @@
 #include "ShadeInfo.h"
 
-ShadeInfo::ShadeInfo(Scene &scene) : scene(scene) {}
+ShadeInfo::ShadeInfo(Scene &scene) : scene(scene), state(miss) {}
 
 ShadeInfo::~ShadeInfo() {
 
 }
 
-ShadeInfo::ShadeInfo(const ShadeInfo &info) : scene(info.scene) {
-
-}
+ShadeInfo::ShadeInfo(const ShadeInfo &info) : scene(info.scene), state(miss){}
 
 rayState ShadeInfo::State() const {
     return state;

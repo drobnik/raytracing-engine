@@ -5,7 +5,14 @@ OrthoCamera::OrthoCamera() : Camera() { }
 OrthoCamera::OrthoCamera(Vector3 e, Vector3 look, float near, float far)
         : Camera(e, look, near, far){ }
 
-LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
+
+float clamp(float c, float down, float upper) {
+    if(c > upper) c = upper;
+    if(c < down) c = down;
+    return c;
+}
+
+LightIntensity sampler(int depth, Ray &ray, Tracer *tracer, float pixSize) { //add viewplane
 
     LightIntensity la, lb, lc, ld, le, final;
     Vector3 direction = Vector3(0.0f, 0.0f, 1.0f);
@@ -18,12 +25,11 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
     float offset;
 
     if(depth >= ANTI_MAX){
-        // FIXME
         final = tracer->rayTrace(ray);
         return final;
     }
     else{
-        offset = 1.0f * (float)pow(0.5f, (depth + 1)); //FIXME 0.5f
+        offset = pixSize * (float)pow(0.5f, (depth + 1)); //FIXME 0.5f
         ra.setOrigin(Vector3(ray.getOrigin().getX() - offset, ray.getOrigin().getY(), //directio
                              ray.getOrigin().getZ()));
         rb.setOrigin(Vector3(ray.getOrigin().getX() - offset,
@@ -42,16 +48,16 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         ld = tracer->rayTrace(rd);
 
         if(le != la){
-            la = sampler((depth + 1), ray, tracer);
+            la = sampler((depth + 1), ray, tracer, pixSize);
         }
         else if(le != lb){
-            lb = sampler((depth + 1), ray, tracer);
+            lb = sampler((depth + 1), ray, tracer, pixSize);
         }
         else if(le != lc){
-            lc = sampler((depth + 1), ray, tracer);
+            lc = sampler((depth + 1), ray, tracer, pixSize);
         }
         else if(le != ld){
-            ld = sampler((depth + 1), ray, tracer);
+            ld = sampler((depth + 1), ray, tracer, pixSize);
         }
 
         float finR, finG, finB;
@@ -59,7 +65,6 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
         finG = (la.green() + lb.green() + lc.green() + ld.green())/4.0f;
         finB = (la.blue() + lb.blue() + lc.blue() + ld.blue())/4.0f;
 
-        //calc colors!
         final = LightIntensity(finR, finG, finB);
         return final;
     }
@@ -67,6 +72,7 @@ LightIntensity sampler(int depth, Ray& ray, Tracer* tracer){ //add viewplane
 
 EngineImage
 OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) {
+    //the camera works on the exact size of the image, not its resolution.
     LightIntensity color;
     std::string name = tracer->sceneName();
     EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light,
@@ -74,27 +80,21 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
     Ray ray;
     Vector3 vc;
 
-    float x, y, pixWidth, pixHeight, pixelCenterX, pixelCenterY, aspect;
-    float xAspect, yAspect;
-    pixWidth = 2.0f / plane.getHRes();
-    pixHeight = 2.0f / plane.getWRes();
+    float x, y;
     image.resetPixels(light);
     calcUVW();
-    aspect = plane.getWRes() / plane.getHRes();
 
-    std::cout<<pixWidth<< " " << pixHeight <<"\n";
     Vector3 direction = u * lookAt.getX() + (v * lookAt.getY() - w * lookAt.getZ());
     direction = direction.normalize();
     ray.setDirection(direction);
 
     for(unsigned int r = 0; r < plane.getWRes(); r++){ //up
-
         for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
-            x = 0.05f * (c - 0.5f *(plane.getHRes() - 1.0f));
-            y = 0.05f * (r - 0.5f *(plane.getWRes() - 1.0f));
+            x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
+            y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
             vc = (Vector3(x, y, eye.getZ()));
             ray.setOrigin(vc);
-            color = tracer->rayTrace(ray);//sampler(0, ray, tracer);//
+            color = sampler(0, ray, tracer, plane.getPixSize());//tracer->rayTrace(ray);
             image.setPixel((int)r, (int)c, color);
         }
     }

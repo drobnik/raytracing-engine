@@ -18,7 +18,6 @@ public:
     renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer)=0;
     virtual std::string toString()=0;
     void calcUVW();
-
 protected:
     Vector3 eye;
     Vector3 lookAt;
@@ -27,6 +26,7 @@ protected:
     float nearPlane;
     float farPlane;
     float fieldOfView;
+    float clamp(float c, float down, float upper);
 
     Vector3 u, v, w; //local coordinates
 };

@@ -37,7 +37,7 @@ EngineImage Scene::renderScene(Tracer *tracer) {
 }
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
-    Sphere s2 = Sphere(zero2, 1.0f);
+    Sphere s2 = Sphere(zero2, 6.0f);
 
     s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     objs.push_back(std::make_unique<Sphere>(s2));
@@ -79,7 +79,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
         if( (state == tangent || state == hit) && (t < tmin)){
             info.setState(state);
             tmin = t;
-            info.setMaterial(objs.at(i)->getMaterial());
+            info.setMaterial(objs.at(0)->getMaterial());
         }
     }
     return info;

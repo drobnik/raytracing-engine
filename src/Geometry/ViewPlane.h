@@ -4,6 +4,8 @@
 
 class ViewPlane {
 private:
+    int planeWidth;
+    int planeHeight;
     int wResolution;
     int hResolution;
     float pixSize;
@@ -16,9 +18,6 @@ public:
     int getHRes() const;
     int getWRes() const;
     float getPixSize() const;
-    void HRes(int hResolution);
-    void WRes(int wResolution);
-    void setPixSize(float pixSize);
     void setGamma(float gamma);
 };
 
