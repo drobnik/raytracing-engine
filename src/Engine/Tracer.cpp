@@ -12,7 +12,7 @@ LightIntensity Tracer::rayTrace(const Ray &ray) const {
     ShadeInfo info(scene->raytraceObjects(ray));
 
      if(info.State() == tangent || info.State() == hit)
-          return info.getMaterial().getColor();
+          return info.getMaterial().getAmbient();
      else
           return scene->Background();
 }

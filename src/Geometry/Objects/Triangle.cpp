@@ -98,16 +98,6 @@ Material Triangle::getMaterial() {
     return material;
 }
 
-void Triangle::show() {
-    std::cout<<"a: "<<a.getX()<<" "<<a.getY()<<" "<<a.getZ()<<"\n"
-            "b: "<<b.getX()<<" "<<b.getY()<<" "<<b.getZ()<<"\n"
-            "c: "<<c.getX()<<" "<<c.getY()<<" "<<c.getZ()<<"\n"
-             <<"\n";
-    std::cout<<"normal: "<<normal<<"\n";
-    std::cout<<"color! "<<"r: "<<material.getColor().red()<<" g: "
-             <<material.getColor().green()<<" b: "<<material.getColor().blue()<<"\n";
-}
-
 Vector3 & Triangle::getNormal() {
     return normal;
 }
