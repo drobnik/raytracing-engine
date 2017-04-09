@@ -3,7 +3,7 @@
 
 //NOTE: cam is initialized in init() method.
 Scene::Scene() {
-    sceneBackground = LightIntensity(1.0f, 1.0f, 1.0f); //black background
+    sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
     sceneName = "sample";
     viewPlane = ViewPlane();
     viewPlane.setGamma(1.0f);
@@ -11,7 +11,7 @@ Scene::Scene() {
 }
 
 Scene::Scene(int w, int h, float p, const std::string &n) {
-    sceneBackground = LightIntensity(1.0f, 1.0f, 1.0f);
+    sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f);
     this->viewPlane = ViewPlane(w, h, p);
     sceneName = n;
     sampleMesh = Mesh();

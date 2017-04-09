@@ -1,6 +1,7 @@
 #ifndef RAYTRACING_ENGINE_LIGHTINTENSITY_H
 #define RAYTRACING_ENGINE_LIGHTINTENSITY_H
 #include <iostream>
+#include <cassert>
 
 class LightIntensity {
 protected:
@@ -8,19 +9,21 @@ protected:
     float g;
     float b;
 public:
-    inline LightIntensity() {r=0.0f, g=0.0f, b=0.0f;};
-    inline LightIntensity(float r1, float g1, float b1) {r=r1, g=g1, b=b1;};
-    inline LightIntensity(float r1, float g1) {r=r1, g=g1, b=0.0f;};
-    inline LightIntensity(float r1) {r=r1, g=0.0f, b=0.0f;};
+    LightIntensity();
+    LightIntensity(float r1, float g1, float b1);
+    LightIntensity(float r1, float g1);
+    LightIntensity(float r1);
     LightIntensity(const LightIntensity& l);
 
-    float red() {return r;};
-    float green() {return g;};
-    float blue() {return b;};
+    float red();
+    float green();
+    float blue();
 
-    //LightIntensity operator+(LightIntensity& l);
+    LightIntensity operator+(LightIntensity& l);
+    LightIntensity add(float r1, float g1, float b1);
     LightIntensity operator-(LightIntensity& l);
     LightIntensity operator/(LightIntensity& l);
+    LightIntensity operator/(float value);
     bool operator<(LightIntensity& l);
     bool operator==(LightIntensity& l);
     bool operator!=(LightIntensity& l);
@@ -28,6 +31,7 @@ public:
     friend LightIntensity operator*(LightIntensity& l, float scale);
     friend LightIntensity operator+(LightIntensity& l1, LightIntensity& l2);
     friend std::ostream& operator<<(std::ostream &str, LightIntensity &l);
+    friend float clampColor(float base);
 };
 
 
