@@ -44,3 +44,11 @@ const Vector3 &ShadeInfo::getHit() const {
 const Vector3 &ShadeInfo::getNormal() const{
     return ShadeInfo::normal;
 }
+
+const Ray &ShadeInfo::getRay() const {
+    return ray;
+}
+
+Scene &ShadeInfo::getScene() const {
+    return scene;
+}

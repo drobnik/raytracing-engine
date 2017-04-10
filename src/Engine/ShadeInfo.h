@@ -9,11 +9,12 @@ private:
     rayState state;
     Vector3 intersection;
     Vector3 normal;
-    //Material material; //color info
+    //Material* material; //nearest material
     LightIntensity material;
+    Ray ray; //for specular
     Scene& scene; // for shading
 
-public:
+public: //FIXME add set for the ray
     ShadeInfo(Scene &scene);
     ShadeInfo(const ShadeInfo& info);
     ~ShadeInfo();
@@ -27,6 +28,9 @@ public:
     void setState(rayState state);
     void setNormal(const Vector3 &normal);
     const Vector3 &getHit() const;
+    const Ray &getRay() const;
+
+    Scene &getScene() const;
 };
 
 
