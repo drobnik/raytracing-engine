@@ -2,6 +2,7 @@
 #define RAYTRACING_ENGINE_PHONGMAT_H
 #include "../BRDF/SpecularBRDF.h"
 #include "../BRDF/LambertBRDF.h"
+#include "../Engine/Scene.h"
 
 class PhongMat : public Material {
 private:

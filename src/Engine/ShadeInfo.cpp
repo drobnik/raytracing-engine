@@ -2,16 +2,14 @@
 
 ShadeInfo::ShadeInfo(Scene &scene) : scene(scene), state(miss) {}
 
-ShadeInfo::~ShadeInfo() {
-
-}
+ShadeInfo::~ShadeInfo() { }
 
 ShadeInfo::ShadeInfo(const ShadeInfo &info)
         : scene(info.scene),
           state(info.state),
           material(info.material),
           intersection(info.intersection),
-          normal(info.normal) {}
+          normal(info.normal), lightDir(info.lightDir){}
 
 rayState ShadeInfo::State() const {
     return state;
@@ -51,4 +49,12 @@ const Ray &ShadeInfo::getRay() const {
 
 Scene &ShadeInfo::getScene() const {
     return scene;
+}
+
+void ShadeInfo::setLightDir(const Vector3 &lightDir) {
+    ShadeInfo::lightDir = lightDir;
+}
+
+const Vector3 &ShadeInfo::getLightDir() const {
+    return lightDir;
 }

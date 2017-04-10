@@ -3,18 +3,20 @@
 #include "../Geometry/Vector3.h"
 #include "../Engine/ShadeInfo.h"
 #include "../Geometry/Ray.h"
+#include "Light.h"
 
-class PointLight {
+class PointLight : public Light{
 private:
     Vector3 positionL;
-    float constAttr;
-    float linearAttr;
+    LightIntensity color;
+    float linearCoef;
 public:
-    bool isInShadow(Ray& ray, ShadeInfo& info);
-    LightIntensity getDiffuse(Vector3 camPos, ShadeInfo& info);
-    LightIntensity getSpecular(Vector3 camPos, ShadeInfo& info);
-
-
+    PointLight();
+    ~PointLight();
+    PointLight(const PointLight& light);
+    PointLight(Vector3& pos, LightIntensity& col, float linearCoe);
+    virtual Vector3 getDirection(ShadeInfo& info);
+    virtual LightIntensity L(ShadeInfo& info);
 };
 
 

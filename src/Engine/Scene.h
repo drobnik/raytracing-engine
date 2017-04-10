@@ -16,6 +16,7 @@
 #include "../Geometry/ViewPlane.h"
 #include "ShadeInfo.h"
 #include "../Geometry/Objects/Mesh.h"
+#include "../Lights/Light.h"
 
 class Tracer;
 class Camera;
@@ -31,6 +32,8 @@ private:
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh;
+    Light* ambientLight;
+    std::vector<Light*> lights;//beware
 
 public:
     Scene();
@@ -46,6 +49,9 @@ public:
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
+    void addAmbientLight(Light *l);
+    Light *getAmbientLight() const;
+    const std::vector<Light *> &getLights() const;
 };
 
 

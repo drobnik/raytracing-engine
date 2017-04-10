@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "../Geometry/Objects/Triangle.h"
+#include "../Lights/PointLight.h"
 
 //NOTE: cam is initialized in init() method.
 Scene::Scene() {
@@ -32,6 +33,8 @@ Scene::Scene(const Scene &sc) {
 Scene::~Scene() {
     delete camera;
     camera = nullptr;
+   // delete ambientLight;
+   // ambientLight = nullptr;
 }
 
 EngineImage Scene::renderScene(Tracer *tracer) {
@@ -40,6 +43,7 @@ EngineImage Scene::renderScene(Tracer *tracer) {
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
+    //PointLight* pointless = new PointLight();
 
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
@@ -78,7 +82,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
         if( (state == tangent || state == hit) && (t < tmin)){
             info.setState(state);
             tmin = t;
-            info.setMaterial(objs.at(0)->getMaterial());
+            info.setMaterial(objs.at(0)->getMaterial()); //FIXME add true material!
             info.setHit(ta.getOrigin() + ta.getDirection() * t);
         }
     }
@@ -103,6 +107,18 @@ const ViewPlane &Scene::getViewPlane() const {
 
 void Scene::addMesh(Mesh &m) {
     sampleMesh = m;
+}
+
+void Scene::addAmbientLight(Light *l) {
+    ambientLight = l;
+}
+
+const std::vector<Light *> &Scene::getLights() const {
+    return lights;
+}
+
+Light *Scene::getAmbientLight() const {
+    return ambientLight;
 }
 
 

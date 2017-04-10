@@ -13,6 +13,7 @@ private:
     LightIntensity material;
     Ray ray; //for specular
     Scene& scene; // for shading
+    Vector3 lightDir;
 
 public: //FIXME add set for the ray
     ShadeInfo(Scene &scene);
@@ -29,8 +30,9 @@ public: //FIXME add set for the ray
     void setNormal(const Vector3 &normal);
     const Vector3 &getHit() const;
     const Ray &getRay() const;
-
     Scene &getScene() const;
+    void setLightDir(const Vector3 &lightDir);
+    const Vector3 &getLightDir() const;
 };
 
 
