@@ -44,7 +44,7 @@ const Vector3 Vector3::operator/(float k) {
     return Vector3(x, y, z);
 }
 
-Vector3 Vector3::neg(Vector3 v) {
+const Vector3 Vector3::neg(Vector3 v) const{
     return Vector3(-v.x, -v.y, -v.z);
 }
 

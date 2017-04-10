@@ -17,7 +17,7 @@ rayState ShadeInfo::State() const {
     return state;
 }
 
-const Material &ShadeInfo::getMaterial(){
+const LightIntensity &ShadeInfo::getMaterial(){
     return material;
 }
 
@@ -25,7 +25,7 @@ void ShadeInfo::setHit(const Vector3 &intersection) {
     ShadeInfo::intersection = intersection;
 }
 
-void ShadeInfo::setMaterial(const Material &material) {
+void ShadeInfo::setMaterial(const LightIntensity &material) {
     ShadeInfo::material = material;
 }
 
@@ -39,4 +39,8 @@ void ShadeInfo::setNormal(const Vector3 &normal) {
 
 const Vector3 &ShadeInfo::getHit() const {
     return intersection;
+}
+
+const Vector3 &ShadeInfo::getNormal() const{
+    return ShadeInfo::normal;
 }

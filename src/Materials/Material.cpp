@@ -1,30 +1,22 @@
 #include "Material.h"
 
-Material::Material() { }
+Material::Material() : alpha(1.0f), textureOn(false) { }
 
-Material::Material(LightIntensity diff) : Material(){
-    kAmbient = diff;
-}
+Material::~Material() {}
 
-LightIntensity Material::getAmbient()const {
-    return kAmbient;
-}
-
-Material::Material(LightIntensity amb, LightIntensity diff,
-                   LightIntensity spec)
-        : kAmbient(amb),
-          kDiffuse(diff),
-          kSpecular(spec){}
-
-const LightIntensity &Material::getKDiffuse() const {
-    return kDiffuse;
-}
-
-const LightIntensity &Material::getKSpecular() const {
-    return kSpecular;
+Material&
+Material::operator= (const Material& rhs){
+    return (*this);
 }
 
 bool Material::isTextureOn() const {
     return textureOn;
 }
 
+Material::Material(const Material &mat) : alpha(mat.alpha),
+                                          textureOn(mat.textureOn){ }
+
+// default shade
+LightIntensity Material::shade(ShadeInfo& info){
+    return LightIntensity(0.0f, 0.0f, 0.0f);
+}

@@ -55,10 +55,11 @@ bool LightIntensity::operator==(LightIntensity &l) {
     return (r == l.red() && g == l.green() && b == l.blue());
 }
 
-LightIntensity operator*(float scale, LightIntensity &l) {
-    return LightIntensity(clampColor(l.red() * scale),
-                          clampColor(l.green() * scale),
-                          clampColor(l.blue() * scale));
+LightIntensity operator*(float scale, const LightIntensity &l) {
+    LightIntensity lu = l; //FIXME
+    return LightIntensity(clampColor(lu.red() * scale),
+                          clampColor(lu.green() * scale),
+                          clampColor(lu.blue() * scale));
 }
 
 LightIntensity operator*(LightIntensity &l, float scale) {
