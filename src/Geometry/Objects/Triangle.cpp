@@ -5,7 +5,7 @@ Triangle::Triangle() : Primitive(){
     b = Vector3(0.0f, 0.0f, 1.0f);
     c = Vector3(1.0f, 0.0f, 0.0f);
     normal = Vector3(0.0f, 1.0f, 0.0f);
-    material = Material(LightIntensity(0.5f, 1.0f, 0.0f));
+    material = LightIntensity(0.5f, 1.0f, 0.0f);//Material(LightIntensity(0.5f, 1.0f, 0.0f));
 }
 
 Triangle::~Triangle(){ }
@@ -28,7 +28,7 @@ Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c)
     normal = v1.crossProd(v2);
     normal.normalize();
     normal = normal.neg(normal);
-    material = Material(LightIntensity(0.0f, 1.0f, 0.0f));
+    material = LightIntensity(0.0f, 1.0f, 0.0f);//Material(LightIntensity(0.0f, 1.0f, 0.0f));
 }
 
 // FIXME add hit info!
@@ -68,33 +68,9 @@ rayState Triangle::intersects(Ray &ray, float &t) {
     t = tet;
 
     return hit;
-/*
-    static float denom, party, d;
-    static Vector3 fx, fy, fz, p, u;
-
-    denom = normal.dot(ray.getDirection());
-    if (denom > 1e-6F) return miss;					 // ray pararell to plane or opposite
-
-    //d = Dot(t.n * t.d - r.origin, t.n) / denom;
-    p = normal * a.dot(normal); //d
-    d = (p.dot(normal - ray.getOrigin()))/denom;
-
-    if (d > ray.getDistance()) return miss;				 // ray is too short
-
-
-    u = ray.getOrigin() + ray.getDirection() * d;
-    fx = a - u;
-    fy = b - u;
-    fz = c - u;
-
-    if(fx.crossProd(fy).dot(normal)< -0.00001F) return miss;
-    if(fy.crossProd(fz).dot(normal)< -0.00001F) return miss;
-    if(fz.crossProd(fx).dot(normal)< -0.00001F) return miss;
-    return hit;
-    */
 }
 
-Material Triangle::getMaterial() {
+LightIntensity Triangle::getMaterial() {
     return material;
 }
 

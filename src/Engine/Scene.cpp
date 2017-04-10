@@ -41,7 +41,8 @@ void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
 
-    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+//    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+    s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_unique<Sphere>(s2));
     camera = new OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
                              Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f);
@@ -51,8 +52,8 @@ void Scene::init(){
 void Scene::initPers() {
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
-
-    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+//    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+    s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_unique<Sphere>(s2));
     camera = new PerspectiveCamera(Vector3(0.0f, 0.0f, -20.0f),
                              Vector3(0.0f, 0.0f, 1.0f), 200.0f, 2000);

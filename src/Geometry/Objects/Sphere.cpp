@@ -5,7 +5,7 @@ Sphere::Sphere()
           radius(10),
           center(Vector3(0.0f, 0.0f, 0.0f)) {
     LightIntensity l = LightIntensity(0.8f, 0.8f, 0.8f);
-    material = Material(l);
+    material = l;//Material(l);
 }
 
 Sphere::~Sphere() { }
@@ -20,7 +20,7 @@ Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
     LightIntensity l = LightIntensity(1.0f, 0.0f, 0.0f);
     this->center = center;
     radius = rad;
-    material = Material(l);
+    material = l;//Material(l);
 }
 
 Sphere::Sphere(Sphere *s) : Primitive() {
@@ -72,10 +72,10 @@ float Sphere::getRadius() {
     return radius;
 }
 
-Material Sphere::getMaterial() {
+LightIntensity Sphere::getMaterial() {
     return material;
 }
 
-void Sphere::setMaterial(const Material &material) {
+void Sphere::setMaterial(const LightIntensity &material) {
     Sphere::material = material;
 }

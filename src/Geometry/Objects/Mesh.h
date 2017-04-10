@@ -18,7 +18,6 @@ public:
     Mesh(const Mesh& m);
     Mesh(std::vector<Triangle> tris);
     ShadeInfo intersects(const Ray &ray, Scene &scene); //TODO: one list for all of them
-    void show();
 };
 
 

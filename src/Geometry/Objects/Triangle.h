@@ -6,7 +6,7 @@ class Triangle : public Primitive{
 private:
     Vector3 a, b, c; //TODO create Point3 and Point2 classes
     Vector3 normal;
-    Material material;
+    LightIntensity material;
 
 public:
     Triangle();
@@ -14,11 +14,10 @@ public:
     Triangle(const Triangle& t);
     Triangle(Vector3& a, Vector3& b, Vector3& c);
     rayState intersects(Ray& ray, float& t) override;
-    Material getMaterial();
+    LightIntensity getMaterial();
     Vector3 & getNormal();
     void setNormal(const Vector3 &normal);
     Triangle flipNormal(Triangle& t);
-    void show();
 };
 
 
