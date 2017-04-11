@@ -21,6 +21,7 @@ public:
 
     LightIntensity operator+(LightIntensity& l);
     LightIntensity add(float r1, float g1, float b1);
+    LightIntensity operator*(LightIntensity l);
     LightIntensity operator-(LightIntensity& l);
     LightIntensity operator/(LightIntensity& l);
     LightIntensity operator/(float value);
@@ -29,7 +30,6 @@ public:
     bool operator!=(LightIntensity& l);
     friend LightIntensity operator*(float scale, const LightIntensity &l);
     friend LightIntensity operator*(LightIntensity& l, float scale);
-    friend LightIntensity operator+(LightIntensity& l1, LightIntensity& l2);
     friend std::ostream& operator<<(std::ostream &str, LightIntensity &l);
     friend float clampColor(float base);
 };

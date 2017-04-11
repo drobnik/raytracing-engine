@@ -83,12 +83,6 @@ bool LightIntensity::operator<(LightIntensity &l) {
     return (r < l.r) && (g < l.g) && (b < l.b);
 }
 
-LightIntensity operator+(LightIntensity &l1, LightIntensity &l2) {
-    return LightIntensity(clampColor(l1.r + l2.r),
-                          clampColor(l1.g + l2.g),
-                          clampColor(l1.b + l2.b));
-}
-
 LightIntensity LightIntensity::add(float r1, float g1, float b1) {
     return LightIntensity(clampColor(r + r1),
                           clampColor(g + g1),
@@ -102,5 +96,9 @@ bool LightIntensity::operator!=(LightIntensity &l) {
 float LightIntensity::red() {return clampColor(r);};
 float LightIntensity::green() {return clampColor(g);};
 float LightIntensity::blue() {return clampColor(b);}
+
+LightIntensity LightIntensity::operator*(LightIntensity l) {
+    return LightIntensity(r*l.r, g*l.g, b*l.b);
+}
 
 
