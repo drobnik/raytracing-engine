@@ -33,8 +33,8 @@ Scene::Scene(const Scene &sc) {
 Scene::~Scene() {
     delete camera;
     camera = nullptr;
-   // delete ambientLight;
-   // ambientLight = nullptr;
+    delete ambientLight;
+    ambientLight = nullptr;
 }
 
 EngineImage Scene::renderScene(Tracer *tracer) {
@@ -43,7 +43,8 @@ EngineImage Scene::renderScene(Tracer *tracer) {
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
-    //PointLight* pointless = new PointLight();
+    PointLight* pointless = new PointLight();
+    //ambientLight = new PointLight();
 
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));

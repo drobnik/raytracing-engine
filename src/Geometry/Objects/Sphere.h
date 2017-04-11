@@ -10,6 +10,7 @@ private:
     Vector3 center;
     float radius;
     LightIntensity material;
+   // Material* material;
 public:
     Sphere();
     ~Sphere();
