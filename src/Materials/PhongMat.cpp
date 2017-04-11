@@ -22,7 +22,7 @@ LightIntensity PhongMat::shade(ShadeInfo &info) {
     Ray r = info.getRay();
     Vector3 wo = r.getDirection().normalize(), norm;
     LightIntensity L = ambientBrdf->rho(info, wo.neg(wo))
-                       * info.getScene().getAmbientLight()->L(info);
+                       * info.getScene().getAmbientLight().L(info);
     LightIntensity diffus, gloss, diffGloss;
 
     typedef std::vector<Light*>::iterator iter;

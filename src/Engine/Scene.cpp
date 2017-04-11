@@ -33,8 +33,6 @@ Scene::Scene(const Scene &sc) {
 Scene::~Scene() {
     delete camera;
     camera = nullptr;
-    delete ambientLight;
-    ambientLight = nullptr;
 }
 
 EngineImage Scene::renderScene(Tracer *tracer) {
@@ -43,8 +41,8 @@ EngineImage Scene::renderScene(Tracer *tracer) {
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
-    PointLight* pointless = new PointLight();
-    //ambientLight = new PointLight();
+    ambientLight = AmbientLight();
+    lights.push_back(new PointLight()); //!!
 
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
@@ -57,6 +55,8 @@ void Scene::init(){
 void Scene::initPers() {
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
+    ambientLight = AmbientLight();
+
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_unique<Sphere>(s2));
@@ -74,6 +74,7 @@ Vector3 Scene::calcPoint(Ray &r, float &t, rayState &state){
 
 ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
+    info.setAmbientLight(ambientLight);
     rayState state;
     Ray ta = ray; //FIXME const getOrigin and direction
     float t = 0.0f, tmin = INFINITY;
@@ -110,7 +111,7 @@ void Scene::addMesh(Mesh &m) {
     sampleMesh = m;
 }
 
-void Scene::addAmbientLight(Light *l) {
+void Scene::addAmbientLight(AmbientLight l) {
     ambientLight = l;
 }
 
@@ -118,7 +119,7 @@ const std::vector<Light *> &Scene::getLights() const {
     return lights;
 }
 
-Light *Scene::getAmbientLight() const {
+AmbientLight Scene::getAmbientLight() const {
     return ambientLight;
 }
 

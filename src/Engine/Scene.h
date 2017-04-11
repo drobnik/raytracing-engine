@@ -32,7 +32,7 @@ private:
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh;
-    Light* ambientLight;
+    AmbientLight ambientLight;
     std::vector<Light*> lights;//beware
 
 public:
@@ -49,8 +49,8 @@ public:
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
-    void addAmbientLight(Light *l);
-    Light *getAmbientLight() const;
+    void addAmbientLight(AmbientLight l);
+    AmbientLight getAmbientLight() const;
     const std::vector<Light *> &getLights() const;
 };
 

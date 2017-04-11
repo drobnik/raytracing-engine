@@ -58,3 +58,19 @@ void ShadeInfo::setLightDir(const Vector3 &lightDir) {
 const Vector3 &ShadeInfo::getLightDir() const {
     return lightDir;
 }
+
+const AmbientLight &ShadeInfo::getAmbientLight() const {
+    return *ambientLight;
+}
+
+const std::vector<Light *> &ShadeInfo::getLights() const {
+    return lights;
+}
+
+void ShadeInfo::setAmbientLight(AmbientLight ambientLight) {
+    ShadeInfo::ambientLight = &ambientLight;
+}
+
+void ShadeInfo::setLights(const std::vector<Light *> &lights) {
+    ShadeInfo::lights = lights;
+}

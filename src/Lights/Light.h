@@ -1,7 +1,9 @@
 #ifndef RAYTRACING_ENGINE_LIGHT_H
 #define RAYTRACING_ENGINE_LIGHT_H
 #include "../Geometry/Vector3.h"
-#include "../Engine/ShadeInfo.h"
+#include "LightIntensity.h"
+
+class ShadeInfo;
 
 class Light {
 protected:
