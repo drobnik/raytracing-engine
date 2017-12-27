@@ -20,7 +20,7 @@ Renderer::Renderer(const Renderer &r) {
     img = r.img;
 }
 
-Renderer::Renderer(Scene* s, FileManager& man) {
+Renderer::Renderer(std::shared_ptr<Scene> s, FileManager& man) {
     std::string name = s->SceneName();
     scene = s;
     manager = &man;

@@ -8,7 +8,7 @@
 class Renderer {
 private:
     FileManager* manager;
-    Scene* scene;
+    std::shared_ptr<Scene> scene;
     EngineImage img;
     Tracer* tracer;
     //ArgsParser parser;
@@ -19,7 +19,7 @@ public:
     Renderer();
     ~Renderer();
     Renderer(const Renderer& r);
-    Renderer(Scene* s, FileManager& man);
+    Renderer(std::shared_ptr<Scene> s, FileManager& man);
     void renderScene();
 };
 

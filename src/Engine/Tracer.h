@@ -8,10 +8,10 @@
 
 class Tracer {
 private:
-    Scene* scene;
+    std::shared_ptr<Scene> scene;
 public:
     Tracer();
-    Tracer(Scene* scene);
+    Tracer(const std::shared_ptr<Scene>);
     LightIntensity rayTrace(const Ray& ray) const;
     std::string sceneName(); //uhh so ugly dude
 };

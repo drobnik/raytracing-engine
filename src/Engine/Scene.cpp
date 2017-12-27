@@ -1,5 +1,4 @@
 #include "Scene.h"
-#include "../Lights/PointLight.h"
 
 //NOTE: cam is initialized in init() method.
 Scene::Scene() {
@@ -28,11 +27,6 @@ Scene::Scene(const Scene &sc) {
     sceneBackground = sc.sceneBackground;
 }
 
-Scene::~Scene() {
-    delete camera;
-    camera = nullptr;
-}
-
 EngineImage Scene::renderScene(Tracer *tracer) {
     return camera->renderScene(viewPlane, sceneBackground, tracer);
 }
@@ -45,12 +39,13 @@ void Scene::init(){
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_shared<Sphere>(s2));
-    camera = new OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
-                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f);
+
+    camera = std::make_shared<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
+                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
     sceneName = sceneName + camera->toString();
 }
 
-// TODO: Geometry module
+// TODO: REVIEW it
 Vector3 Scene::calcPoint(Ray &r, float &t, rayState &state){
     Vector3 point = r.getOrigin() + r.getDirection() * t;
     t = 0;
@@ -104,7 +99,7 @@ const std::vector<Light *> &Scene::getLights() const {
     return lights;
 }
 
-void Scene::ChangeCamera(Camera* cam){
+void Scene::ChangeCamera(std::shared_ptr<Camera> cam){
     camera = cam;
 }
 

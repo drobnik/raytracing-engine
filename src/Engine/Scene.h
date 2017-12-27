@@ -14,6 +14,7 @@
 #include "../Utilities/Utility.h"
 #include "../Utilities/Utility.h"
 #include "../Geometry/ViewPlane.h"
+#include "../Lights/PointLight.h"
 #include "ShadeInfo.h"
 #include "../Geometry/Objects/Mesh.h"
 #include "../Lights/Light.h"
@@ -27,7 +28,7 @@ private:
     std::vector<std::shared_ptr<Primitive>> objs;
 
     std::vector<Ray> rays;
-    Camera* camera;
+    std::shared_ptr<Camera> camera;
 
     LightIntensity sceneBackground;
     std::string sceneName;
@@ -39,9 +40,9 @@ public:
     Scene();
     Scene(int w, int h, float p, const std::string &n);
     Scene(const Scene& sc);
-    ~Scene();
+
     void init();
-    void ChangeCamera(Camera* cam);
+    void ChangeCamera(std::shared_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);

@@ -1,12 +1,11 @@
 #include "Tracer.h"
 
+// maybe discard it?
 Tracer::Tracer() : scene(nullptr){
 
 }
 
-Tracer::Tracer(Scene *scene) {
-    this->scene = scene;
-}
+Tracer::Tracer(const std::shared_ptr<Scene> s) : scene(s) { }
 
 //FIXME
 LightIntensity Tracer::rayTrace(const Ray &ray) const {
