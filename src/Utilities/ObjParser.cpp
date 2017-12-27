@@ -73,6 +73,7 @@ int ObjParser::parseLine(std::vector<std::string> vec) {
     std::map<const std::string, ObjCommand>::const_iterator
             i = objFormat.find(vec.at(0));
 
+    // add asserts and make this function void
     if (i == objFormat.end()) {
         std::cout << "Syntax error!\n";
         return -1;
@@ -254,8 +255,7 @@ ObjParser::faceIntoTokens(std::string delimiter, std::string s) {
 
 int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<int> nor,
                         faceState state) {
-    //for(int i = 0; i < geo.size(); i++) std::cout<<geo.at(i)<<" ";
-    //std::cout<<"\n";
+
     if(state == geoOnly){
         Vector3 a, b, c;
         Triangle t;
@@ -265,7 +265,7 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
         c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
         t = Triangle(a, b, c);
-        triangles.push_back(t); //4968
+        triangles.push_back(std::make_shared<Triangle>(t)); //4968
 
     } else if(state == geoNor){
         Vector3 a, b, c;
@@ -282,9 +282,9 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
         assert(v1 == v2 && v2 == v3 && v1 == v3);
 
         t = Triangle(a, b, c);
-        //t.setNormal(v1);
+        //t.setNormal(v1); <- later
         
-        triangles.push_back(t);
+        triangles.push_back(std::make_shared<Triangle>(t));
     } else if(state == geoTexNor){//FIXME IGNORE TEXTURE
         Vector3 a, b, c;
         Triangle t;
@@ -293,7 +293,7 @@ int ObjParser::makeFace(std::vector<int> geo, std::vector<int> tex, std::vector<
         c = verticles.at((unsigned long long int) (geo.at(2)-1));
 
         t = Triangle(a, b, c);
-        triangles.push_back(t);
+        triangles.push_back(std::make_shared<Triangle>(t));
     }
     return 0;
 }

@@ -1,14 +1,11 @@
 #include "Sphere.h"
 
 Sphere::Sphere()
-        : //Primitive(),
-          radius(10),
+        : radius(10),
           center(Vector3(0.0f, 0.0f, 0.0f)) {
     LightIntensity l = LightIntensity(0.8f, 0.8f, 0.8f);
     material = l;//Material(l);
 }
-
-Sphere::~Sphere() { }
 
 Sphere::Sphere(const Sphere &s){
     radius = s.radius;
@@ -23,7 +20,7 @@ Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
     material = l;//Material(l);
 }
 
-Sphere::Sphere(Sphere *s) : Primitive() {
+Sphere::Sphere(Sphere *s) {
     center = s->getCenter();
     radius = s ->getRadius();
 }

@@ -14,8 +14,6 @@ enum rayState{
 class Primitive {
 public:
     Primitive();
-    ~Primitive() = default;
-    Primitive(const Primitive& p) = delete;
     virtual rayState intersects(Ray& r, float& a_dist)=0;
     virtual LightIntensity getMaterial()=0;
 };

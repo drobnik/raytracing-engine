@@ -35,8 +35,10 @@ private:
     std::vector<Vector3> verticles;//TODO pair <vector3, float> aka weight
     std::vector<Vector3> normals;
     std::vector<Vector3> texCoords; //to be used later?
-    std::vector<Triangle> triangles;
+
+    std::vector<std::shared_ptr<Triangle>> triangles;
     Material currentMaterial;
+
     std::map<const std::string, ObjCommand> objFormat;
     std::string currentGroup;
     std::map<std::string, Vector3*> groups; //string -> group name

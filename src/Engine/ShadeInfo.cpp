@@ -67,7 +67,7 @@ const std::vector<Light *> &ShadeInfo::getLights() const {
     return lights;
 }
 
-void ShadeInfo::setAmbientLight(AmbientLight ambientLight) {
+void ShadeInfo::setAmbientLight(AmbientLight &ambientLight) {
     ShadeInfo::ambientLight = &ambientLight;
 }
 

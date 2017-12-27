@@ -10,7 +10,7 @@ Triangle::Triangle() : Primitive(){
 
 Triangle::~Triangle(){ }
 
-Triangle::Triangle(const Triangle &t) : Primitive() {
+Triangle::Triangle(const Triangle &t) {
     a = t.a;
     b = t.b;
     c = t.c;
@@ -18,8 +18,7 @@ Triangle::Triangle(const Triangle &t) : Primitive() {
     material = t.material;
 }
 
-Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c)
-        : Primitive() {
+Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c) {
     this->a = a;
     this->b = b;
     this->c = c;
@@ -78,7 +77,7 @@ Vector3 & Triangle::getNormal() {
     return normal;
 }
 
-Triangle Triangle::flipNormal(Triangle &t) {
+void Triangle::flipNormal(Triangle &t) {
     Vector3 a, b, c;
     a = t.a, b = t.b, c = t.c;
     Vector3 v1 = b - c;

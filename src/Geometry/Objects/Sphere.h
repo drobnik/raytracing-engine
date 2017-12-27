@@ -13,7 +13,6 @@ private:
    // Material* material;
 public:
     Sphere();
-    ~Sphere();
     Sphere(const Sphere& s);
     Sphere(Sphere* s);
     Sphere(Vector3& center, float rad);

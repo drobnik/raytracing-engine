@@ -85,7 +85,7 @@ Vector3 Vector3::lerp(Vector3 v, float t) {
     float x = this->x + t * (v.x - this->x);
     float y = this->y + t * (v.y - this->y);
     float z = this->z + t * (v.z - this->z);
-    return Vector3();
+    return Vector3(x, y, z);
 }
 
 bool Vector3::operator!=(const Vector3 &v2) {

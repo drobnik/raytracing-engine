@@ -1,6 +1,7 @@
 #ifndef RAYTRACING_ENGINE_MESH_H
 #define RAYTRACING_ENGINE_MESH_H
 #include <vector>
+#include <memory>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -10,13 +11,12 @@
 
 class Mesh {
 private:
-    std::vector<Triangle> triangles;
-    Sphere simpleBounding;
+    std::vector<std::shared_ptr<Triangle>> triangles;
+    Sphere simpleBounding; //hey, hey, throw a pointer here
 public:
     Mesh();
-    ~Mesh();
     Mesh(const Mesh& m);
-    Mesh(std::vector<Triangle> tris);
+    Mesh(const std::vector<std::shared_ptr<Triangle>> tris);
     ShadeInfo intersects(const Ray &ray, Scene &scene); //TODO: one list for all of them
 };
 

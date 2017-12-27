@@ -17,7 +17,7 @@ public:
     LightIntensity getMaterial();
     Vector3 & getNormal();
     void setNormal(const Vector3 &normal);
-    Triangle flipNormal(Triangle& t);
+    void flipNormal(Triangle& t);
 };
 
 

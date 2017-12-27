@@ -17,4 +17,4 @@ namespace Utility {
         }
         if(state == 0) std::cout <<"misses the primitive.\n\n";
     }
-};
+}

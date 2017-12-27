@@ -1,5 +1,4 @@
 #include "Scene.h"
-#include "../Geometry/Objects/Triangle.h"
 #include "../Lights/PointLight.h"
 
 //NOTE: cam is initialized in init() method.

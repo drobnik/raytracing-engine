@@ -87,14 +87,14 @@ LightIntensity LightIntensity::add(float r1, float g1, float b1) {
     return LightIntensity(clampColor(r + r1),
                           clampColor(g + g1),
                           clampColor(b + b1));
-};
+}
 
 bool LightIntensity::operator!=(LightIntensity &l) {
     return !(r == l.red() && g == l.green() && b == l.blue());
 }
 
-float LightIntensity::red() {return clampColor(r);};
-float LightIntensity::green() {return clampColor(g);};
+float LightIntensity::red() {return clampColor(r);}
+float LightIntensity::green() {return clampColor(g);}
 float LightIntensity::blue() {return clampColor(b);}
 
 LightIntensity LightIntensity::operator*(LightIntensity l) {

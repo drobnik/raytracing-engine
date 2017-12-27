@@ -42,7 +42,7 @@ public: //FIXME add set for the ray
     const Vector3 &getLightDir() const;
     const AmbientLight &getAmbientLight() const;
     const std::vector<Light *> &getLights() const;
-    void setAmbientLight(AmbientLight ambientLight);
+    void setAmbientLight(AmbientLight &ambientLight);
     void setLights(const std::vector<Light *> &lights);
 };
 

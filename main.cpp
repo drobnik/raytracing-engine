@@ -1,5 +1,4 @@
 #include <iostream>
-#include "src/Geometry/Vector3.h"
 #include "src/Engine/Scene.h"
 #include "src/Engine/Renderer.h"
 
