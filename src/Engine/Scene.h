@@ -23,12 +23,12 @@ class Camera;
 
 class Scene {
 private:
-    std::vector<Sphere> spheres;
-    std::vector<Ray> rays;
-    Plane samplePlane;
-    std::vector<std::unique_ptr<Primitive>> objs;// headaches guaranteed
-    Camera* camera;
     ViewPlane viewPlane;
+    std::vector<std::shared_ptr<Primitive>> objs;
+
+    std::vector<Ray> rays;
+    Camera* camera;
+
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh;
@@ -41,7 +41,8 @@ public:
     Scene(const Scene& sc);
     ~Scene();
     void init();
-    void initPers();
+    void ChangeCamera(Camera* cam);
+    void ChangeSceneName(std::string s);
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);
     EngineImage renderScene(Tracer *tracer);

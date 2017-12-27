@@ -84,7 +84,7 @@ PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
     calcUVW();
     float pixSize = plane.getPixSize();
 
-    for(unsigned int r = 0; r < plane.getWRes(); r++){ //up
+    for(unsigned int r = 0; r < (unsigned)plane.getWRes(); r++){ //up
         for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));

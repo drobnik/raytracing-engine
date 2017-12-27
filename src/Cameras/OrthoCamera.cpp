@@ -82,7 +82,7 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
     ray.setDirection(direction);
 
     for(unsigned int r = 0; r < plane.getWRes(); r++){ //up
-        for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
+        for(unsigned int c = 0; c < (unsigned)plane.getHRes(); c++){ //horizontal
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
             vc = (Vector3(x, y, eye.getZ()));

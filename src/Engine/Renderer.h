@@ -19,7 +19,7 @@ public:
     Renderer();
     ~Renderer();
     Renderer(const Renderer& r);
-    Renderer(Scene& s, FileManager& man);
+    Renderer(Scene* s, FileManager& man);
     void renderScene();
 };
 

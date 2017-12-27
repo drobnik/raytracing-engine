@@ -20,14 +20,13 @@ Renderer::Renderer(const Renderer &r) {
     img = r.img;
 }
 
-Renderer::Renderer(Scene &s, FileManager& man) {
-    Scene* scenePtr = &s;
-    std::string name = s.SceneName();
-    scene = &s;
+Renderer::Renderer(Scene* s, FileManager& man) {
+    std::string name = s->SceneName();
+    scene = s;
     manager = &man;
-    img = EngineImage(s.getViewPlane().getWRes(), s.getViewPlane().getHRes(),
-                      s.Background(), name);
-    tracer = new Tracer(scenePtr);
+    img = EngineImage(s->getViewPlane().getWRes(), s->getViewPlane().getHRes(),
+                      s->Background(), name);
+    tracer = new Tracer(s);
 }
 
 void Renderer::renderScene() {
@@ -37,7 +36,7 @@ void Renderer::renderScene() {
 
 void Renderer::saveImage() {
     manager->saveImage(img);
-    std::cout<<"Done\n";
+    std::cout<<"Finished rendering image.\n";
 }
 
 

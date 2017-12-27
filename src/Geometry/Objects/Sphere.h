@@ -14,7 +14,7 @@ private:
 public:
     Sphere();
     Sphere(const Sphere& s);
-    Sphere(Sphere* s);
+    Sphere(Sphere* s); //what? Need to define rule of three (5?)
     Sphere(Vector3& center, float rad);
     rayState intersects(Ray& r, float& t) override;
     Vector3 getCenter();

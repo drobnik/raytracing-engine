@@ -12,12 +12,11 @@
 class Mesh {
 private:
     std::vector<std::shared_ptr<Triangle>> triangles;
-    Sphere simpleBounding; //hey, hey, throw a pointer here
+    std::shared_ptr<Sphere> simpleBounding;
 public:
     Mesh();
-    Mesh(const Mesh& m);
     Mesh(const std::vector<std::shared_ptr<Triangle>> tris);
-    ShadeInfo intersects(const Ray &ray, Scene &scene); //TODO: one list for all of them
+    ShadeInfo intersects(const Ray &ray, Scene &scene);
 };
 
 

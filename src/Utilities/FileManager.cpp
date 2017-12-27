@@ -2,7 +2,7 @@
 
 EngineImage *FileManager::loadImage(const std::string path) {
     //FIXME
-    return nullptr;
+    return nullptr; //?!!!?!
 }
 
 FileManager::FileManager(std::string path, std::string assets) {
