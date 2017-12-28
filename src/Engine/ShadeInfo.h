@@ -2,6 +2,8 @@
 #define RAYTRACING_ENGINE_SHADEINFO_H
 
 #include <vector>
+#include <memory>
+#include <bits/shared_ptr.h>
 #include "../Geometry/Objects/Primitive.h"
 #include "../Materials/Material.h"
 #include "../Lights/AmbientLight.h"
@@ -19,8 +21,8 @@ private:
     Ray ray; //for specular
     Scene& scene; // for shading
     Vector3 lightDir;
-    AmbientLight* ambientLight;
-    std::vector<Light*> lights;
+    std::shared_ptr<AmbientLight> ambientLight;
+    std::vector<std::shared_ptr<Light>> lights;
 
 public: //FIXME add set for the ray
     ShadeInfo(Scene &scene);
@@ -41,9 +43,8 @@ public: //FIXME add set for the ray
     void setLightDir(const Vector3 &lightDir);
     const Vector3 &getLightDir() const;
     const AmbientLight &getAmbientLight() const;
-    const std::vector<Light *> &getLights() const;
-    void setAmbientLight(AmbientLight &ambientLight);
-    void setLights(const std::vector<Light *> &lights);
+    const std::vector<std::shared_ptr<Light>> &getLights() const;
+    void setAmbientLight(AmbientLight& ambientLight);
 };
 
 

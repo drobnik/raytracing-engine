@@ -11,66 +11,33 @@ ShadeInfo::ShadeInfo(const ShadeInfo &info)
           intersection(info.intersection),
           normal(info.normal), lightDir(info.lightDir){}
 
-rayState ShadeInfo::State() const {
-    return state;
-}
+rayState ShadeInfo::State() const { return state; }
 
-const LightIntensity &ShadeInfo::getMaterial(){
-    return material;
-}
+const LightIntensity &ShadeInfo::getMaterial(){ return material; }
 
-void ShadeInfo::setHit(const Vector3 &intersection) {
-    ShadeInfo::intersection = intersection;
-}
+void ShadeInfo::setHit(const Vector3 &intersection) { ShadeInfo::intersection = intersection; }
 
-void ShadeInfo::setMaterial(const LightIntensity &material) {
-    ShadeInfo::material = material;
-}
+void ShadeInfo::setMaterial(const LightIntensity &material) { ShadeInfo::material = material; }
 
-void ShadeInfo::setState(rayState state) {
-    ShadeInfo::state = state;
-}
+void ShadeInfo::setState(rayState state) { ShadeInfo::state = state; }
 
-void ShadeInfo::setNormal(const Vector3 &normal) {
-    ShadeInfo::normal = normal;
-}
+void ShadeInfo::setNormal(const Vector3 &normal) { ShadeInfo::normal = normal; }
 
-const Vector3 &ShadeInfo::getHit() const {
-    return intersection;
-}
+const Vector3 &ShadeInfo::getHit() const { return intersection; }
 
-const Vector3 &ShadeInfo::getNormal() const{
-    return ShadeInfo::normal;
-}
+const Vector3 &ShadeInfo::getNormal() const{ return ShadeInfo::normal; }
 
-const Ray &ShadeInfo::getRay() const {
-    return ray;
-}
+const Ray &ShadeInfo::getRay() const { return ray; }
 
-Scene &ShadeInfo::getScene() const {
-    return scene;
-}
+Scene &ShadeInfo::getScene() const { return scene; }
 
-void ShadeInfo::setLightDir(const Vector3 &lightDir) {
-    ShadeInfo::lightDir = lightDir;
-}
+void ShadeInfo::setLightDir(const Vector3 &lightDir) { ShadeInfo::lightDir = lightDir; }
 
-const Vector3 &ShadeInfo::getLightDir() const {
-    return lightDir;
-}
+const Vector3 &ShadeInfo::getLightDir() const { return lightDir; }
 
-const AmbientLight &ShadeInfo::getAmbientLight() const {
-    return *ambientLight;
-}
+const AmbientLight &ShadeInfo::getAmbientLight() const { return *ambientLight; }
 
-const std::vector<Light *> &ShadeInfo::getLights() const {
-    return lights;
-}
+const std::vector<std::shared_ptr<Light>>  &ShadeInfo::getLights() const { return lights; }
 
-void ShadeInfo::setAmbientLight(AmbientLight &ambientLight) {
-    ShadeInfo::ambientLight = &ambientLight;
-}
+void ShadeInfo::setAmbientLight(AmbientLight& ambient) { ambientLight = std::make_shared<AmbientLight>(ambient); }
 
-void ShadeInfo::setLights(const std::vector<Light *> &lights) {
-    ShadeInfo::lights = lights;
-}

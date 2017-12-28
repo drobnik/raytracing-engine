@@ -20,11 +20,6 @@ Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
     material = l;//Material(l);
 }
 
-Sphere::Sphere(Sphere *s) {
-    center = s->getCenter();
-    radius = s ->getRadius();
-}
-
 rayState Sphere::intersects(Ray& r, float& t) {
     rayState state = miss;
     Vector3 v = r.getOrigin() - center;
@@ -61,18 +56,6 @@ rayState Sphere::intersects(Ray& r, float& t) {
     return state;
 }
 
-Vector3 Sphere::getCenter() {
-    return center;
-}
+LightIntensity Sphere::getMaterial() { return material; }
 
-float Sphere::getRadius() {
-    return radius;
-}
-
-LightIntensity Sphere::getMaterial() {
-    return material;
-}
-
-void Sphere::setMaterial(const LightIntensity &material) {
-    Sphere::material = material;
-}
+void Sphere::setMaterial(const LightIntensity &material) { Sphere::material = material; }

@@ -76,36 +76,20 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     return info;
 }
 
-LightIntensity Scene::Background() {
-    return sceneBackground;
-}
+LightIntensity Scene::Background() { return sceneBackground; }
 
-const ViewPlane &Scene::getViewPlane() const {
-    return viewPlane;
-}
+const ViewPlane &Scene::getViewPlane() const { return viewPlane; }
 
-void Scene::addMesh(Mesh &m) {
-    sampleMesh = m;
-}
+void Scene::addMesh(Mesh &m) { sampleMesh = m; }
 
-void Scene::addAmbientLight(AmbientLight l) {
-    ambientLight = l;
-}
+void Scene::addAmbientLight(AmbientLight l) { ambientLight = l; }
 
-const std::vector<std::shared_ptr<Light>> &Scene::getLights() const {
-    return lights;
-}
+const std::vector<std::shared_ptr<Light>> &Scene::getLights() const { return lights; }
 
-void Scene::ChangeCamera(std::shared_ptr<Camera> cam){
-    camera = cam;
-}
+void Scene::ChangeCamera(std::shared_ptr<Camera> cam){ camera = cam; }
 
-void Scene::ChangeSceneName(std::string s) {
-    sceneName = s;
-}
+void Scene::ChangeSceneName(std::string s) { sceneName = s; }
 
-AmbientLight Scene::getAmbientLight() const {
-    return ambientLight;
-}
+AmbientLight Scene::getAmbientLight() const { return ambientLight; }
 
 
