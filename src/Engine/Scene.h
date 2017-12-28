@@ -12,7 +12,6 @@
 #include "../Geometry/Objects/Plane.h"
 #include "../Geometry/Vector3.h"
 #include "../Utilities/Utility.h"
-#include "../Utilities/Utility.h"
 #include "../Geometry/ViewPlane.h"
 #include "../Lights/PointLight.h"
 #include "ShadeInfo.h"
@@ -27,14 +26,14 @@ private:
     ViewPlane viewPlane;
     std::vector<std::shared_ptr<Primitive>> objs;
 
-    std::vector<Ray> rays;
+    std::vector<std::shared_ptr<Ray>> rays;
     std::shared_ptr<Camera> camera;
 
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh;
     AmbientLight ambientLight;
-    std::vector<Light*> lights;//beware
+    std::vector<std::shared_ptr<Light>> lights;//beware
 
 public:
     Scene();
@@ -46,14 +45,14 @@ public:
     void ChangeSceneName(std::string s);
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);
-    EngineImage renderScene(Tracer *tracer);
+    EngineImage renderScene(std::shared_ptr<Tracer> tracer);
     LightIntensity Background();
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
     void addAmbientLight(AmbientLight l);
     AmbientLight getAmbientLight() const;
-    const std::vector<Light *> &getLights() const;
+    const std::vector<std::shared_ptr<Light>> &getLights() const;
 };
 
 

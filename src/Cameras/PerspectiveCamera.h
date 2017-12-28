@@ -8,11 +8,11 @@
 
 class PerspectiveCamera : public Camera {
 public:
+    std::string toString(){return "_pers_cam";};
     PerspectiveCamera();
     PerspectiveCamera(Vector3 e, Vector3 look, float near, float far);
     virtual EngineImage
-    renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) override;
-    std::string toString(){return "_pers_cam";};
+    renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer) override;
 };
 
 

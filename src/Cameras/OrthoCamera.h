@@ -13,7 +13,7 @@ public:
     OrthoCamera();
     OrthoCamera(Vector3 e, Vector3 look, float near, float far);
     virtual EngineImage
-    renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) override;
+    renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer) override;
     std::string toString(){return "_ortho_cam";};
 };
 

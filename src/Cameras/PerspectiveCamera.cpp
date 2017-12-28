@@ -7,10 +7,10 @@ PerspectiveCamera::PerspectiveCamera(Vector3 e, Vector3 look, float near,
     Camera::fieldOfView = 45;
 }
 
-LightIntensity sampler1(int depth, Ray &ray, Tracer *tracer, float &pixSize) {
+LightIntensity sampler1(int depth, Ray &ray, std::shared_ptr<Tracer> tracer, float &pixSize) {
 
     LightIntensity la, lb, lc, ld, le, final;
-    Vector3 direction = ray.getDirection();
+    Vector3 direction = ray.getDirection(); //TODO
     Vector3 orgi = ray.getOrigin();
 
     Ray sampleR = ray;
@@ -69,7 +69,7 @@ LightIntensity sampler1(int depth, Ray &ray, Tracer *tracer, float &pixSize) {
 }
 EngineImage
 PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
-                               Tracer *tracer) {
+                               std::shared_ptr<Tracer> tracer) {
     LightIntensity color;
     std::string name = tracer->sceneName();
     EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light,
@@ -84,8 +84,9 @@ PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
     calcUVW();
     float pixSize = plane.getPixSize();
 
-    for(unsigned int r = 0; r < (unsigned)plane.getWRes(); r++){ //up
-        for(unsigned int c = 0; c < plane.getHRes(); c++){ //horizontal
+    for(unsigned int r = 0; r < (unsigned)plane.getWRes(); r++) { //up
+        for(unsigned int c = 0; c < (unsigned)plane.getHRes(); c++) { //horizontal
+
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));
             vo = Vector3(x, y, nearPlane) - eye; //beware

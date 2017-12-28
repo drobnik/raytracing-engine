@@ -1,51 +1,48 @@
 #include "Scene.h"
 
-//NOTE: cam is initialized in init() method.
+
 Scene::Scene() {
     sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f); //black background
     sceneName = "sample";
     viewPlane = ViewPlane();
     viewPlane.setGamma(1.0f);
     sampleMesh = Mesh();
-    objs.clear();
+    // Default camera -- can be changed later
 }
 
 Scene::Scene(int w, int h, float p, const std::string &n) {
-    sceneBackground = LightIntensity(0.0f, 0.0f, 0.0f);
+    sceneBackground = LightIntensity(0.5f, 0.5f, 0.5f);
     this->viewPlane = ViewPlane(w, h, p);
     sceneName = n;
     sampleMesh = Mesh();
 }
 
-Scene::Scene(const Scene &sc) {
-    rays = sc.rays;
+Scene::Scene(const Scene &sc) : viewPlane(sc.viewPlane),
+                                objs(sc.objs),
+                                rays(sc.rays),
+                                camera(sc.camera),
+                                sceneBackground(sc.sceneBackground),
+                                sceneName(sc.sceneName) { }
 
-    objs = sc.objs;
-
-    camera = sc.camera;
-    viewPlane = sc.viewPlane;
-    sceneBackground = sc.sceneBackground;
-}
-
-EngineImage Scene::renderScene(Tracer *tracer) {
+EngineImage Scene::renderScene(std::shared_ptr<Tracer> tracer) {
     return camera->renderScene(viewPlane, sceneBackground, tracer);
 }
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
     ambientLight = AmbientLight();
-    lights.push_back(new PointLight()); //!!
+    lights.push_back(std::make_shared<PointLight>(PointLight()));
 
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_shared<Sphere>(s2));
 
     camera = std::make_shared<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
-                             Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
-    sceneName = sceneName + camera->toString();
+                                                       Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
+    sceneName = this->sceneName + camera->toString();
 }
 
-// TODO: REVIEW it
+// TODO: REVIEW it -- unused state
 Vector3 Scene::calcPoint(Ray &r, float &t, rayState &state){
     Vector3 point = r.getOrigin() + r.getDirection() * t;
     t = 0;
@@ -95,7 +92,7 @@ void Scene::addAmbientLight(AmbientLight l) {
     ambientLight = l;
 }
 
-const std::vector<Light *> &Scene::getLights() const {
+const std::vector<std::shared_ptr<Light>> &Scene::getLights() const {
     return lights;
 }
 

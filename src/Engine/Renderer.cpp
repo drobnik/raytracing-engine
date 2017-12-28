@@ -6,13 +6,6 @@ Renderer::Renderer() {
     assert(false);
 }
 
-Renderer::~Renderer() { //?!
-    delete tracer;
-    tracer = nullptr;
-    manager = nullptr;
-    scene = nullptr;
-}
-
 Renderer::Renderer(const Renderer &r) {
     tracer = r.tracer;
     manager = r.manager;
@@ -23,10 +16,10 @@ Renderer::Renderer(const Renderer &r) {
 Renderer::Renderer(std::shared_ptr<Scene> s, FileManager& man) {
     std::string name = s->SceneName();
     scene = s;
-    manager = &man;
+    manager = std::make_shared<FileManager>(man);
     img = EngineImage(s->getViewPlane().getWRes(), s->getViewPlane().getHRes(),
                       s->Background(), name);
-    tracer = new Tracer(s);
+    tracer = std::make_shared<Tracer>(Tracer(s));
 }
 
 void Renderer::renderScene() {

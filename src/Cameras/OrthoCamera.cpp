@@ -5,7 +5,7 @@ OrthoCamera::OrthoCamera() : Camera() { }
 OrthoCamera::OrthoCamera(Vector3 e, Vector3 look, float near, float far)
         : Camera(e, look, near, far){ }
 
-LightIntensity sampler(int depth, Ray &ray, Tracer *tracer, float pixSize) { //add viewplane
+LightIntensity sampler(int depth, Ray &ray, std::shared_ptr<Tracer> tracer, float pixSize) { //add viewplane
 
     LightIntensity la, lb, lc, ld, le, final;
     Vector3 direction = Vector3(0.0f, 0.0f, 1.0f);
@@ -64,7 +64,7 @@ LightIntensity sampler(int depth, Ray &ray, Tracer *tracer, float pixSize) { //a
 }
 
 EngineImage
-OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer) {
+OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer) {
     //the camera works on the exact size of the image, not its resolution.
     LightIntensity color;
     std::string name = tracer->sceneName();
@@ -81,7 +81,7 @@ OrthoCamera::renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer
     direction = direction.normalize();
     ray.setDirection(direction);
 
-    for(unsigned int r = 0; r < plane.getWRes(); r++){ //up
+    for(unsigned int r = 0; r < (unsigned)plane.getWRes(); r++){ //up
         for(unsigned int c = 0; c < (unsigned)plane.getHRes(); c++){ //horizontal
             x = plane.getPixSize() * (c - 0.5f *(plane.getHRes() - 1.0f));
             y = plane.getPixSize() * (r - 0.5f *(plane.getWRes() - 1.0f));

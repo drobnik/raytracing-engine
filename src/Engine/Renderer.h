@@ -7,17 +7,16 @@
 
 class Renderer {
 private:
-    FileManager* manager;
+    std::shared_ptr<FileManager> manager;
     std::shared_ptr<Scene> scene;
     EngineImage img;
-    Tracer* tracer;
+    std::shared_ptr<Tracer> tracer;
     //ArgsParser parser;
     //EngineConfig config;
     void saveImage();
 
 public:
     Renderer();
-    ~Renderer();
     Renderer(const Renderer& r);
     Renderer(std::shared_ptr<Scene> s, FileManager& man);
     void renderScene();

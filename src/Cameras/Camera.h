@@ -15,7 +15,7 @@ public:
     Camera(Vector3 e, Vector3 look, float near, float far);
     virtual ~Camera();
     virtual EngineImage
-    renderScene(ViewPlane &plane, LightIntensity &light, Tracer *tracer)=0;
+    renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer)=0;
     virtual std::string toString()=0;
     void calcUVW();
 protected:
