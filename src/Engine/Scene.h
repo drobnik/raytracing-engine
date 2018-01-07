@@ -24,35 +24,34 @@ class Camera;
 class Scene {
 private:
     ViewPlane viewPlane;
-    std::vector<std::shared_ptr<Primitive>> objs;
+    std::vector<std::unique_ptr<Primitive>> objs;
+    std::vector<std::unique_ptr<Ray>> rays;
 
-    std::vector<std::shared_ptr<Ray>> rays;
-    std::shared_ptr<Camera> camera;
+    std::unique_ptr<Camera> camera;
 
     LightIntensity sceneBackground;
     std::string sceneName;
-    Mesh sampleMesh;
-    AmbientLight ambientLight;
-    std::vector<std::shared_ptr<Light>> lights;//beware
+    Mesh sampleMesh; // FIXME add to the new collection of meshes
+    AmbientLight ambientLight; // add it as a light to the list
+    std::vector<std::unique_ptr<Light>> lights;
 
 public:
     Scene();
     Scene(int w, int h, float p, const std::string &n);
-    Scene(const Scene& sc);
 
     void init();
-    void ChangeCamera(std::shared_ptr<Camera> cam);
+    void ChangeCamera(std::unique_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
     Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);
-    EngineImage renderScene(std::shared_ptr<Tracer> tracer);
+    EngineImage renderScene(std::unique_ptr<Tracer> const &tracer);
     LightIntensity Background();
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
     void addAmbientLight(AmbientLight l);
     AmbientLight getAmbientLight() const;
-    const std::vector<std::shared_ptr<Light>> &getLights() const;
+    const std::vector<std::unique_ptr<Light>> &getLights() const;
 };
 
 

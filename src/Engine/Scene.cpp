@@ -17,27 +17,21 @@ Scene::Scene(int w, int h, float p, const std::string &n) {
     sampleMesh = Mesh();
 }
 
-Scene::Scene(const Scene &sc) : viewPlane(sc.viewPlane),
-                                objs(sc.objs),
-                                rays(sc.rays),
-                                camera(sc.camera),
-                                sceneBackground(sc.sceneBackground),
-                                sceneName(sc.sceneName) { }
-
-EngineImage Scene::renderScene(std::shared_ptr<Tracer> tracer) {
+EngineImage Scene::renderScene(std::unique_ptr<Tracer> const &tracer) {
     return camera->renderScene(viewPlane, sceneBackground, tracer);
 }
+
 void Scene::init(){
     Vector3 zero2 = Vector3(0.0f, 10.0f, 100.0f);
     Sphere s2 = Sphere(zero2, 6.0f);
     ambientLight = AmbientLight();
-    lights.push_back(std::make_shared<PointLight>(PointLight()));
+    lights.push_back(std::make_unique<PointLight>(PointLight()));
 
 //    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
-    objs.push_back(std::make_shared<Sphere>(s2));
+    objs.push_back(std::make_unique<Sphere>(s2));
 
-    camera = std::make_shared<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
+    camera = std::make_unique<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
                                                        Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
     sceneName = this->sceneName + camera->toString();
 }
@@ -84,9 +78,9 @@ void Scene::addMesh(Mesh &m) { sampleMesh = m; }
 
 void Scene::addAmbientLight(AmbientLight l) { ambientLight = l; }
 
-const std::vector<std::shared_ptr<Light>> &Scene::getLights() const { return lights; }
+const std::vector<std::unique_ptr<Light>> &Scene::getLights() const { return lights; }
 
-void Scene::ChangeCamera(std::shared_ptr<Camera> cam){ camera = cam; }
+void Scene::ChangeCamera(std::unique_ptr<Camera> cam){ camera.swap(cam); }
 
 void Scene::ChangeSceneName(std::string s) { sceneName = s; }
 

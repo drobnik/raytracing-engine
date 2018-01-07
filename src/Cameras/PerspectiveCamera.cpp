@@ -7,7 +7,7 @@ PerspectiveCamera::PerspectiveCamera(Vector3 e, Vector3 look, float near,
     Camera::fieldOfView = 45;
 }
 
-LightIntensity sampler1(int depth, Ray &ray, std::shared_ptr<Tracer> tracer, float &pixSize) {
+LightIntensity sampler1(int depth, Ray &ray, std::unique_ptr<Tracer> const &tracer, float &pixSize) {
 
     LightIntensity la, lb, lc, ld, le, final;
     Vector3 direction = ray.getDirection(); //TODO
@@ -68,8 +68,8 @@ LightIntensity sampler1(int depth, Ray &ray, std::shared_ptr<Tracer> tracer, flo
     }
 }
 EngineImage
-PerspectiveCamera::renderScene(ViewPlane &plane, LightIntensity &light,
-                               std::shared_ptr<Tracer> tracer) {
+PerspectiveCamera::renderScene(ViewPlane const &plane, LightIntensity &light,
+                               std::unique_ptr<Tracer> const &tracer) {
     LightIntensity color;
     std::string name = tracer->sceneName();
     EngineImage image = EngineImage(plane.getWRes(), plane.getHRes(), light,

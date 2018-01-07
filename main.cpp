@@ -20,25 +20,24 @@ const float NEAR_PLANE_DIST = 200.0f;
 const float FAR_PLANE_DIST = 2000.0f;
 
 int main() {
-    FileManager man = FileManager(IMG_PATH, MESHES_PATH);
-    Mesh k = man.loadModel("cube");    // Sample mesh
+    std::shared_ptr<FileManager> man = std::make_unique<FileManager>(IMG_PATH, MESHES_PATH); // shared resource by multiple renderers
+    Mesh k = man->loadModel("cube");    // Sample mesh
 
-    std::shared_ptr<Scene> renderScene = std::make_shared<Scene>(Scene(VIEWPLANE_SIZE.first,
-                                                                       VIEWPLANE_SIZE.second,
-                                                                       PIXEL_SIZE, SCENE_NAME));
-    // empty?
+    std::shared_ptr<Scene> renderScene = std::make_shared<Scene>(Scene(VIEWPLANE_SIZE.first, VIEWPLANE_SIZE.second,
+                                                                PIXEL_SIZE, SCENE_NAME));
+
     renderScene->init();
     renderScene->addMesh(k);
 
-    Renderer renderer = Renderer(renderScene, man);
+    Renderer renderer(renderScene, man);
     renderer.renderScene();
 
     //now reuse the scene with sample perspective cam
-    renderScene->ChangeCamera(std::make_shared<PerspectiveCamera>(PerspectiveCamera(EYE_POSITION,
+    renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(EYE_POSITION,
                                                    LOOK_AT_DIRECTION, NEAR_PLANE_DIST, FAR_PLANE_DIST)));
     renderScene->ChangeSceneName("pers");
 
-    Renderer rendererPers = Renderer(renderScene, man);
+    Renderer rendererPers(renderScene, man);
     rendererPers.renderScene();
 
     return 0;

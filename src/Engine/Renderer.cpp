@@ -1,25 +1,16 @@
 #include "Renderer.h"
 
+// something went wrong -- delete later
 Renderer::Renderer() {
-    std::string name = "dummy_ren";
-    img = EngineImage(500, 500, name);
     assert(false);
 }
 
-Renderer::Renderer(const Renderer &r) {
-    tracer = r.tracer;
-    manager = r.manager;
-    scene = r.scene;
-    img = r.img;
-}
-
-Renderer::Renderer(std::shared_ptr<Scene> s, FileManager& man) {
+Renderer::Renderer(std::shared_ptr<Scene> s, std::shared_ptr<FileManager> man) : manager(std::move(man)) {
     std::string name = s->SceneName();
     scene = s;
-    manager = std::make_shared<FileManager>(man);
     img = EngineImage(s->getViewPlane().getWRes(), s->getViewPlane().getHRes(),
                       s->Background(), name);
-    tracer = std::make_shared<Tracer>(Tracer(s));
+    tracer = std::make_unique<Tracer>(Tracer(scene));
 }
 
 void Renderer::renderScene() {

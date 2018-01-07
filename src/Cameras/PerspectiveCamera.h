@@ -12,7 +12,7 @@ public:
     PerspectiveCamera();
     PerspectiveCamera(Vector3 e, Vector3 look, float near, float far);
     virtual EngineImage
-    renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer) override;
+    renderScene(ViewPlane const &plane, LightIntensity &light, std::unique_ptr<Tracer> const &tracer) override;
 };
 
 

@@ -1,6 +1,7 @@
 #ifndef RAYTRACING_ENGINE_RENDERER_H
 #define RAYTRACING_ENGINE_RENDERER_H
 #include <cassert>
+#include <memory>
 #include "Scene.h"
 #include "../Utilities/FileManager.h"
 #include "Tracer.h"
@@ -10,15 +11,17 @@ private:
     std::shared_ptr<FileManager> manager;
     std::shared_ptr<Scene> scene;
     EngineImage img;
-    std::shared_ptr<Tracer> tracer;
+    std::unique_ptr<Tracer> tracer;
     //ArgsParser parser;
     //EngineConfig config;
     void saveImage();
 
+    Renderer(Renderer const &) = delete;
+    Renderer &operator=(Renderer const &) = delete;
+
 public:
     Renderer();
-    Renderer(const Renderer& r);
-    Renderer(std::shared_ptr<Scene> s, FileManager& man);
+    Renderer(std::shared_ptr<Scene> s, std::shared_ptr<FileManager> man);
     void renderScene();
 };
 

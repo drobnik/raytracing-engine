@@ -11,9 +11,9 @@ private:
     std::shared_ptr<Scene> scene;
 public:
     Tracer();
-    Tracer(const std::shared_ptr<Scene>);
+    Tracer(std::shared_ptr<Scene> s);
     LightIntensity rayTrace(const Ray& ray) const;
-    std::string sceneName(); //uhh so ugly dude
+    std::string sceneName(); //FIXME
 };
 
 

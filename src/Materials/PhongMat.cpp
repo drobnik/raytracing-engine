@@ -21,7 +21,7 @@ LightIntensity PhongMat::shade(ShadeInfo &info) {
                        * info.getScene().getAmbientLight().L(info);
     LightIntensity diffus, gloss, diffGloss; //diffuse light missing?
 
-    std::vector<std::shared_ptr<Light>> lights = info.getScene().getLights();
+    std::vector<std::unique_ptr<Light>> const &lights = info.getScene().getLights(); //beware
 
     for(auto&& light: lights){
         Vector3 wi = light->getDirection(info);

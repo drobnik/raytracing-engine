@@ -10,14 +10,13 @@
 class Tracer;
 class Camera {
 public:
-    Camera();
-    Camera(const Camera& cam);
-    Camera(Vector3 e, Vector3 look, float near, float far);
-    virtual ~Camera();
     virtual EngineImage
-    renderScene(ViewPlane &plane, LightIntensity &light, std::shared_ptr<Tracer> tracer)=0;
+    renderScene(ViewPlane const &plane, LightIntensity &light, std::unique_ptr<Tracer> const &tracer)=0;
+
+    virtual ~Camera();
     virtual std::string toString()=0;
     void calcUVW();
+
 protected:
     Vector3 eye;
     Vector3 lookAt;
@@ -27,6 +26,10 @@ protected:
     float farPlane;
     float fieldOfView;
     float clamp(float c, float down, float upper);
+
+    Camera();
+    Camera(const Camera& cam);
+    Camera(Vector3 e, Vector3 look, float near, float far);
 
     Vector3 u, v, w; //local coordinates
 };
