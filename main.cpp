@@ -10,7 +10,7 @@ const std::string MESHES_PATH = "../assets/";
 
 // Scene setup
 const std::pair<int, int> VIEWPLANE_SIZE = std::make_pair(900, 700);
-const float PIXEL_SIZE = 0.05f; //FIXME 0.5f pix size
+const float PIXEL_SIZE = 0.5f;
 const std::string SCENE_NAME = "scene_1";
 
 // Default perspective camera

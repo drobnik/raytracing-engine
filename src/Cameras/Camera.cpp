@@ -23,16 +23,17 @@ Camera::Camera(const Camera& cam)
           viewHeight(cam.viewHeight),
           viewWidth(cam.viewWidth),
           pixelSize(cam.pixelSize),
+          zoom(cam.zoom),
           u(cam.u),
           v(cam.v),
-          w(cam.w){
-    calculateUVW();
-}
+          w(cam.w){ }
 
 Camera::~Camera() { }
 
-void Camera::calculateDirection(Vector3& ray) {
-    Vector3 direct = u * ray.getX() + v * ray.getY() - w * viewDistance;
+Vector3 Camera::CalculateDirection(Vector3&& point) {
+    Vector3 direct = u * point.getX() + v * point.getY() - w * viewDistance;
+    direct.normalize();
+    return direct;
 
 }
 void Camera::calculateUVW() {

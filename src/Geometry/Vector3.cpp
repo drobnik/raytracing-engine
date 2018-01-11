@@ -92,5 +92,3 @@ bool Vector3::operator!=(const Vector3 &v2) {
     return !((*this) == v2);
 }
 
-
-
