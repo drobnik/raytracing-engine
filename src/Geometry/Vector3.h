@@ -20,11 +20,13 @@ public:
     Vector3 operator-(const Vector3 &v2) const;
     bool operator==(const Vector3& v2);
     bool operator!=(const Vector3& v2);
+
     float dot(Vector3 v2);
     float absDot(Vector3 v2);
     Vector3 crossProd(Vector3 v2);
     float length()const;
     Vector3 normalize();
+
     Vector3 reflect(Vector3 normal);
     Vector3 lerp(Vector3 v, float t);
 

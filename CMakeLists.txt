@@ -12,11 +12,11 @@ set(SOURCE_FILES main.cpp src/Geometry/Vector3.cpp src/Geometry/Vector3.h src/Ge
         src/Engine/Renderer.cpp src/Engine/Renderer.h
         src/Cameras/Camera.cpp src/Geometry/ViewPlane.cpp src/Geometry/ViewPlane.h src/Engine/Tracer.cpp
         src/Engine/Tracer.h src/Engine/ShadeInfo.cpp src/Engine/ShadeInfo.h src/Materials/Material.cpp
-        src/Materials/Material.h
+        src/Materials/Material.h src/Cameras/OrthoCamera.cpp src/Cameras/OrthoCamera.h
         src/Geometry/Objects/Triangle.cpp src/Geometry/Objects/Triangle.h src/Geometry/Objects/Mesh.cpp
         src/Geometry/Objects/Mesh.h src/Utilities/ObjParser.cpp src/Utilities/ObjParser.h src/Lights/Light.cpp
         src/Lights/Light.h src/Lights/PointLight.cpp src/Lights/PointLight.h src/BRDF/BRDF.cpp src/BRDF/BRDF.h src/BRDF/LambertBRDF.cpp
-        src/BRDF/LambertBRDF.h src/BRDF/SpecularBRDF.cpp src/BRDF/SpecularBRDF.h src/Materials/PhongMat.cpp src/Materials/PhongMat.h src/Lights/AmbientLight.cpp src/Lights/AmbientLight.h src/Cameras/OrthoCamera.cpp src/Cameras/OrthoCamera.h)
+        src/BRDF/LambertBRDF.h src/BRDF/SpecularBRDF.cpp src/BRDF/SpecularBRDF.h src/Materials/PhongMat.cpp src/Materials/PhongMat.h src/Lights/AmbientLight.cpp src/Lights/AmbientLight.h )
 set(CMAKE_CXX_FLAGS "-p -Wall -Wextra -pedantic-errors")
 
 

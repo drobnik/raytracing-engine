@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "../Cameras/OrthoCamera.h"
 
 
 Scene::Scene() {
@@ -18,7 +19,7 @@ Scene::Scene(int w, int h, float p, const std::string &n) {
 }
 
 EngineImage Scene::renderScene(std::unique_ptr<Tracer> const &tracer) {
-    return EngineImage();// camera->renderScene(viewPlane, sceneBackground, tracer);
+    return camera->RenderScene(sceneBackground, tracer);
 }
 
 void Scene::init(){
@@ -31,9 +32,11 @@ void Scene::init(){
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_unique<Sphere>(s2));
 
-//    camera = std::make_unique<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
-//                                                       Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
-    sceneName = this->sceneName; //+ camera->toString();
+    // change the size
+    Vector3 e = Vector3(40.0f, 40.0f, 100.0f), l = Vector3(0.0f, 0.0f, 50.0f);
+
+    camera = std::move(std::make_unique<OrthoCamera>(OrthoCamera(Vector3(10.0f, 10.0f, 50.0f),
+                                                                 Vector3(0.0f, 0.0f, -50.0f), 600, 800, 0.5f)));
 }
 
 // TODO: REVIEW it -- unused state
