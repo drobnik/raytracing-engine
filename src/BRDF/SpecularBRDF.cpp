@@ -11,7 +11,7 @@ SpecularBRDF::~SpecularBRDF() {}
 LightIntensity SpecularBRDF::f(const ShadeInfo &info, const Vector3 &wo,
                                const Vector3 &wi) const {
     LightIntensity L;
-    Vector3 normal = info.getNormal(), negWi = wi.neg(wi);
+    Vector3 normal = info.getNormal(), negWi = -wi;//.neg(wi);
     float ndotwi = normal.dot(wi);
     Vector3 r( negWi + normal * ndotwi * 2.0f);
     float rdotwo = r.dot(wo);

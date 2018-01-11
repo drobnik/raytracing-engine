@@ -18,7 +18,7 @@ Scene::Scene(int w, int h, float p, const std::string &n) {
 }
 
 EngineImage Scene::renderScene(std::unique_ptr<Tracer> const &tracer) {
-    return camera->renderScene(viewPlane, sceneBackground, tracer);
+    return EngineImage();// camera->renderScene(viewPlane, sceneBackground, tracer);
 }
 
 void Scene::init(){
@@ -27,13 +27,13 @@ void Scene::init(){
     ambientLight = AmbientLight();
     lights.push_back(std::make_unique<PointLight>(PointLight()));
 
-//    s2.setMaterial(Material(LightIntensity(1.0f, 0.5f, 1.0f)));
+
     s2.setMaterial(LightIntensity(1.0f, 0.5f, 1.0f));
     objs.push_back(std::make_unique<Sphere>(s2));
 
-    camera = std::make_unique<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
-                                                       Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
-    sceneName = this->sceneName + camera->toString();
+//    camera = std::make_unique<OrthoCamera>(OrthoCamera(Vector3(0.0f, 0.0f, -500.0f),
+//                                                       Vector3(0.0f, 0.0f, 1.0f), -20.0f, -20.0f));
+    sceneName = this->sceneName; //+ camera->toString();
 }
 
 // TODO: REVIEW it -- unused state
@@ -47,7 +47,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
     info.setAmbientLight(ambientLight);
     rayState state;
-    Ray ta = ray; //FIXME const getOrigin and direction
+    Ray ta = ray; //FIXME const getOrigin and viewDistance
     float t = 0.0f, tmin = INFINITY;
 
     for(unsigned int i = 0; i < objs.size(); i++){

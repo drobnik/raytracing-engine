@@ -9,6 +9,7 @@
 class Tracer {
 private:
     std::shared_ptr<Scene> scene;
+    // maybe vector of rays?
 public:
     Tracer();
     Tracer(std::shared_ptr<Scene> s);

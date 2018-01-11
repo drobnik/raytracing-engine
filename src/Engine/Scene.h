@@ -6,8 +6,6 @@
 #include <memory>
 #include "../Geometry/Objects/Primitive.h"
 #include "../Geometry/Ray.h"
-#include "../Cameras/OrthoCamera.h"
-#include "../Cameras/PerspectiveCamera.h"
 #include "../Geometry/Objects/Sphere.h"
 #include "../Geometry/Objects/Plane.h"
 #include "../Geometry/Vector3.h"
@@ -17,6 +15,8 @@
 #include "ShadeInfo.h"
 #include "../Geometry/Objects/Mesh.h"
 #include "../Lights/Light.h"
+#include "EngineImage.h"
+#include "../Cameras/Camera.h"
 
 class Tracer;
 class Camera;

@@ -11,27 +11,31 @@ class Tracer;
 class Camera {
 public:
     virtual EngineImage
-    renderScene(ViewPlane const &plane, LightIntensity &light, std::unique_ptr<Tracer> const &tracer)=0;
-
+    renderScene(LightIntensity &light, std::unique_ptr<Tracer> const &tracer)=0;
     virtual ~Camera();
-    virtual std::string toString()=0;
-    void calcUVW();
 
 protected:
+    Vector3 u, v, w; //local coordinates
+
     Vector3 eye;
     Vector3 lookAt;
-    Vector3 up;
+    Vector3 up; // shows the viewDistance of the top of camera
+    float viewDistance; //for perspective + zoom
 
-    float nearPlane;
-    float farPlane;
-    float fieldOfView;
-    float clamp(float c, float down, float upper);
+    unsigned int viewWidth;
+    unsigned int viewHeight;
+    float pixelSize;
 
     Camera();
     Camera(const Camera& cam);
-    Camera(Vector3 e, Vector3 look, float near, float far);
+    Camera(const Vector3& e, const Vector3& look, const Vector3& u,
+           unsigned int height, unsigned int width, float pixSize);
 
-    Vector3 u, v, w; //local coordinates
+    //float clamp(float c, float down, float upper);
+private:
+    void calculateUVW();
+    void calculateDirection(Vector3& ray); // for rays
+
 };
 
 

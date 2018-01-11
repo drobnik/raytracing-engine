@@ -26,7 +26,7 @@ Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c) {
     Vector3 v2 = c - a;
     normal = v1.crossProd(v2);
     normal.normalize();
-    normal = normal.neg(normal);
+    normal = -normal;//.neg(normal);
     material = LightIntensity(0.0f, 1.0f, 0.0f);//Material(LightIntensity(0.0f, 1.0f, 0.0f));
 }
 

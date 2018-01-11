@@ -1,20 +1,14 @@
 #ifndef RAYTRACING_ENGINE_ORTHOCAMERA_H
 #define RAYTRACING_ENGINE_ORTHOCAMERA_H
-#define MAX_DEPTH 3
-#define SPATIAL 0.05f
-#include <string>
-#include <algorithm>
-#include "Camera.h"
-#include "../Geometry/ViewPlane.h"
-#include "../Engine/Tracer.h"
 
-class OrthoCamera : public Camera {
+#include "Camera.h"
+
+class OrthoCamera : Camera {
 public:
-    OrthoCamera();
-    OrthoCamera(Vector3 e, Vector3 look, float near, float far);
-    virtual EngineImage
-    renderScene(ViewPlane const &plane, LightIntensity &light, std::unique_ptr<Tracer> const &tracer) override;
-    std::string toString(){return "_ortho_cam";};
+    EngineImage
+    renderScene(LightIntensity &light, std::unique_ptr<Tracer> const &tracer) override;
+    OrthoCamera(const Vector3& e, const Vector3& look, const Vector3& up = Vector3(0.0f, 1.0f, 0.0f));
 };
+
 
 #endif //RAYTRACING_ENGINE_ORTHOCAMERA_H

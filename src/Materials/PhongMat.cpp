@@ -17,7 +17,7 @@ PhongMat::PhongMat(LambertBRDF *ambient, LambertBRDF *diff,
 LightIntensity PhongMat::shade(ShadeInfo &info) {
     Ray r = info.getRay();
     Vector3 wo = r.getDirection().normalize(), norm;
-    LightIntensity L = ambientBrdf->rho(info, wo.neg(wo))
+    LightIntensity L = ambientBrdf->rho(info, -wo)//wo.neg(wo))
                        * info.getScene().getAmbientLight().L(info);
     LightIntensity diffus, gloss, diffGloss; //diffuse light missing?
 

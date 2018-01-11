@@ -33,12 +33,12 @@ int main() {
     renderer.renderScene();
 
     //now reuse the scene with sample perspective cam
-    renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(EYE_POSITION,
-                                                   LOOK_AT_DIRECTION, NEAR_PLANE_DIST, FAR_PLANE_DIST)));
-    renderScene->ChangeSceneName("pers");
+//    renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(EYE_POSITION,
+//                                                   LOOK_AT_DIRECTION, NEAR_PLANE_DIST, FAR_PLANE_DIST)));
+//    renderScene->ChangeSceneName("pers");
 
-    Renderer rendererPers(renderScene, man);
-    rendererPers.renderScene();
+    //Renderer rendererPers(renderScene, man);
+    //rendererPers.renderScene();
 
     return 0;
 }

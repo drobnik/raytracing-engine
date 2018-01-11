@@ -33,7 +33,7 @@ Vector3 Vector3::normalize(){
     return *this / n;
 }
 
-const Vector3 Vector3::operator/(float k) {
+Vector3 Vector3::operator/(float k) const{
 
     assert(k);
     float inv = 1.0f / k;
@@ -44,19 +44,19 @@ const Vector3 Vector3::operator/(float k) {
     return Vector3(x, y, z);
 }
 
-const Vector3 Vector3::neg(Vector3 v) const{
-    return Vector3(-v.x, -v.y, -v.z);
+Vector3 Vector3::operator-() const{
+    return Vector3(-x, -y, -z);
 }
 
 Vector3 Vector3::operator*(const float& k) {
     return Vector3(this->x*k, this->y*k, this->z*k);
 }
 
-const Vector3 Vector3::operator+(const Vector3 &v2) {
+Vector3 Vector3::operator+(const Vector3 &v2) const{
     return Vector3(this->x + v2.x, this->y + v2.y, this->z + v2.z);
 }
 
-const Vector3 Vector3::operator-(const Vector3 &v2) {
+Vector3 Vector3::operator-(const Vector3 &v2) const{
     return Vector3(this->x - v2.x, this->y - v2.y, this->z - v2.z);
 }
 
