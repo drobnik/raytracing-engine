@@ -36,7 +36,7 @@ void Scene::init(){
     Vector3 e = Vector3(40.0f, 40.0f, 100.0f), l = Vector3(0.0f, 0.0f, 50.0f);
 
     camera = std::move(std::make_unique<OrthoCamera>(OrthoCamera(Vector3(10.0f, 10.0f, 50.0f),
-                                                                 Vector3(0.0f, 0.0f, -50.0f), 600, 800, 0.5f)));
+                                                                 Vector3(0.0f, 0.0f, -50.0f), 600, 800, viewPlane.getPixSize())));
 }
 
 // TODO: REVIEW it -- unused state
