@@ -32,7 +32,7 @@ Camera::~Camera() { }
 
 Vector3 Camera::CalculateDirection(Vector3&& point) {
     Vector3 direct = u * point.getX() + v * point.getY() - w * viewDistance;
-    direct.normalize();
+    direct = direct.normalize();
     return direct;
 
 }
