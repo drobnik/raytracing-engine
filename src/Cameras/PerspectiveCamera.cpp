@@ -5,6 +5,7 @@ PerspectiveCamera::PerspectiveCamera(const Vector3& e, const Vector3& look, cons
                                      unsigned int height, unsigned int width, float pixSize, float field)
         : Camera(e, look, u, height, width, pixSize) {
     fieldOfView = field;
+    // if distance is default -> calculate from field(ofView)
     calculateViewDistance();
     zoom = 4.0f;
 }
@@ -101,5 +102,5 @@ PerspectiveCamera::PerspectiveCamera(const PerspectiveCamera& cam) :
         fieldOfView(cam.fieldOfView){ }
 
 void PerspectiveCamera::calculateViewDistance(){
-    viewDistance = 200.0f;//viewWidth / (2.0f * tanf(Utility::degToRad(fieldOfView) * 0.5f));
+    viewDistance = 400.0f;//viewWidth / (2.0f * tanf(Utility::degToRad(fieldOfView) * 0.5f));
 }

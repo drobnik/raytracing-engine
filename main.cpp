@@ -10,15 +10,14 @@ const std::string IMG_PATH = "../img/";
 const std::string MESHES_PATH = "../assets/";
 
 // Scene setup
-const std::pair<int, int> VIEWPLANE_SIZE = std::make_pair(900, 700);
+const std::pair<int, int> VIEWPLANE_SIZE = std::make_pair(800, 600);
 const float PIXEL_SIZE = 0.5f;
 const std::string SCENE_NAME = "scene_1";
 
 // Default perspective camera
-const Vector3 EYE_POSITION = Vector3(0.0f, 0.0f, -20.0f);
-const Vector3 LOOK_AT_DIRECTION = Vector3(0.0f, 0.0f, 1.0f);
+const Vector3 EYE_POSITION = Vector3(0.0f, 0.0f, 50.0f);
+const Vector3 LOOK_AT_DIRECTION = Vector3(0.0f, 0.0f, -50.0f);
 const float NEAR_PLANE_DIST = 200.0f;
-const float FAR_PLANE_DIST = 2000.0f;
 
 int main() {
     std::shared_ptr<FileManager> man = std::make_unique<FileManager>(IMG_PATH, MESHES_PATH); // shared resource by multiple renderers
@@ -30,8 +29,8 @@ int main() {
     renderScene->init();
     renderScene->addMesh(k);
 
-    //Renderer renderer(renderScene, man);
-    //renderer.renderScene();
+    Renderer renderer(renderScene, man);
+    renderer.renderScene();
 
     //now reuse the scene with sample perspective cam
     renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(Vector3(0.0f, 0.0f, 50.0f),

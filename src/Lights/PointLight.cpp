@@ -2,7 +2,7 @@
 
 PointLight::PointLight() : Light(), color(LightIntensity(1.0f, 1.0f, 1.0f)),
                            positionL(Vector3(10.0f, 10.0f, 5.0f)),
-                           linearCoef(0.3f){ }
+                           linearCoefficient(0.3f){ }
 
 PointLight::~PointLight() { }
 
@@ -10,13 +10,13 @@ PointLight::PointLight(const PointLight &light)
             : Light(light),
             color(light.color),
             positionL(light.positionL),
-            linearCoef(light.linearCoef){ }
+            linearCoefficient(light.linearCoefficient){ }
 
 PointLight::PointLight(Vector3 &pos, LightIntensity &col, float linearCoe)
             : Light(),
             color(col),
             positionL(pos),
-            linearCoef(linearCoe){ }
+            linearCoefficient(linearCoe){ }
 
 Vector3 PointLight::getDirection(ShadeInfo &info) {
     Vector3 posahit = positionL - info.getHit();
@@ -24,5 +24,5 @@ Vector3 PointLight::getDirection(ShadeInfo &info) {
 }
 
 LightIntensity PointLight::L(ShadeInfo &info) {
-    return (color * linearCoef);
+    return (color * linearCoefficient);
 }

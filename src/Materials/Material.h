@@ -5,17 +5,28 @@
 class ShadeInfo;
 
 class Material {
-private:
-    // Texture texture;
-    float alpha;
-    bool textureOn;
 public:
     Material();
-    ~Material();
+    Material(std::string name, const LightIntensity& ambient, const LightIntensity& diffuse, const LightIntensity& specular);
+    Material(const LightIntensity &ambient);
     Material(const Material& mat);
-    virtual LightIntensity shade(ShadeInfo& info);
-    bool isTextureOn() const;
+    virtual ~Material();
+
+    virtual LightIntensity shade(ShadeInfo& info)=0;
     Material& operator= (const Material& rhs);
+
+private:
+    std::string name;
+    LightIntensity ambient;
+    LightIntensity diffuse;
+    LightIntensity specular;
+
+    float specularAmount;
+    float specularCoefficient;
+    float reflectFraction;
+
+    //Texture texture;
+    float alpha;
 };
 
 

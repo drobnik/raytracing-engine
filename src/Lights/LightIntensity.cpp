@@ -1,5 +1,11 @@
 #include "LightIntensity.h"
 
+LightIntensity LightIntensity::Black = LightIntensity(0.0f, 0.0f, 0.0f);
+
+LightIntensity LightIntensity::White = LightIntensity(1.0f, 1.0f, 1.0f);
+
+LightIntensity LightIntensity::Grey = LightIntensity(0.7f, 0.7f, 0.7f);
+
 float clampColor(float base) {
     if(base >= 0.0f || base <= 1.0f){
         return base;

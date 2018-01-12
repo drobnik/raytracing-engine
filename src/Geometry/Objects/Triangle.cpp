@@ -1,11 +1,12 @@
 #include "Triangle.h"
 
+
 Triangle::Triangle() : Primitive(){
     a = Vector3(0.0f, 0.0f, 0.0f);
     b = Vector3(0.0f, 0.0f, 1.0f);
     c = Vector3(1.0f, 0.0f, 0.0f);
     normal = Vector3(0.0f, 1.0f, 0.0f);
-    material = LightIntensity(0.5f, 1.0f, 0.0f);//Material(LightIntensity(0.5f, 1.0f, 0.0f));
+    material = std::make_shared<PhongMat>(PhongMat());//Material(LightIntensity(0.5f, 1.0f, 0.0f));
 }
 
 Triangle::~Triangle(){ }
@@ -26,12 +27,12 @@ Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c) {
     Vector3 v2 = c - a;
     normal = v1.crossProd(v2);
     normal.normalize();
-    normal = -normal;//.neg(normal);
-    material = LightIntensity(0.0f, 1.0f, 0.0f);//Material(LightIntensity(0.0f, 1.0f, 0.0f));
+    normal = -normal;
+    material = std::make_shared<PhongMat>(PhongMat()); //TODO
 }
 
 // FIXME add hit info!
-rayState Triangle::intersects(Ray &ray, float &t) {
+rayState Triangle::intersects(const Ray &ray, float &t) {
     float a, b, c, d, e, f, g, h, i, j, k, l;
     float m, n, p, q, s, r, d1, d2, d3, invDem;
     float beta, gamma, tet = 0.0f; // for t
@@ -67,10 +68,6 @@ rayState Triangle::intersects(Ray &ray, float &t) {
     t = tet;
 
     return hit;
-}
-
-LightIntensity Triangle::getMaterial() {
-    return material;
 }
 
 Vector3 & Triangle::getNormal() {

@@ -16,7 +16,7 @@ private:
 public:
     Mesh();
     Mesh(const std::vector<std::shared_ptr<Triangle>> tris);
-    ShadeInfo intersects(const Ray &ray, Scene &scene);
+    ShadeInfo intersects(const Ray &ray, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<AmbientLight> ambient);
 };
 
 

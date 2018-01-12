@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 
+
 class LightIntensity {
 protected:
     float r;
@@ -31,7 +32,12 @@ public:
     friend LightIntensity operator*(float scale, const LightIntensity &l);
     friend LightIntensity operator*(LightIntensity& l, float scale);
     friend std::ostream& operator<<(std::ostream &str, LightIntensity &l);
+
     friend float clampColor(float base);
+
+    static LightIntensity Black;
+    static LightIntensity White;
+    static LightIntensity Grey;
 };
 
 

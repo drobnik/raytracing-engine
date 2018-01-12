@@ -1,10 +1,11 @@
 #include "Sphere.h"
+#include "../../Materials/PhongMat.h"
 
-Sphere::Sphere()
-        : radius(10),
-          center(Vector3(0.0f, 0.0f, 0.0f)) {
+Sphere::Sphere():
+        center(Vector3(0.0f, 0.0f, 0.0f)),
+        radius(10) {
     LightIntensity l = LightIntensity(0.8f, 0.8f, 0.8f);
-    material = l;//Material(l);
+    material = std::make_shared<PhongMat>(PhongMat());
 }
 
 Sphere::Sphere(const Sphere &s){
@@ -13,14 +14,14 @@ Sphere::Sphere(const Sphere &s){
     material = s.material;
 }
 
+// TODO add constructor for material definition!
 Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
-    LightIntensity l = LightIntensity(1.0f, 0.0f, 0.0f);
     this->center = center;
     radius = rad;
-    material = l;//Material(l);
+    material = std::make_shared<PhongMat>(PhongMat()); //TODO
 }
 
-rayState Sphere::intersects(Ray& r, float& t) {
+rayState Sphere::intersects(const Ray& r, float& t) {
     rayState state = miss;
     Vector3 v = r.getOrigin() - center;
     float b = -v.dot(r.getDirection());
@@ -55,7 +56,3 @@ rayState Sphere::intersects(Ray& r, float& t) {
 
     return state;
 }
-
-LightIntensity Sphere::getMaterial() { return material; }
-
-void Sphere::setMaterial(const LightIntensity &material) { Sphere::material = material; }

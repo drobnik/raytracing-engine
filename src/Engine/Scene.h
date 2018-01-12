@@ -12,7 +12,7 @@
 #include "../Utilities/Utility.h"
 #include "../Geometry/ViewPlane.h"
 #include "../Lights/PointLight.h"
-#include "ShadeInfo.h"
+//#include "ShadeInfo.h"
 #include "../Geometry/Objects/Mesh.h"
 #include "../Lights/Light.h"
 #include "EngineImage.h"
@@ -20,6 +20,7 @@
 
 class Tracer;
 class Camera;
+class ShadeInfo;
 
 class Scene {
 private:
@@ -32,8 +33,8 @@ private:
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh; // FIXME add to the new collection of meshes
-    AmbientLight ambientLight; // add it as a light to the list
-    std::vector<std::unique_ptr<Light>> lights;
+    std::shared_ptr<AmbientLight> ambientLight; // add it as a light to the list
+    std::vector<std::shared_ptr<Light>> lights;
 
 public:
     Scene();
@@ -42,16 +43,13 @@ public:
     void init();
     void ChangeCamera(std::unique_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
-    Vector3 calcPoint(Ray &r, float &t, rayState &state); //move to math
     ShadeInfo raytraceObjects(const Ray &ray);
     EngineImage renderScene(std::unique_ptr<Tracer> const &tracer);
     LightIntensity Background();
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
-    void addAmbientLight(AmbientLight l);
-    AmbientLight getAmbientLight() const;
-    const std::vector<std::unique_ptr<Light>> &getLights() const;
+    const std::vector<std::shared_ptr<Light>> &getLights() const;
 };
 
 

@@ -9,7 +9,7 @@ class PointLight : public Light{
 private:
     Vector3 positionL;
     LightIntensity color;
-    float linearCoef;
+    float linearCoefficient;
 public:
     PointLight();
     ~PointLight();
