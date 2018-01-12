@@ -2,6 +2,7 @@
 #include <utility>
 #include "src/Engine/Scene.h"
 #include "src/Engine/Renderer.h"
+#include "src/Cameras/PerspectiveCamera.h"
 
 // TODO: Move it somewherelse -- maybe some configuration class?
 // File Manager setup
@@ -29,16 +30,16 @@ int main() {
     renderScene->init();
     renderScene->addMesh(k);
 
-    Renderer renderer(renderScene, man);
-    renderer.renderScene();
+    //Renderer renderer(renderScene, man);
+    //renderer.renderScene();
 
     //now reuse the scene with sample perspective cam
-//    renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(EYE_POSITION,
-//                                                   LOOK_AT_DIRECTION, NEAR_PLANE_DIST, FAR_PLANE_DIST)));
-//    renderScene->ChangeSceneName("pers");
+    renderScene->ChangeCamera(std::make_unique<PerspectiveCamera>(PerspectiveCamera(Vector3(0.0f, 0.0f, 50.0f),
+                                                                                    Vector3(0.0f, 0.0f, -50.0f), Vector3(0.0f, 1.0f, 0.0f), 800, 600, PIXEL_SIZE)));
+    renderScene->ChangeSceneName("pers");
 
-    //Renderer rendererPers(renderScene, man);
-    //rendererPers.renderScene();
+    Renderer rendererPers(renderScene, man);
+    rendererPers.renderScene();
 
     return 0;
 }

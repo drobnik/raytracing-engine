@@ -68,7 +68,7 @@ LightIntensity sampler(int depth, Ray &ray, std::unique_ptr<Tracer> const &trace
 }
 
 EngineImage OrthoCamera::RenderScene(LightIntensity &background, std::unique_ptr<Tracer> const &tracer) {
-    LightIntensity pixelColor = LightIntensity(1.0f, 1.0f, 1.0f);
+    LightIntensity pixelColor;
     std::string sceneName = tracer->sceneName();
     EngineImage image = EngineImage(viewHeight, viewWidth, background, sceneName);
 
