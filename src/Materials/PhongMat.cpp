@@ -4,8 +4,6 @@
 
 PhongMat::PhongMat() : Material(){ }
 
-PhongMat::~PhongMat() { }
-
 PhongMat::PhongMat(const PhongMat &phongy) : Material(phongy),
                                              ambientBrdf(phongy.ambientBrdf),
                                              diffuseBrdf(phongy.diffuseBrdf),

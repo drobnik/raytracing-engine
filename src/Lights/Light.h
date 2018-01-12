@@ -8,13 +8,17 @@ class ShadeInfo;
 class Light {
 protected:
     bool shadows;
+    LightIntensity lightColor;
+    float intensity;
+
 public:
     Light();
-    Light(const Light& l);
     virtual ~Light();
+    Light(const LightIntensity& color, float intensity, bool shadows=false);
+    Light(const Light& l);
     Light& operator=(const Light& lr);
+    virtual LightIntensity L(ShadeInfo& info)=0;
     virtual Vector3 getDirection(ShadeInfo& info) = 0;
-    virtual LightIntensity L(ShadeInfo& info);
 };
 
 

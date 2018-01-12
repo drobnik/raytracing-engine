@@ -11,7 +11,6 @@ private:
     SpecularBRDF* glossySpec;
 public:
     PhongMat();
-    ~PhongMat();
     PhongMat(const PhongMat& phongy);
     PhongMat(LambertBRDF* ambient, LambertBRDF* diff, SpecularBRDF* gloss);
     LightIntensity shade(ShadeInfo& info);

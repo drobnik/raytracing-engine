@@ -3,7 +3,7 @@
 OrthoCamera::OrthoCamera(const Vector3 &e, const Vector3 &look, unsigned int height, unsigned int width, float pixSize,
                          const Vector3 &u) : Camera(e, look, u, width, height, pixSize) {
     viewDistance = 0;
-    zoom = 4.0f;
+    zoom = 6.0f;
 }
 
 OrthoCamera::OrthoCamera(const OrthoCamera& cam) : Camera(cam){ }

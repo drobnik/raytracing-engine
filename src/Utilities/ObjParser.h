@@ -37,7 +37,7 @@ private:
     std::vector<Vector3> texCoords; //to be used later?
 
     std::vector<std::shared_ptr<Triangle>> triangles;
-    Material currentMaterial;
+    std::shared_ptr<Material> currentMaterial;
 
     std::map<const std::string, ObjCommand> objFormat;
     std::string currentGroup;

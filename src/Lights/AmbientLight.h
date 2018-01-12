@@ -3,12 +3,10 @@
 #include "Light.h"
 
 class AmbientLight : public Light {
-private:
-    float ls;
-    LightIntensity color;
 public:
     AmbientLight();
-    ~AmbientLight();
+    ~AmbientLight() {};
+    AmbientLight(const LightIntensity& color, float intensity);
     AmbientLight(const AmbientLight& l);
     virtual Vector3 getDirection(ShadeInfo& info);
     virtual LightIntensity L(ShadeInfo& info);

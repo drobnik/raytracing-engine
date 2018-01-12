@@ -50,7 +50,6 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
     ShadeInfo info = ShadeInfo(*this);
     info.setAmbientLight(ambientLight);
     rayState state;
-    Ray ta = ray; //FIXME const getOrigin and viewDistance
     float t = 0.0f, tmin = INFINITY;
 
     for(unsigned int i = 0; i < objs.size(); i++){
@@ -59,7 +58,7 @@ ShadeInfo Scene::raytraceObjects(const Ray &ray){
             info.setState(state);
             tmin = t;
             info.setMaterial(objs.at(0)->getMaterial()); //FIXME add true material!
-            info.setHit(ta.getOrigin() + ta.getDirection() * t);
+            info.setHit(ray.getOrigin() + ray.getDirection() * t);
         }
     }
 

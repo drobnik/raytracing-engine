@@ -25,13 +25,9 @@ Ray::Ray(const Ray &parent) {
 
 void Ray::pointAt(const Vector3 &dest) {
 }
-Vector3 Ray::getOrigin() {
-    return origin;
-}
+Vector3 Ray::getOrigin() const{ return origin; }
 
-Vector3 Ray::getDirection() {
-    return direction;
-}
+Vector3 Ray::getDirection() const { return direction; }
 
 float Ray::getDistance() {
     return distance;
