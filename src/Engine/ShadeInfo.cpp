@@ -1,23 +1,26 @@
 #include "ShadeInfo.h"
 
-ShadeInfo::ShadeInfo(Scene &scene) : scene(scene), state(miss) {}
+ShadeInfo::ShadeInfo(std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<AmbientLight> ambient) : state(miss) {
+    lights.swap(lights);
+    ambientLight.swap(ambient);
+}
 
 ShadeInfo::~ShadeInfo() { }
 
 ShadeInfo::ShadeInfo(const ShadeInfo &info)
-        : scene(info.scene),
-          state(info.state),
+        : state(info.state),
           material(info.material),
           intersection(info.intersection),
-          normal(info.normal), lightDir(info.lightDir){}
+          normal(info.normal), lightDirection(info.lightDirection),
+          lights(info.lights), ambientLight(info.ambientLight){}
 
 rayState ShadeInfo::State() const { return state; }
 
-const LightIntensity &ShadeInfo::getMaterial(){ return material; }
+const std::shared_ptr<Material>& ShadeInfo::getMaterial() { return material; }
 
 void ShadeInfo::setHit(const Vector3 &intersection) { ShadeInfo::intersection = intersection; }
 
-void ShadeInfo::setMaterial(const LightIntensity &material) { ShadeInfo::material = material; }
+void ShadeInfo::setMaterial(const std::shared_ptr<Material>& material) { ShadeInfo::material = material; }
 
 void ShadeInfo::setState(rayState state) { ShadeInfo::state = state; }
 
@@ -29,15 +32,9 @@ const Vector3 &ShadeInfo::getNormal() const{ return ShadeInfo::normal; }
 
 const Ray &ShadeInfo::getRay() const { return ray; }
 
-Scene &ShadeInfo::getScene() const { return scene; }
+const Vector3 &ShadeInfo::getLightDir() const { return lightDirection; }
 
-void ShadeInfo::setLightDir(const Vector3 &lightDir) { ShadeInfo::lightDir = lightDir; }
-
-const Vector3 &ShadeInfo::getLightDir() const { return lightDir; }
-
-const AmbientLight &ShadeInfo::getAmbientLight() const { return *ambientLight; }
+std::shared_ptr<AmbientLight> &ShadeInfo::getAmbientLight() { return ambientLight; }
 
 const std::vector<std::shared_ptr<Light>>  &ShadeInfo::getLights() const { return lights; }
-
-void ShadeInfo::setAmbientLight(AmbientLight& ambient) { ambientLight = std::make_shared<AmbientLight>(ambient); }
 

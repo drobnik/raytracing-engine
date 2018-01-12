@@ -23,13 +23,11 @@ Ray::Ray(const Ray &parent) {
     this->depth = parent.depth + 1;
 }
 
-void Ray::pointAt(const Vector3 &dest) {
-}
 Vector3 Ray::getOrigin() const{ return origin; }
 
 Vector3 Ray::getDirection() const { return direction; }
 
-float Ray::getDistance() {
+float Ray::getDistance() const{
     return distance;
 }
 

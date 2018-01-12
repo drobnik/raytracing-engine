@@ -10,7 +10,7 @@ public:
     Material(std::string name, const LightIntensity& ambient, const LightIntensity& diffuse, const LightIntensity& specular);
     Material(const LightIntensity &ambient);
     Material(const Material& mat);
-    ~Material();
+    virtual ~Material();
 
     virtual LightIntensity shade(ShadeInfo& info)=0;
     Material& operator= (const Material& rhs);

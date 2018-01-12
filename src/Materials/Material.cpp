@@ -12,6 +12,8 @@ Material::Material(std::string name, const LightIntensity& ambient,
           specularCoefficient(10.0f),
           reflectFraction(0.0f) { }
 
+Material::~Material(){}
+
 Material::Material(const LightIntensity &ambient)
         : ambient(ambient),
           diffuse(LightIntensity::Grey),

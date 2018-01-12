@@ -15,10 +15,9 @@ public:
     ~Ray() {};
     Ray(const Vector3& origin, const Vector3& direct);
     Ray(const Ray& parent);
-    void pointAt(const Vector3 &dest);
     Vector3 getOrigin() const;
     Vector3 getDirection() const;
-    float getDistance();
+    float getDistance() const;
     void setOrigin(const Vector3 &origin);
     void setDirection(const Vector3 &direction);
     void setDepth(int depth);

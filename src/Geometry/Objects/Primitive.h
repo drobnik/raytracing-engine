@@ -1,5 +1,7 @@
 #ifndef RAYTRACING_ENGINE_PRIMITIVE_H
 #define RAYTRACING_ENGINE_PRIMITIVE_H
+
+#include <memory>
 #include "../Ray.h"
 #include "../../Materials/Material.h"
 
@@ -12,10 +14,13 @@ enum rayState{
 };
 
 class Primitive {
+protected:
+    std::shared_ptr<Material> material;
 public:
     Primitive();
-    virtual rayState intersects(Ray& r, float& a_dist)=0;
-    virtual LightIntensity getMaterial()=0;
+    virtual rayState intersects(const Ray& r, float& a_dist)=0;
+    std::shared_ptr<Material> getMaterial();
+    void setMaterial(const std::shared_ptr<Material>& material);
 };
 
 

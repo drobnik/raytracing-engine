@@ -1,25 +1,28 @@
-#include <vector>
+
 #include "PhongMat.h"
-#include "../Lights/Light.h"
 
-PhongMat::PhongMat() : Material(){ }
+PhongMat::PhongMat() : Material() {
+    ambientBrdf = std::make_unique<LambertBRDF>(LambertBRDF());
+    diffuseBrdf = std::make_unique<LambertBRDF>(LambertBRDF());
+    glossySpec = std::make_unique<SpecularBRDF>(SpecularBRDF());
+}
 
-PhongMat::PhongMat(const PhongMat &phongy) : Material(phongy),
-                                             ambientBrdf(phongy.ambientBrdf),
-                                             diffuseBrdf(phongy.diffuseBrdf),
-                                             glossySpec(phongy.glossySpec) {}
 
-PhongMat::PhongMat(LambertBRDF *ambient, LambertBRDF *diff,
-                   SpecularBRDF *gloss) : ambientBrdf(ambient), diffuseBrdf(diff), glossySpec(gloss){}
+PhongMat::PhongMat(LambertBRDF ambient, LambertBRDF diff,
+                   SpecularBRDF gloss) : Material() {
+    ambientBrdf = std::make_unique<LambertBRDF>(ambient);
+    diffuseBrdf = std::make_unique<LambertBRDF>(diff);
+    glossySpec = std::make_unique<SpecularBRDF>(gloss);
+}
 
 LightIntensity PhongMat::shade(ShadeInfo &info) {
     Ray r = info.getRay();
     Vector3 wo = r.getDirection().normalize(), norm;
-    LightIntensity L = ambientBrdf->rho(info, -wo)//wo.neg(wo))
-                       * info.getScene().getAmbientLight().L(info);
+    LightIntensity L = ambientBrdf->rho(info, -wo)
+                       * info.getAmbientLight()->L(info);
     LightIntensity diffus, gloss, diffGloss; //diffuse light missing?
 
-    std::vector<std::unique_ptr<Light>> const &lights = info.getScene().getLights(); //beware
+    const std::vector<std::shared_ptr<Light>> &lights = info.getLights();
 
     for(auto&& light: lights){
         Vector3 wi = light->getDirection(info);

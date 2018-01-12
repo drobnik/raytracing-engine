@@ -1,10 +1,10 @@
 #include "LambertBRDF.h"
 
-LambertBRDF::LambertBRDF() : BRDF(), kd(0.0f), diffColor(0.0f) { }
+LambertBRDF::LambertBRDF() : BRDF(), kd(0.0f), diffColor(LightIntensity(0.7f, 0.0f, 0.5f)) { }
 
 LambertBRDF::LambertBRDF(const LambertBRDF &brdf) : BRDF(brdf),
                                                     kd(brdf.kd),
-                                                    diffColor(0.0f){ }
+                                                    diffColor(brdf.diffColor){ }
 
 LambertBRDF::~LambertBRDF() { }
 

@@ -16,33 +16,28 @@ private:
     rayState state;
     Vector3 intersection;
     Vector3 normal;
-    //Material* material; //nearest material
-    LightIntensity material;
+    std::shared_ptr<Material> material; //nearest material
     Ray ray; //for specular
-    Scene& scene; // for shading
-    Vector3 lightDir;
+
+    Vector3 lightDirection;
     std::shared_ptr<AmbientLight> ambientLight;
     std::vector<std::shared_ptr<Light>> lights;
 
 public: //FIXME add set for the ray
-    ShadeInfo(Scene &scene);
+    ShadeInfo(std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<AmbientLight> ambient);
     ShadeInfo(const ShadeInfo& info);
     ~ShadeInfo();
-    //const Material &getMaterial();
-    const LightIntensity &getMaterial();
+    const std::shared_ptr<Material>& getMaterial();
     void setHit(const Vector3 &intersection);
-    //void setMaterial(const Material &material);
-    void setMaterial(const LightIntensity &material);
+    void setMaterial(const std::shared_ptr<Material>& material);
     const Vector3 & getNormal() const;
     rayState State() const;
     void setState(rayState state);
     void setNormal(const Vector3 &normal);
     const Vector3 &getHit() const;
     const Ray &getRay() const;
-    Scene &getScene() const;
-    void setLightDir(const Vector3 &lightDir);
     const Vector3 &getLightDir() const;
-    const AmbientLight &getAmbientLight() const;
+    std::shared_ptr<AmbientLight> &getAmbientLight();
     const std::vector<std::shared_ptr<Light>> &getLights() const;
     void setAmbientLight(AmbientLight& ambientLight);
 };

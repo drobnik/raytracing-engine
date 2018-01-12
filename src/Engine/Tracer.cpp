@@ -2,12 +2,11 @@
 
 Tracer::Tracer(std::shared_ptr<Scene> s) : scene(s) { }
 
-//FIXME
 LightIntensity Tracer::rayTrace(const Ray &ray) const {
     ShadeInfo info(scene->raytraceObjects(ray));
 
      if(info.State() == tangent || info.State() == hit)
-          return info.getMaterial();
+          return info.getMaterial()->shade(info);
      else
           return scene->Background();
 }
