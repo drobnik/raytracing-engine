@@ -24,5 +24,5 @@ Vector3 PointLight::getDirection(ShadeInfo &info) {
 }
 
 LightIntensity PointLight::L(ShadeInfo &info) {
-    return (color * linearCoefficient);
+    return (linearCoefficient * color);
 }

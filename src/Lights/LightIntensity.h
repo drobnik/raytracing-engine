@@ -16,21 +16,19 @@ public:
     LightIntensity(float r1);
     LightIntensity(const LightIntensity& l);
 
-    float red();
-    float green();
-    float blue();
+    float Red() const;
+    float Green() const;
+    float Blue() const;
 
-    LightIntensity operator+(LightIntensity& l);
+    LightIntensity operator+(const LightIntensity& l);
     LightIntensity add(float r1, float g1, float b1);
-    LightIntensity operator*(LightIntensity l);
-    LightIntensity operator-(LightIntensity& l);
-    LightIntensity operator/(LightIntensity& l);
+    LightIntensity operator*(const LightIntensity l);
+    LightIntensity operator-(const LightIntensity& l);
+    LightIntensity operator/(const LightIntensity& l);
     LightIntensity operator/(float value);
-    bool operator<(LightIntensity& l);
-    bool operator==(LightIntensity& l);
-    bool operator!=(LightIntensity& l);
-    friend LightIntensity operator*(float scale, const LightIntensity &l);
-    friend LightIntensity operator*(LightIntensity& l, float scale);
+    bool operator<(const LightIntensity& l);
+    bool operator==(const LightIntensity& l);
+    bool operator!=(const LightIntensity& l);
     friend std::ostream& operator<<(std::ostream &str, LightIntensity &l);
 
     friend float clampColor(float base);
@@ -39,6 +37,9 @@ public:
     static LightIntensity White;
     static LightIntensity Grey;
 };
+
+LightIntensity operator*(const float scale, const LightIntensity &l);
+LightIntensity operator*(const LightIntensity& l, const float scale);
 
 
 #endif //RAYTRACING_ENGINE_LIGHTINTENSITY_H

@@ -20,7 +20,7 @@ LightIntensity PhongMat::shade(ShadeInfo &info) {
     Vector3 wo = r.getDirection().normalize(), norm;
     LightIntensity L = ambientBrdf->rho(info, -wo)
                        * info.getAmbientLight()->L(info);
-    LightIntensity diffus, gloss, diffGloss; //diffuse light missing?
+    LightIntensity diffus, gloss;
 
     const std::vector<std::shared_ptr<Light>> &lights = info.getLights();
 
@@ -32,8 +32,7 @@ LightIntensity PhongMat::shade(ShadeInfo &info) {
         if(ndotwi > 0.0f) {
             diffus = diffuseBrdf->f(info, wo, wi);
             gloss = glossySpec->f(info, wo, wi);
-            diffGloss = diffus + gloss;
-            L = (L + diffGloss) * (ndotwi * light->L(info));
+            L = L + (ndotwi * (diffus + gloss) * light->L(info));
         }
      }
      return L;
