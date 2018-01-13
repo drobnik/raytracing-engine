@@ -18,7 +18,7 @@ Sphere::Sphere(const Sphere &s){
 Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
     this->center = center;
     radius = rad;
-    material = std::make_shared<PhongMat>(PhongMat()); //TODO
+    material = std::make_shared<PhongMat>(PhongMat());
 }
 
 rayState Sphere::intersects(const Ray& r, float& t) {

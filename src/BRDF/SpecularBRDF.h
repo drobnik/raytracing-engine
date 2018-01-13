@@ -6,14 +6,18 @@ class SpecularBRDF : public BRDF{
 private:
     float ks;
     float exp;
+
 public:
     SpecularBRDF();
     SpecularBRDF(const SpecularBRDF& spec);
+    SpecularBRDF(float k, float exp);
     ~SpecularBRDF();
-    virtual LightIntensity
-    f(const ShadeInfo& info, const Vector3& wo, const Vector3& wi) const;
-    virtual LightIntensity
-    rho(const ShadeInfo& info, const Vector3& wo) const;
+
+    LightIntensity
+    f(const ShadeInfo& info, const Vector3& wo, const Vector3& wi) const override;
+
+    LightIntensity
+    rho(const ShadeInfo& info, const Vector3& wo) const override;
 
 };
 
