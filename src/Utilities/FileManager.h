@@ -6,18 +6,17 @@
 #include "../Engine/EngineImage.h"
 #include "../Geometry/Objects/Mesh.h"
 #include "../Utilities/ObjParser.h"
-#define BITMAP_FORMAT "bmp"
-#define MESH_FORMAT "obj"
 
 class FileManager {
-//private: some configuration file here
 private:
-    std::string path; //FIXME directory for renders only
+    std::string path;
     std::string assetPath;
     ObjParser parser;
+
+    static const std::string BITMAP_FORMAT;
+    static const std::string MESH_FORMAT;
 public:
     FileManager(std::string path, std::string assets);
-    EngineImage* loadImage(const std::string path);
     Mesh loadModel(const std::string name);
     void saveImage(EngineImage &img);
 };

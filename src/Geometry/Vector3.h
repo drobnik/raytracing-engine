@@ -35,6 +35,9 @@ public:
     float getZ() const {return z;};
 
     friend std::ostream& operator<<(std::ostream&, const Vector3&);
+
+    static const Vector3 Zero;
+    static const Vector3 Up;
 };
 
 

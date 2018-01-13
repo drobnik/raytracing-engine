@@ -1,10 +1,5 @@
 #include "FileManager.h"
 
-EngineImage *FileManager::loadImage(const std::string path) {
-    //FIXME
-    return nullptr; //?!!!?!
-}
-
 FileManager::FileManager(std::string path, std::string assets) {
     this->path = path;
     assetPath = assets;
@@ -21,3 +16,6 @@ Mesh FileManager::loadModel(const std::string name) {
     Mesh m = parser.loadMesh(infile);
     return m;
 }
+
+const std::string FileManager::BITMAP_FORMAT = "bmp";
+const std::string FileManager::MESH_FORMAT = "obj";

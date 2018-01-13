@@ -8,18 +8,18 @@ class LambertBRDF : public BRDF{
 private:
     float kd; // diff reflection coe
     LightIntensity diffColor;
+
 public:
     LambertBRDF();
+    LambertBRDF(const LightIntensity& light, const float k);
     LambertBRDF(const LambertBRDF& brdf);
-    virtual ~LambertBRDF();
-    virtual LightIntensity
-    f(const ShadeInfo& info, const Vector3& wo, const Vector3& wi) const;
-    virtual LightIntensity
-    rho(const ShadeInfo& info, const Vector3& wo) const;
-    void setKd(float kd);
-    void setDiffColor(const LightIntensity &diffColor);
-    float getKd() const;
-    const LightIntensity &getDiffColor() const;
+    ~LambertBRDF();
+
+    LightIntensity
+    f(const ShadeInfo& info, const Vector3& wo, const Vector3& wi) const override;
+
+    LightIntensity
+    rho(const ShadeInfo& info, const Vector3& wo) const override;
 };
 
 

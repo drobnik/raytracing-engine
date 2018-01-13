@@ -35,5 +35,6 @@ LightIntensity PhongMat::shade(ShadeInfo &info) {
             L = L + (ndotwi * (diffus + gloss) * light->L(info));
         }
      }
+
      return L;
 }

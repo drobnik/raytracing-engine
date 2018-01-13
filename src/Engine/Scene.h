@@ -12,7 +12,8 @@
 #include "../Utilities/Utility.h"
 #include "../Geometry/ViewPlane.h"
 #include "../Lights/PointLight.h"
-//#include "ShadeInfo.h"
+#include "../Cameras/OrthoCamera.h"
+#include "../Utilities/Configuration.h"
 #include "../Geometry/Objects/Mesh.h"
 #include "../Lights/Light.h"
 #include "EngineImage.h"
@@ -26,21 +27,19 @@ class Scene {
 private:
     ViewPlane viewPlane;
     std::vector<std::unique_ptr<Primitive>> objs;
-    std::vector<std::unique_ptr<Ray>> rays;
-
     std::unique_ptr<Camera> camera;
 
     LightIntensity sceneBackground;
     std::string sceneName;
     Mesh sampleMesh; // FIXME add to the new collection of meshes
-    std::shared_ptr<AmbientLight> ambientLight; // add it as a light to the list
+    std::shared_ptr<AmbientLight> ambientLight;
     std::vector<std::shared_ptr<Light>> lights;
 
 public:
     Scene();
     Scene(int w, int h, float p, const std::string &n);
 
-    void init();
+    void init(const std::unique_ptr<Configuration>& conf);
     void ChangeCamera(std::unique_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
     ShadeInfo raytraceObjects(const Ray &ray);
@@ -49,7 +48,6 @@ public:
     const ViewPlane &getViewPlane() const;
     const std::string SceneName() { return sceneName; };
     void addMesh(Mesh& m);
-    const std::vector<std::shared_ptr<Light>> &getLights() const;
 };
 
 

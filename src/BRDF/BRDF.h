@@ -9,8 +9,10 @@ public:
     BRDF(const BRDF& brdf);
     BRDF& operator= (const BRDF& rhs);
     virtual ~BRDF();
+
     virtual LightIntensity
     f(const ShadeInfo& sr, const Vector3& wo, const Vector3& wi) const;
+
     virtual LightIntensity
     rho(const ShadeInfo& sr, const Vector3& wo) const;
 };
