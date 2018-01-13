@@ -58,9 +58,9 @@ LightIntensity sampler(int depth, Ray &ray, std::unique_ptr<Tracer> const &trace
         }
 
         float finR, finG, finB;
-        finR = (la.red() + lb.red() + lc.red() + ld.red())/4.0f;
-        finG = (la.green() + lb.green() + lc.green() + ld.green())/4.0f;
-        finB = (la.blue() + lb.blue() + lc.blue() + ld.blue())/4.0f;
+        finR = (la.Red() + lb.Red() + lc.Red() + ld.Red())/4.0f;
+        finG = (la.Green() + lb.Green() + lc.Green() + ld.Green())/4.0f;
+        finB = (la.Blue() + lb.Blue() + lc.Blue() + ld.Blue())/4.0f;
 
         final = LightIntensity(finR, finG, finB);
         return final;

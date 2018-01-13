@@ -14,7 +14,7 @@ float clampColor(float base) {
     } else if(base < 0.0f){
         return 0.0f;
     } else{
-        return base; // to turn off silly warnings
+        return base;
     }
 }
 
@@ -32,21 +32,21 @@ LightIntensity::LightIntensity(float r1) {
     r = r1, g = 0.0f, b = 0.0f;
 }
 
-LightIntensity LightIntensity::operator+(LightIntensity &l) {
+LightIntensity LightIntensity::operator+(const LightIntensity &l) {
     return LightIntensity(clampColor(r + l.r),
                           clampColor(g + l.g),
                           clampColor(b + l.b));
 }
 
-LightIntensity LightIntensity::operator-(LightIntensity &l) {
-    return LightIntensity(clampColor(r - l.red()),
-                          clampColor(g - l.green()),
-                          clampColor(b - l.blue()));
+LightIntensity LightIntensity::operator-(const LightIntensity &l) {
+    return LightIntensity(clampColor(r - l.r),
+                          clampColor(g - l.g),
+                          clampColor(b - l.b));
 }
 
-LightIntensity LightIntensity::operator/(LightIntensity &l) {
+LightIntensity LightIntensity::operator/(const LightIntensity &l) {
     assert(l.r != 0.0f && l.g != 0.0f && l.b != 0.0f);
-    return LightIntensity(r/l.red(), g/l.green(), b/l.blue());
+    return LightIntensity(r/l.r, g/l.g, b/l.b);
 }
 
 LightIntensity LightIntensity::operator/(float value) {
@@ -57,25 +57,24 @@ LightIntensity LightIntensity::operator/(float value) {
     }
 }
 
-bool LightIntensity::operator==(LightIntensity &l) {
-    return (r == l.red() && g == l.green() && b == l.blue());
+bool LightIntensity::operator==(const LightIntensity &l) {
+    return (r == l.r && g == l.g && b == l.b);
 }
 
 LightIntensity operator*(float scale, const LightIntensity &l) {
-    LightIntensity lu = l; //FIXME
-    return LightIntensity(clampColor(lu.red() * scale),
-                          clampColor(lu.green() * scale),
-                          clampColor(lu.blue() * scale));
+    return LightIntensity(clampColor(l.Red() * scale),
+                          clampColor(l.Green() * scale),
+                          clampColor(l.Blue() * scale));
 }
 
-LightIntensity operator*(LightIntensity &l, float scale) {
-    return LightIntensity(clampColor(l.red() * scale),
-                          clampColor(l.green() * scale),
-                          clampColor(l.blue() * scale));
+LightIntensity operator*(const LightIntensity &l, float scale) {
+    return LightIntensity(clampColor(l.Red() * scale),
+                          clampColor(l.Green() * scale),
+                          clampColor(l.Blue() * scale));
 }
 
 std::ostream& operator<<(std::ostream &str, LightIntensity &l) {
-    str << "Light Intensity [R: " << l.red()<<", G: "<< l.green() << ", B: "<<l.blue()<<" ]\n";
+    str << "Light Intensity [R: " << l.Red()<<", G: "<< l.Green() << ", B: "<<l.Blue()<<" ]\n";
     return str;
 }
 
@@ -85,7 +84,7 @@ LightIntensity::LightIntensity(const LightIntensity &l) {
     b = l.b;
 }
 
-bool LightIntensity::operator<(LightIntensity &l) {
+bool LightIntensity::operator<(const LightIntensity &l) {
     return (r < l.r) && (g < l.g) && (b < l.b);
 }
 
@@ -95,15 +94,15 @@ LightIntensity LightIntensity::add(float r1, float g1, float b1) {
                           clampColor(b + b1));
 }
 
-bool LightIntensity::operator!=(LightIntensity &l) {
-    return !(r == l.red() && g == l.green() && b == l.blue());
+bool LightIntensity::operator!=(const LightIntensity &l) {
+    return !(*this == l);
 }
 
-float LightIntensity::red() {return clampColor(r);}
-float LightIntensity::green() {return clampColor(g);}
-float LightIntensity::blue() {return clampColor(b);}
+float LightIntensity::Red() const {return clampColor(r);}
+float LightIntensity::Green() const {return clampColor(g);}
+float LightIntensity::Blue() const {return clampColor(b);}
 
-LightIntensity LightIntensity::operator*(LightIntensity l) {
+LightIntensity LightIntensity::operator*(const LightIntensity l) {
     return LightIntensity(r*l.r, g*l.g, b*l.b);
 }
 

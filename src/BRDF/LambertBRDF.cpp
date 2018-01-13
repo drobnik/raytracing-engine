@@ -1,6 +1,6 @@
 #include "LambertBRDF.h"
 
-LambertBRDF::LambertBRDF() : BRDF(), kd(0.0f), diffColor(LightIntensity(0.7f, 0.0f, 0.5f)) { }
+LambertBRDF::LambertBRDF() : BRDF(), kd(0.0f), diffColor(LightIntensity(0.0f, 0.0f, 0.5f)) { }
 
 LambertBRDF::LambertBRDF(const LambertBRDF &brdf) : BRDF(brdf),
                                                     kd(brdf.kd),
@@ -11,11 +11,11 @@ LambertBRDF::~LambertBRDF() { }
 LightIntensity LambertBRDF::f(const ShadeInfo &info, const Vector3 &wo,
                               const Vector3 &wi) const {
     LightIntensity k = kd * diffColor;
-    return (k * (float)INV_PI);
+    return ((float)INV_PI * k);
 }
 
 LightIntensity LambertBRDF::rho(const ShadeInfo &info, const Vector3 &wo) const {
-    return (kd * diffColor);
+    return (diffColor * kd);
 }
 
 float LambertBRDF::getKd() const {
