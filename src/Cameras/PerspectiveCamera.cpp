@@ -2,8 +2,9 @@
 
 
 PerspectiveCamera::PerspectiveCamera(const Vector3& e, const Vector3& look, const Vector3& u,
-                                     unsigned int height, unsigned int width, float pixSize, float field)
-        : Camera(e, look, u, height, width, pixSize) {
+                                     unsigned int height, unsigned int width, float pixSize,
+                                     const std::shared_ptr<AdaptiveSampler>& sampler, float field)
+        : Camera(e, look, u, height, width, pixSize, sampler) {
     fieldOfView = field;
     // if distance is default -> calculate from field(ofView)
     calculateViewDistance();

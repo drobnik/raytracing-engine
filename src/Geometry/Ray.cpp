@@ -2,8 +2,7 @@
 
 Ray::Ray() {
     origin = Vector3();
-    direction = Vector3(1,0,0);
-    Vector3();
+    direction = Vector3(1.0f, 0.0f, 0.0f);
     distance = INFINITY;
     depth = 0;
 }
@@ -11,7 +10,6 @@ Ray::Ray() {
 Ray::Ray(const Vector3& origin, const Vector3& direct){
     this->origin = origin;
     direction = direct;
-    Vector3();
     distance = INFINITY;
     depth = 0;
 }
@@ -41,4 +39,10 @@ void Ray::setDirection(const Vector3 &direction) {
 
 void Ray::setDepth(int depth) {
     Ray::depth = depth;
+}
+
+void Ray::resetRay() {
+    origin = Vector3::Zero;
+    direction = Vector3::Forward;
+    depth = 0;
 }

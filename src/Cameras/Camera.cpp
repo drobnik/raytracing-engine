@@ -2,16 +2,18 @@
 
 Camera::Camera(): eye(Vector3(0.0f, 0.0f, 400.0f)),
                   lookAt(Vector3()),
-                  up(Vector3(0.0f, 1.0f, 0.0f)) {}
+                  up(Vector3(0.0f, 1.0f, 0.0f)){}
 
 Camera::Camera(const Vector3& e, const Vector3& look, const Vector3& u,
-               unsigned int height, unsigned int width, float pixSize)
+               unsigned int height, unsigned int width, float pixSize,
+               const std::shared_ptr<AdaptiveSampler>& sampler)
         : eye(e),
           lookAt(look),
           up(u),
           viewHeight(height),
           viewWidth(width),
-          pixelSize(pixSize) {
+          pixelSize(pixSize),
+          sampler(sampler) {
     calculateUVW();
 }
 
@@ -26,7 +28,8 @@ Camera::Camera(const Camera& cam)
           zoom(cam.zoom),
           u(cam.u),
           v(cam.v),
-          w(cam.w){ }
+          w(cam.w),
+          sampler(cam.sampler){ }
 
 Camera::~Camera() { }
 

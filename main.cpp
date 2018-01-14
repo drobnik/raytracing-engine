@@ -8,15 +8,16 @@ int main() {
     std::unique_ptr<Configuration> conf = std::make_unique<Configuration>();
     std::shared_ptr<FileManager> man = std::make_shared<FileManager>(conf->getImgPath(), conf->getMeshesPath());
 
-    Mesh k = man->loadModel("cube"); // Sample mesh
+
 
     std::shared_ptr<Scene> renderScene = std::make_shared<Scene>(Scene(conf->ViewplaneWidth(), conf->ViewplaneHeight(),
                                                                 conf->PixelSize(), conf->SceneName()));
-
-    renderScene->InitializeScene(conf);
+    Mesh k = man->loadModel("cube"); // Sample mesh
     renderScene->addMesh(k);
 
-    Renderer renderer(renderScene, man);
+
+    Renderer renderer(man);
+    renderer.AddScene(renderScene, conf);
     renderer.renderScene();
 
     //now reuse the scene with sample perspective cam
@@ -24,11 +25,11 @@ int main() {
                                                                                     conf->getLookAtPosition(), Vector3::Up,
                                                                                     conf->ViewplaneWidth(),
                                                                                     conf->ViewplaneHeight(),
-                                                                                    conf->PixelSize())));
+                                                                                    conf->PixelSize(),
+                                                                                    renderer.GetSampler())));
     renderScene->ChangeSceneName("pers");
-
-    Renderer rendererPers(renderScene, man);
-    rendererPers.renderScene();
+    //Renderer rendererPers(renderScene, man); //beware!
+    renderer.renderScene();
 
     return 0;
 }

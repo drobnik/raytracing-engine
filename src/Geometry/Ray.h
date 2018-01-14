@@ -21,6 +21,7 @@ public:
     void setOrigin(const Vector3 &origin);
     void setDirection(const Vector3 &direction);
     void setDepth(int depth);
+    void resetRay();
 };
 
 
