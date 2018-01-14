@@ -21,7 +21,7 @@ Sphere::Sphere(Vector3 &center, float rad) : Primitive(){
     material = std::make_shared<PhongMat>(PhongMat());
 }
 
-rayState Sphere::intersects(const Ray& r, float& t) {
+rayState Sphere::Intersects(const Ray &r, float &t) {
     rayState state = miss;
     Vector3 v = r.getOrigin() - center;
     float b = -v.dot(r.getDirection());

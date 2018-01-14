@@ -13,7 +13,7 @@ int main() {
     std::shared_ptr<Scene> renderScene = std::make_shared<Scene>(Scene(conf->ViewplaneWidth(), conf->ViewplaneHeight(),
                                                                 conf->PixelSize(), conf->SceneName()));
 
-    renderScene->init(conf);
+    renderScene->InitializeScene(conf);
     renderScene->addMesh(k);
 
     Renderer renderer(renderScene, man);

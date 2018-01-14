@@ -6,7 +6,7 @@ Triangle::Triangle() : Primitive(){
     b = Vector3(0.0f, 0.0f, 1.0f);
     c = Vector3(1.0f, 0.0f, 0.0f);
     normal = Vector3(0.0f, 1.0f, 0.0f);
-    material = std::make_shared<PhongMat>(PhongMat());//Material(LightIntensity(0.5f, 1.0f, 0.0f));
+    material = std::make_shared<PhongMat>(PhongMat());
 }
 
 Triangle::~Triangle(){ }
@@ -31,8 +31,7 @@ Triangle::Triangle(Vector3 &a, Vector3 &b, Vector3 &c) {
     material = std::make_shared<PhongMat>(PhongMat()); //TODO
 }
 
-// FIXME add hit info!
-rayState Triangle::intersects(const Ray &ray, float &t) {
+rayState Triangle::Intersects(const Ray &ray, float &t) {
     float a, b, c, d, e, f, g, h, i, j, k, l;
     float m, n, p, q, s, r, d1, d2, d3, invDem;
     float beta, gamma, tet = 0.0f; // for t
@@ -70,11 +69,11 @@ rayState Triangle::intersects(const Ray &ray, float &t) {
     return hit;
 }
 
-Vector3 & Triangle::getNormal() {
+Vector3 & Triangle::GetNormal() {
     return normal;
 }
 
-void Triangle::flipNormal(Triangle &t) {
+void Triangle::FlipNormal(Triangle &t) {
     Vector3 a, b, c;
     a = t.a, b = t.b, c = t.c;
     Vector3 v1 = b - c;
@@ -83,6 +82,12 @@ void Triangle::flipNormal(Triangle &t) {
     normal.normalize();
 }
 
-void Triangle::setNormal(const Vector3 &normal) {
+void Triangle::SetNormal(const Vector3 &normal) {
     Triangle::normal = normal;
+}
+
+void Triangle::Move(const Vector3 &offset) {
+    a = a + offset;
+    b = b + offset;
+    c = c + offset;
 }

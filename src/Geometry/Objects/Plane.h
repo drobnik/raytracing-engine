@@ -12,7 +12,7 @@ public:
     Plane();
     Plane(const Plane& p);
     Plane(const Vector3& nor, const float& offset);
-    rayState intersects(const Ray& r, float& t) override; //was virtual
+    rayState Intersects(const Ray &r, float &t) override; //was virtual
 };
 
 

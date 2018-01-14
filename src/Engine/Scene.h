@@ -27,11 +27,11 @@ class Scene {
 private:
     ViewPlane viewPlane;
     std::vector<std::unique_ptr<Primitive>> objs;
+    std::vector<std::unique_ptr<Mesh>> meshes;
     std::unique_ptr<Camera> camera;
 
     LightIntensity sceneBackground;
     std::string sceneName;
-    Mesh sampleMesh; // FIXME add to the new collection of meshes
     std::shared_ptr<AmbientLight> ambientLight;
     std::vector<std::shared_ptr<Light>> lights;
 
@@ -39,7 +39,7 @@ public:
     Scene();
     Scene(int w, int h, float p, const std::string &n);
 
-    void init(const std::unique_ptr<Configuration>& conf);
+    void InitializeScene(const std::unique_ptr<Configuration> &conf);
     void ChangeCamera(std::unique_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
     ShadeInfo raytraceObjects(const Ray &ray);
