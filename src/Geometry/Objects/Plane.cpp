@@ -7,7 +7,7 @@ Plane::Plane() : Primitive() {
     material = std::make_shared<PhongMat>(PhongMat()); //TODO
 }
 
-rayState Plane::intersects(const Ray &r, float &t) {
+rayState Plane::Intersects(const Ray &r, float &t) {
     rayState state = miss;
     float denom = normal.dot(r.getDirection());
     float q;

@@ -13,10 +13,11 @@ public:
     ~Triangle();
     Triangle(const Triangle& t);
     Triangle(Vector3& a, Vector3& b, Vector3& c);
-    rayState intersects(const Ray& ray, float& t) override;
-    Vector3 & getNormal();
-    void setNormal(const Vector3 &normal);
-    void flipNormal(Triangle& t);
+    rayState Intersects(const Ray &ray, float &t) override;
+    Vector3 & GetNormal();
+    void SetNormal(const Vector3 &normal);
+    void FlipNormal(Triangle &t);
+    void Move(const Vector3 &offset);
 };
 
 

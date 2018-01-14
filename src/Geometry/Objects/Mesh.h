@@ -11,12 +11,14 @@
 
 class Mesh {
 private:
+    Vector3 position;
     std::vector<std::shared_ptr<Triangle>> triangles;
     std::shared_ptr<Sphere> simpleBounding;
 public:
     Mesh();
     Mesh(const std::vector<std::shared_ptr<Triangle>> tris);
-    ShadeInfo intersects(const Ray &ray, std::vector<std::shared_ptr<Light>> lights, std::shared_ptr<AmbientLight> ambient);
+    ShadeInfo Intersects(const Ray& ray, ShadeInfo& info);
+    void ChangePosition(const Vector3& position);
 };
 
 

@@ -18,7 +18,7 @@ protected:
     std::shared_ptr<Material> material;
 public:
     Primitive();
-    virtual rayState intersects(const Ray& r, float& a_dist)=0;
+    virtual rayState Intersects(const Ray &r, float &a_dist)=0;
     std::shared_ptr<Material> getMaterial();
     void setMaterial(const std::shared_ptr<Material>& material);
 };

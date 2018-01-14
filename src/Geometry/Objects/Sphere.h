@@ -14,7 +14,7 @@ public:
     Sphere();
     Sphere(const Sphere& s);
     Sphere(Vector3& center, float rad);
-    rayState intersects(const Ray& r, float& t) override;
+    rayState Intersects(const Ray &r, float &t) override;
 };
 
 
