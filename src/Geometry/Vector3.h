@@ -38,6 +38,7 @@ public:
 
     static const Vector3 Zero;
     static const Vector3 Up;
+    static const Vector3 Forward;
 };
 
 

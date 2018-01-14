@@ -8,6 +8,8 @@
 #include <memory>
 
 class Tracer;
+class AdaptiveSampler;
+
 class Camera {
 public:
     static const unsigned int ANTI_MAX = 10;
@@ -32,12 +34,12 @@ protected:
     unsigned int viewHeight;
     float pixelSize;
 
+    std::shared_ptr<AdaptiveSampler> sampler;
+
     Camera();
     Camera(const Camera& cam);
     Camera(const Vector3& e, const Vector3& look, const Vector3& u,
-           unsigned int height, unsigned int width, float pixSize);
-
-    //float clamp(float c, float down, float upper);
+           unsigned int height, unsigned int width, float pixSize, const std::shared_ptr<AdaptiveSampler>& sampler);
 private:
     void calculateUVW();
 

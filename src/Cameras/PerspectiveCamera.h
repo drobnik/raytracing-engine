@@ -9,7 +9,8 @@ public:
     virtual EngineImage
     RenderScene(LightIntensity &background, std::unique_ptr<Tracer> const &tracer) override;
     PerspectiveCamera(const Vector3& e, const Vector3& look, const Vector3& u,
-                      unsigned int height, unsigned int width, float pixSize, float field = 45.0f);
+                      unsigned int height, unsigned int width, float pixSize,
+                      const std::shared_ptr<AdaptiveSampler>& sampler, float field = 45.0f);
     PerspectiveCamera(const PerspectiveCamera& cam);
 
 private:

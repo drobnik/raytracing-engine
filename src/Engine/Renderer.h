@@ -10,7 +10,10 @@ class Renderer {
 private:
     std::shared_ptr<FileManager> manager;
     std::shared_ptr<Scene> scene;
+    std::shared_ptr<AdaptiveSampler> sampler;
     EngineImage img;
+    // TODO move configuration here
+
     std::unique_ptr<Tracer> tracer;
     //ArgsParser parser;
     //EngineConfig config;
@@ -21,8 +24,10 @@ private:
 
 public:
     Renderer();
-    Renderer(std::shared_ptr<Scene> s, std::shared_ptr<FileManager> man);
+    Renderer(std::shared_ptr<FileManager> man);
     void renderScene();
+    std::shared_ptr<AdaptiveSampler> GetSampler();
+    void AddScene(const std::shared_ptr<Scene>& s, const std::unique_ptr<Configuration>& conf);
 };
 
 

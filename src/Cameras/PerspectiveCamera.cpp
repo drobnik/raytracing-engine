@@ -2,74 +2,15 @@
 
 
 PerspectiveCamera::PerspectiveCamera(const Vector3& e, const Vector3& look, const Vector3& u,
-                                     unsigned int height, unsigned int width, float pixSize, float field)
-        : Camera(e, look, u, height, width, pixSize) {
+                                     unsigned int height, unsigned int width, float pixSize,
+                                     const std::shared_ptr<AdaptiveSampler>& sampler, float field)
+        : Camera(e, look, u, height, width, pixSize, sampler) {
     fieldOfView = field;
     // if distance is default -> calculate from field(ofView)
     calculateViewDistance();
     zoom = 4.0f;
 }
 
-LightIntensity sampler1(int depth, Ray &ray, const std::unique_ptr<Tracer>& tracer, float &pixSize) {
-
-    LightIntensity la, lb, lc, ld, le, final;
-    Vector3 direction = ray.getDirection();
-    Vector3 orgi = ray.getOrigin();
-
-    Ray sampleR = ray;
-    Ray ra, rb, rc, rd;
-    float offset;
-
-    if(depth >= Camera::ANTI_MAX){
-        final = tracer->rayTrace(ray);
-        return final;
-    }
-    else{
-        offset = pixSize * (float)pow(0.5f, (depth+1));
-
-        ra.setOrigin(orgi), rb.setOrigin(orgi), rc.setOrigin(orgi);
-        rd.setOrigin(orgi);
-
-        ra.setDirection(Vector3(ray.getDirection().getX() - offset,
-                                ray.getDirection().getY() - offset,
-                                ray.getDirection().getZ()).normalize());
-        rb.setDirection(Vector3(ray.getDirection().getX() + offset,
-                                ray.getDirection().getY()  - offset,
-                                ray.getDirection().getZ()).normalize());
-        rc.setDirection(Vector3(ray.getDirection().getX() + offset,
-                                ray.getDirection().getY() + offset,
-                                ray.getDirection().getZ()).normalize());
-        rd.setDirection(Vector3(ray.getDirection().getX() - offset,
-                                ray.getDirection().getY() + offset,
-                                ray.getDirection().getZ()).normalize());
-
-        le = tracer->rayTrace(ray);
-        la = tracer->rayTrace(ra);
-        lb = tracer->rayTrace(rb);
-        lc = tracer->rayTrace(rc);
-        ld = tracer->rayTrace(rd);
-        if(le != la){
-            la = sampler1((depth + 1), ray, tracer, pixSize);
-        }
-        else if(le != lb){
-            lb = sampler1((depth + 1), ray, tracer, pixSize);
-        }
-        else if(le != lc){
-            lc = sampler1((depth + 1), ray, tracer, pixSize);
-        }
-        else if(le != ld){
-            ld = sampler1((depth + 1), ray, tracer, pixSize);
-        }
-
-        float finR, finG, finB;
-        finR = (la.Red() + lb.Red() + lc.Red() + ld.Red())/4.0f;
-        finG = (la.Green() + lb.Green() + lc.Green() + ld.Green())/4.0f;
-        finB = (la.Blue() + lb.Blue() + lc.Blue() + ld.Blue())/4.0f;
-
-        final = LightIntensity(finR, finG, finB);
-        return final;
-    }
-}
 EngineImage PerspectiveCamera::RenderScene(LightIntensity &background, std::unique_ptr<Tracer> const &tracer) {
     LightIntensity color;
     std::string name = tracer->sceneName();
@@ -82,7 +23,7 @@ EngineImage PerspectiveCamera::RenderScene(LightIntensity &background, std::uniq
     Vector3 vo;
 
     ray.setOrigin(eye);
-    //Camera::calcUVW();
+
     for(unsigned int r = 0; r < viewHeight; r++){ //up
         for(unsigned int c = 0; c < viewWidth; c++){ //horizontal
             x = pixelSize * (c - 0.5f *(viewWidth - 1.0f));
@@ -90,7 +31,7 @@ EngineImage PerspectiveCamera::RenderScene(LightIntensity &background, std::uniq
             vo = Vector3(x, y, viewDistance) - eye;
             d = vo.length();
             ray.setDirection(Vector3(x, y, d));
-            color = sampler1(0,ray,tracer,pixelSize);//
+            color =  sampler->AdaptiveSampling(ray, tracer, pixelSize, 0, false);
             image.setPixel((int)r, (int)c, color);
         }
     }

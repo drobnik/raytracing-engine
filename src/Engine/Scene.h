@@ -39,7 +39,7 @@ public:
     Scene();
     Scene(int w, int h, float p, const std::string &n);
 
-    void InitializeScene(const std::unique_ptr<Configuration> &conf);
+    void InitializeScene(const std::unique_ptr<Configuration> &conf, const std::shared_ptr<AdaptiveSampler>& sampler);
     void ChangeCamera(std::unique_ptr<Camera> cam);
     void ChangeSceneName(std::string s);
     ShadeInfo raytraceObjects(const Ray &ray);
